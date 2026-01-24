@@ -164,11 +164,11 @@ class PreferencesMenu extends ui.OptionsState.Page
 		if (preferences.get(prefString) == null)
 		{
 			preferences.set(prefString, prefValue);
-			trace('set preference!');
+			trace('set preference($prefString, $prefValue)!');
 		}
 		else
 		{
-			trace('found preference: ' + preferences.get(prefString));
+			trace('found preference($prefString): ' + preferences.get(prefString));
 		}
 	}
 }
