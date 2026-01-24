@@ -901,6 +901,7 @@ class PlayState extends MusicBeatState
 					});
 				case 'senpai' | 'roses' | 'thorns':
 					schoolIntro(doof);
+
 				case 'ugh':
 					ughIntro();
 				case 'stress':
@@ -932,9 +933,10 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		var vid:VideoCutscene = new VideoCutscene('music/ughCutscene.mp4');
+		var vid:VideoCutscene = new VideoCutscene(Paths.mp4('ughCutscene'));
 		vid.finishCallback = function()
 		{
+			inCutscene = false;
 			remove(blackShit);
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
 			startCountdown();
@@ -955,11 +957,11 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		var vid:VideoCutscene = new VideoCutscene('music/gunsCutscene.mp4');
+		var vid:VideoCutscene = new VideoCutscene(Paths.mp4('gunsCutscene'));
 		vid.finishCallback = function()
 		{
+			inCutscene = false;
 			remove(blackShit);
-
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
 			startCountdown();
 			cameraMovement();
@@ -974,11 +976,11 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		var vid:VideoCutscene = new VideoCutscene('music/stressCutscene.mp4');
+		var vid:VideoCutscene = new VideoCutscene(Paths.mp4('stressCutscene'));
 		vid.finishCallback = function()
 		{
+			inCutscene = false;
 			remove(blackShit);
-
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
 			startCountdown();
 			cameraMovement();

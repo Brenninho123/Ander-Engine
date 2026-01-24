@@ -2,6 +2,10 @@
 
 THE GAME WORKS ON LATEST SHIT NOW!
 
+## Fixed
+- VIDEOS WORK ON DESKTOP NOW! (THANK YOU `hxCodec`!!!!!!!!!!)
+	- They've got a `videos` folder now too :D
+
 ## Changed
 - In freeplay the song text will darken if you can't play it (chart's missing)
 - In freeplay you can no longer select songs if the chart for the difficulty is missing (it'll give ya an alert :>)

@@ -28,7 +28,7 @@ class VideoState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
-		video = new VideoCutscene(Paths.file('music/kickstarterTrailer.mp4'));
+		video = new VideoCutscene(Paths.mp4('kickstarterTrailer'));
 
 		video.finishCallback = function()
 		{
