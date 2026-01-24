@@ -201,4 +201,6 @@
 		<!-- <haxedef name="NG_FORCE_EXPIRED_SESSION" if="debug" /> -->
 	</section>
 	
+	<haxeflag name="--dce full" if="release" />
+	
 </project>
