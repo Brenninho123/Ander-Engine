@@ -10,6 +10,8 @@ import openfl.events.Event;
 import openfl.media.Video;
 import openfl.net.NetStream;
 
+using StringTools;
+
 class Main extends Sprite
 {
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
@@ -38,11 +40,19 @@ class Main extends Sprite
 
 		var introShit:Array<String> = [
 			'FUNKIN LEGACY',
-			'v${Application.current.meta.get('version')}'
+			'VERSION: ${Application.current.meta.get('version')}',
+			''
 		];
 
 		for (thing in introShit)
-			trace(thing);
+		{
+			#if sys
+			Sys.println(thing);
+			#else
+			if (thing.trim().length > 0)
+				trace(thing);
+			#end
+		}
 
 		if (stage != null)
 		{
