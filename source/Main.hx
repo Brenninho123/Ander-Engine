@@ -36,8 +36,13 @@ class Main extends Sprite
 	{
 		super();
 
-		trace('\t---\tFUNKIN LEGACY\t---\t');
-		trace('\t---\tv${Application.current.meta.get('version')}\t---\t');
+		var introShit:Array<String> = [
+			'FUNKIN LEGACY',
+			'v${Application.current.meta.get('version')}'
+		];
+
+		for (thing in introShit)
+			trace(thing);
 
 		if (stage != null)
 		{
