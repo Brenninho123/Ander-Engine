@@ -1,5 +1,6 @@
 package;
 
+import lime.app.Application;
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Lib;
@@ -34,6 +35,9 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
+
+		trace('\t---\tFUNKIN LEGACY\t---\t');
+		trace('\t---\tv${Application.current.meta.get('version')}\t---\t');
 
 		if (stage != null)
 		{

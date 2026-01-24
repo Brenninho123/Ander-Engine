@@ -128,8 +128,6 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		versionShit.text += '(Newgrounds exclusive preview)';
-
 		// NG.core.calls.event.logEvent('swag').send();
 
 		super.create();
@@ -166,52 +164,6 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/');
 		#end
-	}
-	#end
-
-	#if newgrounds
-	function selectLogin()
-	{
-		openNgPrompt(NgPrompt.showLogin());
-	}
-
-	function selectLogout()
-	{
-		openNgPrompt(NgPrompt.showLogout());
-	}
-
-	function showSavedSessionFailed()
-	{
-		openNgPrompt(NgPrompt.showSavedSessionFailed());
-	}
-
-	/**
-	 * Calls openPrompt and redraws the login/logout button
-	 * @param prompt 
-	 * @param onClose 
-	 */
-	public function openNgPrompt(prompt:Prompt, ?onClose:Void->Void)
-	{
-		var onPromptClose = checkLoginStatus;
-		if (onClose != null)
-		{
-			onPromptClose = function()
-			{
-				checkLoginStatus();
-				onClose();
-			}
-		}
-
-		openPrompt(prompt, onPromptClose);
-	}
-
-	function checkLoginStatus()
-	{
-		var prevLoggedIn = menuItems.has("logout");
-		if (prevLoggedIn && !NGio.isLoggedIn)
-			menuItems.resetItem("login", "logout", selectLogout);
-		else if (!prevLoggedIn && NGio.isLoggedIn)
-			menuItems.resetItem("logout", "login", selectLogin);
 	}
 	#end
 
