@@ -237,13 +237,17 @@ class FreeplayState extends MusicBeatState
 		if (accepted)
 		{
 			var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
-			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-			PlayState.isStoryMode = false;
-			PlayState.storyDifficulty = curDifficulty;
 
-			PlayState.storyWeek = songs[curSelected].week;
-			trace('CUR WEEK' + PlayState.storyWeek);
-			LoadingState.loadAndSwitchState(new PlayState());
+			if (!Assets.exists(Paths.json(songs[curSelected].songName.toLowerCase() + '/' + poop.toLowerCase())))
+			{
+				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+				PlayState.isStoryMode = false;
+				PlayState.storyDifficulty = curDifficulty;
+
+				PlayState.storyWeek = songs[curSelected].week;
+				trace('CUR WEEK' + PlayState.storyWeek);
+				LoadingState.loadAndSwitchState(new PlayState());
+			}
 		}
 	}
 
@@ -262,6 +266,20 @@ class FreeplayState extends MusicBeatState
 
 		diffText.text = "< " + CoolUtil.difficultyString() + " >";
 		positionHighscore();
+
+		for (song in this.grpSongs)
+		{
+			var poop:String = Highscore.formatSong(song.text.toLowerCase(), curDifficulty);
+
+			if (!Assets.exists(Paths.json(song.text.toLowerCase() + '/' + poop.toLowerCase())))
+			{
+				song.color = FlxColor.GRAY;
+			}
+			else
+			{
+				song.color = FlxColor.WHITE;
+			}
+		}
 	}
 
 	function changeSelection(change:Int = 0)
