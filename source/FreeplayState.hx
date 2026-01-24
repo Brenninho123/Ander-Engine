@@ -1,5 +1,6 @@
 package;
 
+import lime.app.Application;
 #if discord_rpc
 import Discord.DiscordClient;
 #end
@@ -247,6 +248,11 @@ class FreeplayState extends MusicBeatState
 				PlayState.storyWeek = songs[curSelected].week;
 				trace('CUR WEEK' + PlayState.storyWeek);
 				LoadingState.loadAndSwitchState(new PlayState());
+			}
+			else
+			{
+				Application.current.window.alert('Missing Chart for difficulty: ${Highscore.formatSong('', curDifficulty).replace('-', '')}',
+					'Missing chart: ${Paths.json(songs[curSelected].songName.toLowerCase() + '/' + poop.toLowerCase())}');
 			}
 		}
 	}
