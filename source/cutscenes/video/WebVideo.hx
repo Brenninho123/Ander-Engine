@@ -1,5 +1,6 @@
-package;
+package cutscenes.video;
 
+#if VIDEO_WEB
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -8,7 +9,7 @@ import openfl.media.Video;
 import openfl.net.NetConnection;
 import openfl.net.NetStream;
 
-class FlxVideo extends FlxBasic
+class WebVideo extends FlxBasic
 {
 	var video:Video;
 	var netStream:NetStream;
@@ -60,3 +61,4 @@ class FlxVideo extends FlxBasic
 			finishVideo();
 	}
 }
+#end

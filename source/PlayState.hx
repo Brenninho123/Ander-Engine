@@ -3,6 +3,8 @@ package;
 import Section.SwagSection;
 import Song.SwagSong;
 import WiggleEffect.WiggleEffectType;
+import cutscenes.video.VideoCutscene;
+import cutscenes.dialogue.Week6DialogueBox;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -763,7 +765,7 @@ class PlayState extends MusicBeatState
 
 		add(foregroundSprites);
 
-		var doof:DialogueBox = new DialogueBox(false, dialogue);
+		var doof:Week6DialogueBox = new Week6DialogueBox(false, dialogue);
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
@@ -899,14 +901,12 @@ class PlayState extends MusicBeatState
 					});
 				case 'senpai' | 'roses' | 'thorns':
 					schoolIntro(doof);
-				#if web
 				case 'ugh':
 					ughIntro();
 				case 'stress':
 					stressIntro();
 				case 'guns':
 					gunsIntro();
-				#end
 
 				default:
 					startCountdown();
@@ -932,7 +932,7 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		var vid:FlxVideo = new FlxVideo('music/ughCutscene.mp4');
+		var vid:VideoCutscene = new VideoCutscene('music/ughCutscene.mp4');
 		vid.finishCallback = function()
 		{
 			remove(blackShit);
@@ -955,7 +955,7 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		var vid:FlxVideo = new FlxVideo('music/gunsCutscene.mp4');
+		var vid:VideoCutscene = new VideoCutscene('music/gunsCutscene.mp4');
 		vid.finishCallback = function()
 		{
 			remove(blackShit);
@@ -974,7 +974,7 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		var vid:FlxVideo = new FlxVideo('music/stressCutscene.mp4');
+		var vid:VideoCutscene = new VideoCutscene('music/stressCutscene.mp4');
 		vid.finishCallback = function()
 		{
 			remove(blackShit);
@@ -1011,7 +1011,7 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
-	function schoolIntro(?dialogueBox:DialogueBox):Void
+	function schoolIntro(?dialogueBox:Week6DialogueBox):Void
 	{
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();

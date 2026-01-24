@@ -1,4 +1,4 @@
-package;
+package cutscenes.dialogue;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -12,7 +12,7 @@ import flixel.util.FlxTimer;
 
 using StringTools;
 
-class DialogueBox extends FlxSpriteGroup
+class Week6DialogueBox extends FlxSpriteGroup
 {
 	var box:FlxSprite;
 

@@ -201,5 +201,13 @@
 	</section>
 	
 	<haxeflag name="--dce full" if="release" />
+
+	<!-- desktop video shit -->
+
+	<define name="VIDEO_WEB" if="web"/>
+	<define name="VIDEO_DESKTOP" if="desktop || android"/>
+
+	<haxelib name="hxCodec" if="VIDEO_DESKTOP" unless="VIDEO_WEB"/>
+	<haxedef name="HXC_LIBVLC_LOGGING" if="hxCodec" />
 	
 </project>

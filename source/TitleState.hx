@@ -233,10 +233,8 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
-		#if web
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.onComplete = function() FlxG.switchState(() -> new VideoState());
-		#end
 
 		startedIntro = true;
 		// credGroup.add(credTextShit);

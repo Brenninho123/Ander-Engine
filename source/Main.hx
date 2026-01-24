@@ -46,9 +46,10 @@ class Main extends Sprite
 			'',
 
 			#if web 'WEB', #end
-			#if web ' * Video Support', #end
+			#if web ' * Video Support (openfl)', #end
 
 			#if desktop 'DESKTOP', #end
+			#if desktop ' * Video Support (hxCodec)', #end
 			
 			#if (!web && !desktop) 'UNKNOWN', #end
 			

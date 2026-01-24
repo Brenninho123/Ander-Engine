@@ -36,4 +36,9 @@ I am going to assume you've already downloaded the repo .zip for this
     		- Windows 10/11 SDK
 	- Mac: [`lime setup mac` Documentation](https://lime.openfl.org/docs/advanced-setup/macos/)
 	- Linux: [`lime setup linux` Documentation](https://lime.openfl.org/docs/advanced-setup/linux/)
+		- In order to build a application with `hxCodec` on Linux,
+		you have to install libvlc and libvlccore
+		from your distro's package manager.
+		- Debian based distributions: `sudo apt-get install libvlc-dev libvlccore-dev`
+		- Arch based distributions: `sudo pacman -S vlc`
     - HTML5: Compiles without any extra setup
