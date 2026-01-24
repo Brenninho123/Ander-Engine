@@ -1,6 +1,5 @@
 package;
 
-import NGio;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;

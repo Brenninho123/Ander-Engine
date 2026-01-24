@@ -124,7 +124,6 @@
 	<haxelib name="flixel-ui" />
 	<!--haxelib name="newgrounds" unless="switch"/> -->
 	<haxelib name="polymod"/>
-	<haxelib name="newgrounds"/>
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
 	
 	<!-- <haxelib name="flixel-animate" /> -->

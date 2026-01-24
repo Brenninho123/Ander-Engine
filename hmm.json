@@ -17,6 +17,13 @@
     },
     {
       "name": "hscript",
+      "type": "git",
+      "dir": null,
+      "ref": "dcc6f822e0866ca4fda300ed23e99559260f7bf5",
+      "url": "https://github.com/FunkinCrew/hscript"
+    },
+    {
+      "name": "hxcpp",
       "type": "haxelib",
       "version": null
     },
@@ -28,20 +35,15 @@
     {
       "name": "jsonpatch",
       "type": "haxelib",
-      "version": null
+      "version": "1.1.0"
     },
     {
       "name": "jsonpath",
       "type": "haxelib",
-      "version": null
+      "version": "1.1.0"
     },
     {
       "name": "lime",
-      "type": "haxelib",
-      "version": null
-    },
-    {
-      "name": "newgrounds",
       "type": "haxelib",
       "version": null
     },
@@ -52,18 +54,24 @@
     },
     {
       "name": "polymod",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "9824bf4f00863c152d5afe3ac4bbcac173d80684",
+      "url": "https://github.com/larsiusprime/polymod"
     },
     {
       "name": "thx.core",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "2bf2b992e06159510f595554e6b952e47922f128",
+      "url": "https://github.com/fponticelli/thx.core"
     },
     {
       "name": "thx.semver",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "bdb191fe7cf745c02a980749906dbf22719e200b",
+      "url": "https://github.com/fponticelli/thx.semver"
     }
   ]
 }
