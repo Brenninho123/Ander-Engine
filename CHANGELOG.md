@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 THE GAME WORKS ON LATEST SHIT NOW!
 
 ### Changed
+- In freeplay the song text will darken if you can't play it (chart's missing)
 - In freeplay you can no longer select songs if the chart for the difficulty is missing
 
 ### Removed
