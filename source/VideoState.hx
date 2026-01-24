@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxG;
 import openfl.display.Sprite;
-import openfl.events.AsyncErrorEvent;
 import openfl.events.MouseEvent;
 import openfl.events.NetStatusEvent;
 import openfl.media.Video;
@@ -37,7 +36,6 @@ class VideoState extends MusicBeatState
 
 		netStream = new NetStream(netConnection);
 		netStream.client = {onMetaData: client_onMetaData};
-		netStream.addEventListener(AsyncErrorEvent.ASYNC_ERROR, netStream_onAsyncError);
 		netConnection.addEventListener(NetStatusEvent.NET_STATUS, netConnection_onNetStatus);
 		// netStream.addEventListener(NetStatusEvent.NET_STATUS);
 		netStream.play(Paths.file('music/kickstarterTrailer.mp4'));
@@ -75,11 +73,6 @@ class VideoState extends MusicBeatState
 		video.width = video.videoWidth;
 		video.height = video.videoHeight;
 		// video.
-	}
-
-	private function netStream_onAsyncError(event:AsyncErrorEvent):Void
-	{
-		trace("Error loading video");
 	}
 
 	private function netConnection_onNetStatus(event:NetStatusEvent):Void

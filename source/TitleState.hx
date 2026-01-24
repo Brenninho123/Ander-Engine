@@ -21,8 +21,6 @@ import lime.app.Application;
 import lime.ui.Window;
 import openfl.Assets;
 import openfl.display.Sprite;
-import openfl.events.AsyncErrorEvent;
-import openfl.events.AsyncErrorEvent;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.events.NetStatusEvent;
@@ -120,37 +118,6 @@ class TitleState extends MusicBeatState
 		FlxG.switchState(() -> new CutsceneAnimTestState());
 		#elseif CHARTING
 		FlxG.switchState(() -> new ChartingState());
-		/* 
-			#elseif web
-
-
-			if (!initialized)
-			{
-
-				video = new Video();
-				FlxG.stage.addChild(video);
-
-				var netConnection = new NetConnection();
-				netConnection.connect(null);
-
-				netStream = new NetStream(netConnection);
-				netStream.client = {onMetaData: client_onMetaData};
-				netStream.addEventListener(AsyncErrorEvent.ASYNC_ERROR, netStream_onAsyncError);
-				netConnection.addEventListener(NetStatusEvent.NET_STATUS, netConnection_onNetStatus);
-				// netStream.addEventListener(NetStatusEvent.NET_STATUS) // netStream.play(Paths.file('music/kickstarterTrailer.mp4'));
-
-				overlay = new Sprite();
-				overlay.graphics.beginFill(0, 0.5);
-				overlay.graphics.drawRect(0, 0, 1280, 720);
-				overlay.addEventListener(MouseEvent.MOUSE_DOWN, overlay_onMouseDown);
-
-				overlay.buttonMode = true;
-				// FlxG.stage.addChild(overlay);
-
-			}
-		 */
-
-		// netConnection.addEventListener(MouseEvent.MOUSE_DOWN, overlay_onMouseDown);
 		#else
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
@@ -175,11 +142,6 @@ class TitleState extends MusicBeatState
 		video.width = video.videoWidth;
 		video.height = video.videoHeight;
 		// video.
-	}
-
-	private function netStream_onAsyncError(event:AsyncErrorEvent):Void
-	{
-		trace("Error loading video");
 	}
 
 	private function netConnection_onNetStatus(event:NetStatusEvent):Void
