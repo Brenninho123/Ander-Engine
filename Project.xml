@@ -208,6 +208,5 @@
 	<define name="VIDEO_DESKTOP" if="desktop || android"/>
 
 	<haxelib name="hxCodec" if="VIDEO_DESKTOP" unless="VIDEO_WEB"/>
-	<haxedef name="HXC_LIBVLC_LOGGING" if="hxCodec" />
 	
 </project>
