@@ -17,3 +17,22 @@ IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN 
 
 ### Artists / Animators
 - [Djotta Flow](https://www.youtube.com/@djotta11)
+
+
+## Build Instructions
+
+A fleshed out doc will have to come later but here is the run down, 
+I am going to assume you've already downloaded the repo .zip for this
+
+- Install haxe
+- Install haxeflixel
+- Run `haxelib --global install hmm` and then `haxelib --global run hmm setup` to install hmm.json
+- Run `hmm install`
+- Perform additional platform setup
+	- For Windows, download the [Visual Studio Build Tools](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+    	- When prompted, select "Individual Components" and make sure to download the following:
+    	- MSVC v143 VS 2022 C++ x64/x86 build tools
+    	- Windows 10/11 SDK
+	- Mac: [`lime setup mac` Documentation](https://lime.openfl.org/docs/advanced-setup/macos/)
+	- Linux: [`lime setup linux` Documentation](https://lime.openfl.org/docs/advanced-setup/linux/)
+    - HTML5: Compiles without any extra setup
