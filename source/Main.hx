@@ -39,9 +39,20 @@ class Main extends Sprite
 		super();
 
 		var introShit:Array<String> = [
+
 			'FUNKIN LEGACY',
 			'VERSION: ${Application.current.meta.get('version')}',
-			''
+
+			'',
+
+			#if web 'WEB', #end
+			#if web ' * Video Support', #end
+
+			#if desktop 'DESKTOP', #end
+			
+			#if (!web && !desktop) 'UNKNOWN', #end
+			
+			'',
 		];
 
 		for (thing in introShit)
