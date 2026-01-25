@@ -18,6 +18,7 @@ Also hashlink :D
 	- They've got a "videos" folder now too :D
 
 ## Changed
+- Chart Editor now formats exported songs
 - Offset files are in "data/offsets" now
 	- Offset files no longer require "Offset" at the end and is now just the character name
 - Dialogue files are in "data/dialogue" now

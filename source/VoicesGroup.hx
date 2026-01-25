@@ -22,12 +22,12 @@ class VoicesGroup extends FlxTypedGroup<FlxSound>
 			return;
 		}
 
-		if (files == null)
+		if (files == null || files.length == 0)
 			files = [""]; // loads with no file name assumption, to load "Voices.ogg" or whatev normally
 
 		for (sndFile in files)
 		{
-			var snd:FlxSound = new FlxSound().loadEmbedded(Paths.voices('$song$sndFile'));
+			var snd:FlxSound = new FlxSound().loadEmbedded(Paths.voices(song, sndFile));
 			FlxG.sound.list.add(snd); // adds it to sound group for proper volumes
 			add(snd); // adds it to main group for other shit
 		}
