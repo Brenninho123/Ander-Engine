@@ -19,12 +19,15 @@ class SparrowCharacter implements ICharacter
 		if (data.assetPath == null)
 			return;
 
+		trace('loading sparrow : characters/${data.assetPath}');
 		var tex = Paths.getSparrowAtlas('characters/${data.assetPath}');
 		character.frames = tex;
 	}
 
 	public function loadSingerAnimations(data:SingerAnimations)
 	{
+		trace('adding singer animations...');
+
 		character.quickAnimAdd('singUP', data.upName);
 		character.quickAnimAdd('singRIGHT', data.rightName);
 		character.quickAnimAdd('singDOWN', data.downName);
@@ -33,6 +36,8 @@ class SparrowCharacter implements ICharacter
 
 	public function loadSinger(data:SingerCharacterData)
 	{
+		trace('loading singer...');
+
 		// DAD ANIMATION LOADING CODE
 		loadImage(data);
 
@@ -49,12 +54,16 @@ class SparrowCharacter implements ICharacter
 
 	public function loadDamselSinger(data:DamselSingerCharacterData)
 	{
+		trace('loading damsel singer...');
+
 		loadDamsel(data);
 		loadSingerAnimations(cast data);
 	}
 
 	public function loadDamselAnimations(data:DamselAnimations)
 	{
+		trace('loading damsel animations...');
+
 		if (data.danceLeft_indices != null)
 			character.animation.addByIndices('danceLeft', data.danceLeft, data.danceLeft_indices, "", 24, false);
 		else
@@ -68,6 +77,8 @@ class SparrowCharacter implements ICharacter
 
 	public function loadDamsel(data:DamselCharacterData)
 	{
+		trace('loading damsel...');
+
 		loadImage(data);
 
 		loadDamselAnimations(data);
@@ -79,6 +90,7 @@ class SparrowCharacter implements ICharacter
 
 	public function loadDeathAnimations(data:DeathAnimations)
 	{
+		trace('loading death animations...');
 		character.quickAnimAdd('firstDeath', data.firstDeathName);
 		character.animation.addByPrefix('deathLoop', data.deathLoopName, 24, true);
 		character.quickAnimAdd('deathConfirm', data.deathConfirmName);
@@ -86,6 +98,7 @@ class SparrowCharacter implements ICharacter
 
 	public function loadDeath(data:DeathCharacterData)
 	{
+		trace('loading death...');
 		loadImage(data);
 
 		loadDeathAnimations(data);
@@ -97,6 +110,8 @@ class SparrowCharacter implements ICharacter
 
 	public function loadCharacter()
 	{
+		trace('attempting to load sparrow character ${curCharacter}');
+
 		switch (curCharacter)
 		{
 			case 'gf' | 'gf-christmas' | 'gf-tankmen' | 'gf-car' | 'gf-pixel':
@@ -321,8 +336,7 @@ class SparrowCharacter implements ICharacter
 
 				if (curCharacter == 'bf')
 				{
-					loadDeath({
-						assetPath: null,
+					loadDeathAnimations({
 						firstDeathName: 'BF dies',
 						deathLoopName: 'BF Dead Loop',
 						deathConfirmName: 'BF Dead confirm',
@@ -445,6 +459,9 @@ class SparrowCharacter implements ICharacter
 				character.playAnim('idle');
 
 				character.flipX = true;
+						
+			default:
+				trace('no sparrow implementation');
 		}
 	}
 }

@@ -9,12 +9,14 @@ class PackerCharacter extends SparrowCharacter
 		if (data.assetPath == null)
 			return;
 
+		trace('loading packer : characters/${data.assetPath}');
 		var tex = Paths.getPackerAtlas('characters/${data.assetPath}');
 		character.frames = tex;
 	}
 
 	override function loadCharacter()
 	{
+		trace('attempting to load packer character ${curCharacter}');
 		switch (curCharacter)
 		{
 			case 'spirit':
@@ -33,6 +35,9 @@ class PackerCharacter extends SparrowCharacter
 				character.playAnim('idle');
 
 				character.antialiasing = false;
+		
+			default:
+				trace('no packer implementation');
 		}
 	}
 }
