@@ -7,6 +7,7 @@ THE GAME WORKS ON LATEST SHIT NOW!
 	- They've got a "videos" folder now too :D
 
 ## Changed
+- The Options category "Mods" only appears on debug builds now
 - Song charts are in "data/songs" now instead of just "data"
 - In freeplay the song text will darken if you can't play it (chart's missing)
 - In freeplay you can no longer select songs if the chart for the difficulty is missing
