@@ -37,8 +37,9 @@ class Character extends FlxSprite
 		new SparrowCharacter(this, character).loadCharacter();
 		new PackerCharacter(this, character).loadCharacter();
 
+		trace('animations list: ${this.animation.getNameList()}');
+
 		dance();
-		animation.finish();
 
 		if (isPlayer)
 		{
@@ -59,6 +60,8 @@ class Character extends FlxSprite
 					animation.getByName('singRIGHTmiss').frames = animation.getByName('singLEFTmiss').frames;
 					animation.getByName('singLEFTmiss').frames = oldMiss;
 				}
+
+				trace('flipped ur shit');
 			}
 		}
 	}
@@ -174,36 +177,29 @@ class Character extends FlxSprite
 	{
 		if (!debugMode)
 		{
+			if (curCharacter.startsWith('gf') && animation.curAnim.name.startsWith('hair'))
+				return;
+
 			switch (curCharacter)
 			{
-				case 'gf' | 'gf-christmas' | 'gf-car' | 'gf-pixel' | 'gf-tankmen':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'pico-speaker':
-					// lol weed
-					// playAnim('shoot' + FlxG.random.int(1, 4), true);
-
 				case 'tankman':
 					if (!animation.curAnim.name.endsWith('DOWN-alt'))
 						playAnim('idle');
+					return;
+			}
 
-				case 'spooky':
-					danced = !danced;
+			if (animation.getNameList().contains('danceLeft'))
+			{
+				danced = !danced;
 
-					if (danced)
-						playAnim('danceRight');
-					else
-						playAnim('danceLeft');
-				default:
-					playAnim('idle');
+				if (danced)
+					playAnim('danceRight');
+				else
+					playAnim('danceLeft');
+			}
+			else
+			{
+				playAnim('idle');
 			}
 		}
 	}
