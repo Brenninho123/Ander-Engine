@@ -140,6 +140,7 @@ class ChartingState extends MusicBeatState
 		add(dummyArrow);
 
 		var tabs = [
+			{name: "Vocals", label: 'Vocals'},
 			{name: "Song", label: 'Song'},
 			{name: "Section", label: 'Section'},
 			{name: "Note", label: 'Note'}
@@ -150,9 +151,10 @@ class ChartingState extends MusicBeatState
 		UI_box.resize(300, 400);
 		UI_box.x = FlxG.width / 2;
 		UI_box.y = 20;
-		UI_box.selected_tab = tabs.length - 1;
+		UI_box.selected_tab = tabs.indexOf(tabs[1]);
 		add(UI_box);
 
+		addVocalUI();
 		addSongUI();
 		addSectionUI();
 		addNoteUI();
@@ -164,9 +166,27 @@ class ChartingState extends MusicBeatState
 		super.create();
 	}
 
+	var UI_vocalAdder:FlxUIInputText;
+	var vocalsList:FlxText;
+
+	function addVocalUI():Void
+	{
+		UI_vocalAdder = new FlxUIInputText(10, 10, 70, "vocal", 8);
+		typingShit = UI_vocalAdder;
+
+		var tab_group_song = new FlxUI(null, UI_box);
+		tab_group_song.name = "Vocals";
+		tab_group_song.add(UI_vocalAdder);
+
+		vocalsList = new FlxText(UI_vocalAdder.x, UI_vocalAdder.y += UI_vocalAdder.height + 10, UI_box.width - 20, "");
+		tab_group_song.add(vocalsList);
+	}
+
+	var UI_songTitle:FlxUIInputText;
+
 	function addSongUI():Void
 	{
-		var UI_songTitle = new FlxUIInputText(10, 10, 70, _song.song, 8);
+		UI_songTitle = new FlxUIInputText(10, 10, 70, _song.song, 8);
 		typingShit = UI_songTitle;
 
 		var tab_group_song = new FlxUI(null, UI_box);
@@ -223,39 +243,6 @@ class ChartingState extends MusicBeatState
 		});
 		player2DropDown.selectedLabel = _song.player2;
 
-		var curSel:Int = 0;
-		var vocalz = _song.vocalsList ?? ['-bob', '-the', '-builder'];
-		vocalz.insert(0, '');
-		if (vocalz.length > 1)
-			curSel++;
-
-		var vocalsDropDown:FlxUIDropDownMenu = null;
-		var makeVocalsDropdown = function()
-		{
-			if (vocalsDropDown != null)
-				vocalsDropDown.destroy();
-			vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y + 48, FlxUIDropDownMenu.makeStrIdLabelArray(vocalz, true),
-				function(vocal)
-				{
-					curSel = Std.parseInt(vocal);
-					trace('selected: ' + vocalsDropDown.selectedLabel);
-				});
-			vocalsDropDown.selectedId = '$curSel';
-			tab_group_song.add(vocalsDropDown);
-		}
-		makeVocalsDropdown();
-
-		var removeVocal:FlxButton = new FlxButton(vocalsDropDown.x + vocalsDropDown.width, vocalsDropDown.y, 'Remove vocal', function()
-		{
-			if (vocalsDropDown.getBtnById(vocalsDropDown.selectedId).getLabel().text != '')
-			{
-				vocalsDropDown.list.remove(vocalsDropDown.list[curSel]);
-				vocalz.remove(vocalz[curSel]);
-				vocalsDropDown.update(10);
-				makeVocalsDropdown();
-			}
-		});
-
 		var check_mute_inst = new FlxUICheckBox(10, 400, null, null, "Mute Instrumental (in editor)", 100);
 		check_mute_inst.checked = false;
 		check_mute_inst.callback = function()
@@ -282,9 +269,6 @@ class ChartingState extends MusicBeatState
 
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
-
-		tab_group_song.add(new FlxText(vocalsDropDown.x, vocalsDropDown.y - 24, 0, 'Vocals List:', 8));
-		tab_group_song.add(removeVocal);
 
 		UI_box.addGroup(tab_group_song);
 		UI_box.scrollFactor.set();
@@ -497,7 +481,22 @@ class ChartingState extends MusicBeatState
 	{
 		curStep = recalculateSteps();
 
+		if (UI_box.selected_tab_id == 'Vocals')
+			typingShit = UI_vocalAdder;
+		else if (UI_box.selected_tab_id == 'Song')
+			typingShit = UI_songTitle;
+
+		var vocL:String = "";
+
+		for (vocal in _song.vocalsList)
+		{
+			vocL += vocal + "\n";
+		}
+
+		vocalsList.text = vocL;
+
 		Conductor.songPosition = FlxG.sound.music.time;
+
 		_song.song = typingShit.text;
 
 		strumLine.y = getYfromStrum((Conductor.songPosition - sectionStartTime()) % (Conductor.stepCrochet * _song.notes[curSection].lengthInSteps));
