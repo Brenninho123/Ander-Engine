@@ -597,15 +597,16 @@ class PlayState extends MusicBeatState
 				gf.y -= 200;
 
 				var swagshit = Song.loadFromJson('picospeaker', 'stress');
-				var notes = swagshit.notes;
 
-				for (section in notes)
+				TankmenBG.animationNotes = [];
+				for (section in swagshit.notes)
 				{
 					for (idk in section.sectionNotes)
+					{
 						gf.animationNotes.push(idk);
+						TankmenBG.animationNotes.push(idk);
+					}
 				}
-
-				TankmenBG.animationNotes = gf.animationNotes;
 
 				var tempTankman:TankmenBG = new TankmenBG(20, 500, true);
 				tempTankman.strumTime = 10;
