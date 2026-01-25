@@ -488,7 +488,7 @@ class ChartingState extends MusicBeatState
 
 		var vocL:String = "";
 
-		for (vocal in _song.vocalsList)
+		for (vocal in _song?.vocalsList ?? [])
 		{
 			vocL += vocal + "\n";
 		}
