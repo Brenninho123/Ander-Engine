@@ -169,6 +169,10 @@ class ChartingState extends MusicBeatState
 		var UI_songTitle = new FlxUIInputText(10, 10, 70, _song.song, 8);
 		typingShit = UI_songTitle;
 
+		var tab_group_song = new FlxUI(null, UI_box);
+		tab_group_song.name = "Song";
+		tab_group_song.add(UI_songTitle);
+
 		var check_voices = new FlxUICheckBox(10, 25, null, null, "Has voice track", 100);
 		check_voices.checked = _song.needsVoices;
 		// _song.needsVoices = check_voices.checked;
@@ -219,13 +223,37 @@ class ChartingState extends MusicBeatState
 		});
 		player2DropDown.selectedLabel = _song.player2;
 
-		var vocalz = _song.vocalsList ?? [];
-		vocalz.push('');
+		var curSel:Int = 0;
+		var vocalz = _song.vocalsList ?? ['-bob', '-the', '-builder'];
+		vocalz.insert(0, '');
+		if (vocalz.length > 1)
+			curSel++;
 
-		var vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y + 48,
-			FlxUIDropDownMenu.makeStrIdLabelArray(vocalz, true), function(vocal:String)
+		var vocalsDropDown:FlxUIDropDownMenu = null;
+		var makeVocalsDropdown = function()
 		{
-			trace(vocal);
+			if (vocalsDropDown != null)
+				vocalsDropDown.destroy();
+			vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y + 48, FlxUIDropDownMenu.makeStrIdLabelArray(vocalz, true),
+				function(vocal)
+				{
+					curSel = Std.parseInt(vocal);
+					trace('selected: ' + vocalsDropDown.selectedLabel);
+				});
+			vocalsDropDown.selectedId = '$curSel';
+			tab_group_song.add(vocalsDropDown);
+		}
+		makeVocalsDropdown();
+
+		var removeVocal:FlxButton = new FlxButton(vocalsDropDown.x + vocalsDropDown.width, vocalsDropDown.y, 'Remove vocal', function()
+		{
+			if (vocalsDropDown.getBtnById(vocalsDropDown.selectedId).getLabel().text != '')
+			{
+				vocalsDropDown.list.remove(vocalsDropDown.list[curSel]);
+				vocalz.remove(vocalz[curSel]);
+				vocalsDropDown.update(10);
+				makeVocalsDropdown();
+			}
 		});
 
 		var check_mute_inst = new FlxUICheckBox(10, 400, null, null, "Mute Instrumental (in editor)", 100);
@@ -240,27 +268,23 @@ class ChartingState extends MusicBeatState
 			FlxG.sound.music.volume = vol;
 		};
 
-		var tab_group_song = new FlxUI(null, UI_box);
-		tab_group_song.name = "Song";
-		tab_group_song.add(UI_songTitle);
-
 		tab_group_song.add(check_voices);
 		tab_group_song.add(check_mute_inst);
-		
+
 		tab_group_song.add(saveButton);
 		tab_group_song.add(reloadSong);
-		
+
 		tab_group_song.add(reloadSongJson);
 		tab_group_song.add(loadAutosaveBtn);
-		
+
 		tab_group_song.add(stepperBPM);
 		tab_group_song.add(stepperSpeed);
-		
+
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
 
 		tab_group_song.add(new FlxText(vocalsDropDown.x, vocalsDropDown.y - 24, 0, 'Vocals List:', 8));
-		tab_group_song.add(vocalsDropDown);
+		tab_group_song.add(removeVocal);
 
 		UI_box.addGroup(tab_group_song);
 		UI_box.scrollFactor.set();

@@ -65,7 +65,8 @@ class Song
 		{
 			trace(' * porting to $SWAGSHITVER...');
 
-			swagShit.vocalsList ??= [];
+			if (swagShit.version < 1)
+				swagShit.vocalsList ??= [];
 
 			swagShit.version = SWAGSHITVER;
 		}
@@ -79,16 +80,12 @@ class Song
 		song: 'Test',
 		notes: [],
 		bpm: 150,
-		
 		needsVoices: true,
-		
 		player1: 'bf',
 		player2: 'dad',
 		speed: 1,
-		
 		validScore: false,
-
 		version: SWAGSHITVER,
-		vocalsList: [],
+		vocalsList: null,
 	};
 }
