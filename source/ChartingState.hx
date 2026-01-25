@@ -113,7 +113,7 @@ class ChartingState extends MusicBeatState
 			_song = PlayState.SONG;
 		else
 		{
-			_song = Song.DUMBASS;
+			_song = Reflect.copy(Song.DUMBASS);
 		}
 
 		// for converting
@@ -549,21 +549,21 @@ class ChartingState extends MusicBeatState
 		var vocL:String = "";
 		var missing = "None / Game will search for \n\"" + '${Paths.voices(_song.song).split(':')[1]}' + "\" most likely";
 
-		if (_song?.vocalsList != null)
+		if (_song.vocalsList != null)
 		{
 			vocL += "Player Vocals: \n";
-			for (vocal in (_song?.vocalsList ?? Song.DEFAULTVOCALS)?.player)
+			for (vocal in (_song.vocalsList ?? Song.DEFAULTVOCALS)?.player)
 				vocL += " * " + getVoc(vocal) + "\n";
 
 			if (_song.vocalsList.player.length == 0)
-				vocL += "None \n";
+				vocL += missing + "\n";
 
 			vocL += "Opponent Vocals: \n";
-			for (vocal in (_song?.vocalsList ?? Song.DEFAULTVOCALS)?.opponent)
+			for (vocal in (_song.vocalsList ?? Song.DEFAULTVOCALS)?.opponent)
 				vocL += " * " + getVoc(vocal) + "\n";
 			
 			if (_song.vocalsList.player.length == 0)
-				vocL += "None \n";
+				vocL += missing + "\n";
 		}
 		else
 			vocL += "That shit's null, game is defenitely just gonna look for " + Paths.voices(_song.song).split(':')[1];

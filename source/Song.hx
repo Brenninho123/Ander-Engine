@@ -103,7 +103,10 @@ class Song
 		speed: 1,
 		validScore: false,
 		version: 0,
-		vocalsList: Reflect.copy(DEFAULTVOCALS),
+		vocalsList: {
+			player: [],
+			opponent: [],
+		},
 	};
 
 	public static var DEFAULTVOCALS:VocalsDef = {
