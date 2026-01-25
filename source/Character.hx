@@ -91,7 +91,7 @@ class Character extends FlxSprite
 
 		TankmenBG.animationNotes = animationNotes;
 
-		trace(animationNotes);
+		trace(' * tankmen to prob shoot: ' + animationNotes.length);
 		animationNotes.sort(sortAnims);
 	}
 
