@@ -11,7 +11,7 @@ import openfl.net.NetStream;
 
 class WebVideo extends FlxBasic
 {
-	var video:Video;
+	public var video:Video;
 	var netStream:NetStream;
 
 	public var finishCallback:Void->Void;

@@ -7,7 +7,7 @@ import flixel.FlxBasic;
 
 class DesktopVideo extends FlxBasic
 {
-	var video:FlxVideoSprite;
+	public var video:FlxVideoSprite;
 
 	public var finishCallback:Void->Void;
 
@@ -31,7 +31,7 @@ class DesktopVideo extends FlxBasic
 			{
 				video.setGraphicSize(FlxG.width, FlxG.height);
 				video.updateHitbox();
-				video.screenCenter();
+				video.setPosition(0, 0);
 			});
 		}
 		else

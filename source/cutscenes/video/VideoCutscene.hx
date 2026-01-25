@@ -10,7 +10,9 @@ class VideoCutscene extends flixel.FlxBasic
 {
 	#if (!VIDEO_WEB && !VIDEO_DESKTOP)
 	public var video:FlxSprite;
+	
 	public var finishCallback(default, set):Void->Void;
+
 	function set_finishCallback(callback:Void->Void):Void->Void
 	{
 		if (callback != null)
@@ -27,6 +29,7 @@ class VideoCutscene extends flixel.FlxBasic
 
 		return finishCallback;
 	}
+	
 	override public function new(vidSrc:String)
 	{
 		trace('not VIDEO_WEB or VIDEO_DESKTOP, set "finishCallback" to do whatever you need to');
