@@ -115,6 +115,11 @@ class ChartingState extends MusicBeatState
 			_song = Song.DUMBASS;
 		}
 
+		// for converting
+		Song.parseJSONshit(Json.stringify({
+			song: _song
+		}));
+
 		FlxG.mouse.visible = true;
 
 		tempBpm = _song.bpm;
@@ -182,15 +187,17 @@ class ChartingState extends MusicBeatState
 		tab_group_vocal.add(vocalsList);
 
 		var addVocal:FlxButton = new FlxButton(UI_vocalAdder.x + UI_vocalAdder.width + 10, UI_vocalAdder.y, 'Add vocal', function()
-			{
+		{
+			if (!_song.vocalsList.contains(typingShit.text))
 				_song.vocalsList.push(typingShit.text);
-			});
+		});
 		tab_group_vocal.add(addVocal);
 
 		var removeVocal:FlxButton = new FlxButton(addVocal.x + addVocal.width + 10, addVocal.y, 'Remove vocal', function()
-			{
+		{
+			if (_song.vocalsList.contains(typingShit.text))
 				_song.vocalsList.remove(typingShit.text);
-			});
+		});
 		tab_group_vocal.add(removeVocal);
 
 		UI_box.addGroup(tab_group_vocal);
