@@ -174,12 +174,14 @@ class ChartingState extends MusicBeatState
 		UI_vocalAdder = new FlxUIInputText(10, 10, 70, "vocal", 8);
 		typingShit = UI_vocalAdder;
 
-		var tab_group_song = new FlxUI(null, UI_box);
-		tab_group_song.name = "Vocals";
-		tab_group_song.add(UI_vocalAdder);
+		var tab_group_vocal = new FlxUI(null, UI_box);
+		tab_group_vocal.name = "Vocals";
+		tab_group_vocal.add(UI_vocalAdder);
 
 		vocalsList = new FlxText(UI_vocalAdder.x, UI_vocalAdder.y += UI_vocalAdder.height + 10, UI_box.width - 20, "");
-		tab_group_song.add(vocalsList);
+		tab_group_vocal.add(vocalsList);
+
+		UI_box.addGroup(tab_group_vocal);
 	}
 
 	var UI_songTitle:FlxUIInputText;
