@@ -72,7 +72,7 @@ class Paths
 
 	inline static public function chart(song:String, chart:String, ?library:String)
 	{
-		return json('songs/${song.toLowerCase()}/${chart.toLowerCase()}.json', library);
+		return json('songs/${song.toLowerCase()}/${chart.toLowerCase()}', library);
 	}
 
 	static public function sound(key:String, ?library:String)

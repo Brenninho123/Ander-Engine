@@ -148,13 +148,10 @@ class PauseSubState extends MusicBeatSubstate
 				case "Resume":
 					close();
 				case "EASY" | 'NORMAL' | "HARD":
-					PlayState.SONG = Song.loadFromJson(Highscore.formatSong(PlayState.SONG.song.toLowerCase(), curSelected),
-						PlayState.SONG.song.toLowerCase());
-
+					PlayState.SONG = Song.loadFromJson(Highscore.formatSong(PlayState.SONG.song, curSelected), PlayState.SONG.song);
 					PlayState.storyDifficulty = curSelected;
 
-					// TODO: "resetState" (most likely) is causing a crash, figure out why and patch that shit
-					FlxG.resetState();
+					LoadingState.loadAndSwitchState(new PlayState());
 
 				case 'Toggle Practice Mode':
 					PlayState.practiceMode = !PlayState.practiceMode;
@@ -167,7 +164,7 @@ class PauseSubState extends MusicBeatSubstate
 					menuItems = pauseOG;
 					regenMenu();
 				case "Restart Song":
-					FlxG.resetState();
+					LoadingState.loadAndSwitchState(new PlayState());
 				case "Exit to menu":
 					PlayState.seenCutscene = false;
 					PlayState.deathCounter = 0;
