@@ -10,6 +10,11 @@ class TextMenuList extends MenuTypedList<TextMenuItem>
 		super(navControls, wrapMode);
 	}
 
+	public function createHeader(x = 0.0, y = 0.0, headerName:String)
+	{
+		return createItem(x, y, headerName, Bold, null, true);
+	}
+
 	public function createItem(x = 0.0, y = 0.0, name:String, font:AtlasFont = Bold, callback, fireInstantly = false)
 	{
 		var item = new TextMenuItem(x, y, name, font, callback);

@@ -3,6 +3,7 @@
 THE GAME WORKS ON LATEST SHIT NOW!
 
 ## Added
+- Headers in the preferences menu
 - Roses Censored Dialogue
 - Songs can now have dialogue play (graphicless but its whatev LOL) as long as there is a "$songname.txt" file in the "assets/data/dialogue" folder
 	- There can also be censored or dialogue versions so that's cool!

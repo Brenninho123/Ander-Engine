@@ -1,5 +1,6 @@
 package ui;
 
+import ui.AtlasText.BoldText;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -30,10 +31,15 @@ class PreferencesMenu extends ui.OptionsState.Page
 
 		add(items = new TextMenuList());
 
+		createHeader('GAMEPLAY');
+
 		createPrefItem('naughtyness', 'censor-naughty', true);
 		createPrefItem('downscroll', 'downscroll', false);
 		createPrefItem('flashing menu', 'flashing-menu', true);
 		createPrefItem('Camera Zooming on Beat', 'camera-zoom', true);
+
+		createHeader('MISC');
+
 		createPrefItem('FPS Counter', 'fps-counter', true);
 		createPrefItem('Auto Pause', 'auto-pause', false);
 
@@ -82,6 +88,11 @@ class PreferencesMenu extends ui.OptionsState.Page
 			FlxG.stage.removeChild(Main.fpsCounter);
 
 		FlxG.autoPause = getPref('auto-pause');
+	}
+
+	function createHeader(headerName:String)
+	{
+		items.createHeader(120, (120 * items.length) + 30, headerName);
 	}
 
 	private function createPrefItem(prefName:String, prefString:String, prefValue:Dynamic):Void
@@ -161,6 +172,8 @@ class PreferencesMenu extends ui.OptionsState.Page
 
 	private static function preferenceCheck(prefString:String, prefValue:Dynamic):Void
 	{
+		if (prefString == null) return;
+
 		if (getPref(prefString) == null)
 		{
 			setPref(prefString, prefValue);
