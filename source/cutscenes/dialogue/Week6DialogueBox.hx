@@ -95,13 +95,17 @@ class Week6DialogueBox extends BasicDialogueBox
 			dropText.color = 0xFFD89494;
 			swagDialogue.color = 0xFF3F2021;
 		}
+		catch (e)
+		{
+			trace(e);
+		}
 	}
 
 	override function startDialogue()
 	{
 		dropText.color = 0xFFD89494;
 		swagDialogue.color = 0xFF3F2021;
-		
+
 		super.startDialogue();
 	}
 
