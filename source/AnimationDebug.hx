@@ -231,7 +231,7 @@ class AnimationDebug extends FlxState
 		_file.removeEventListener(Event.CANCEL, onSaveCancel);
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 		_file = null;
-		FlxG.log.notice("Successfully saved LEVEL DATA.");
+		trace("Successfully saved LEVEL DATA.");
 	}
 
 	/**
@@ -254,6 +254,6 @@ class AnimationDebug extends FlxState
 		_file.removeEventListener(Event.CANCEL, onSaveCancel);
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 		_file = null;
-		FlxG.log.error("Problem saving Level data");
+		trace("Problem saving Level data");
 	}
 }

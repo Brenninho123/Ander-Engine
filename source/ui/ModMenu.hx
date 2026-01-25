@@ -98,7 +98,7 @@ class ModMenu extends ui.OptionsState.Page
 		trace("mods path:" + FileSystem.absolutePath(MOD_PATH));
 		if (!FileSystem.exists(MOD_PATH))
 		{
-			FlxG.log.warn("missing mods folder, expected: " + FileSystem.absolutePath(MOD_PATH));
+			trace("missing mods folder, expected: " + FileSystem.absolutePath(MOD_PATH));
 			return;
 		}
 		

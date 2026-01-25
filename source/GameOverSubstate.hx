@@ -142,7 +142,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super.beatHit();
 
-		FlxG.log.add('beat');
+		trace('beat');
 	}
 
 	var isEnding:Bool = false;
