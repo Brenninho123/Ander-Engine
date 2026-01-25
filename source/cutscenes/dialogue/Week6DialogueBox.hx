@@ -1,5 +1,6 @@
 package cutscenes.dialogue;
 
+import flixel.sound.FlxSound;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -62,16 +63,23 @@ class Week6DialogueBox extends BasicDialogueBox
 		return super.makeDialogueBox();
 	}
 
+	override function playMusic()
+	{
+		if (music != null)
+			music.fadeIn(1, 0, 0.8);
+	}
+
 	override public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
 	{
 		switch (PlayState.SONG.song.toLowerCase())
 		{
 			case 'senpai':
-				FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.8);
+				music = new FlxSound();
+				music.loadEmbedded(Paths.music('Lunchbox'));
 			case 'thorns':
-				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.8);
+				music = new FlxSound();
+				music.loadEmbedded(Paths.music('LunchboxScary'));
+				music.fadeIn(1, 0, 0.8);
 		}
 
 		super(talkingRight, dialogueList);

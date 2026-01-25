@@ -199,21 +199,22 @@ class PlayState extends MusicBeatState
 
 		var checkForTextDialoguePath = function(path:String)
 		{
-			if ((dialogue == [] || dialogue == null) && Assets.exists(path))
+			if (Assets.exists(path))
 			{
 				trace('FOUND DIALOGUE! $path');
-				dialogue = CoolUtil.coolTextFile(path);
+				if (CoolUtil.coolTextFile(path).length > 0)
+					dialogue = CoolUtil.coolTextFile(path);
 			}
 		}
 
+		checkForTextDialoguePath(dialoguePath);
+		checkForTextDialoguePath(dialoguePath_diff);
+
 		if (!PreferencesMenu.getPref('censor-naughty'))
 		{
-			checkForTextDialoguePath(censoredDialoguePath_diff);
 			checkForTextDialoguePath(censoredDialoguePath);
+			checkForTextDialoguePath(censoredDialoguePath_diff);
 		}
-
-		checkForTextDialoguePath(dialoguePath);
-		checkForTextDialoguePath(dialoguePath);
 
 		#if discord_rpc
 		initDiscord();
@@ -1003,6 +1004,7 @@ class PlayState extends MusicBeatState
 				{
 					inCutscene = true;
 
+						dialogueBox.playMusic();
 					add(dialogueBox);
 				}
 				else
@@ -1089,7 +1091,10 @@ class PlayState extends MusicBeatState
 						});
 					}
 					else
+					{
+						dialogueBox.playMusic();
 						add(dialogueBox);
+					}
 				}
 				else
 					startCountdown();

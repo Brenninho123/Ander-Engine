@@ -1,5 +1,6 @@
 package cutscenes.dialogue;
 
+import flixel.sound.FlxSound;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.text.FlxTypeText;
@@ -94,6 +95,14 @@ class BasicDialogueBox extends FlxSpriteGroup
 	var dialogueOpened:Bool = false;
 	var dialogueStarted:Bool = false;
 	var dialogueEnded:Bool = false;
+
+	public var music:FlxSound;
+
+	public function playMusic()
+	{
+		if (music != null)
+			music.play();
+	}
 
 	override function update(elapsed:Float)
 	{

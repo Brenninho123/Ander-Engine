@@ -161,14 +161,14 @@ class PreferencesMenu extends ui.OptionsState.Page
 
 	private static function preferenceCheck(prefString:String, prefValue:Dynamic):Void
 	{
-		if (preferences.get(prefString) == null)
+		if (getPref(prefString) == null)
 		{
-			preferences.set(prefString, prefValue);
+			setPref(prefString, prefValue);
 			trace('set preference($prefString, $prefValue)!');
 		}
 		else
 		{
-			trace('found preference($prefString): ' + preferences.get(prefString));
+			trace('found preference($prefString): ' + getPref(prefString));
 		}
 	}
 }
