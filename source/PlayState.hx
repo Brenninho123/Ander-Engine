@@ -594,22 +594,6 @@ class PlayState extends MusicBeatState
 			case 'pico-speaker':
 				gf.x -= 50;
 				gf.y -= 200;
-
-				for (i in 0...TankmenBG.animationNotes.length)
-				{
-					if (FlxG.random.bool(16))
-					{
-						var tankman:TankmenBG = new TankmenBG(0,0,false);
-						// new TankmenBG(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
-						tankman.strumTime = TankmenBG.animationNotes[i][0];
-						tankman.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
-						tankman.onded = (t) -> {
-							tankmanRun.remove(t);
-							t.destroy();
-						}
-						tankmanRun.add(tankman);
-					}
-				}
 		}
 
 		dad = new Character(100, 100, SONG.player2);
@@ -713,6 +697,31 @@ class PlayState extends MusicBeatState
 		add(foregroundSprites);
 
 		trace('foregroundSprites');
+
+		if (gf.curCharacter == 'pico-speaker')
+		{
+			gf.loadMappedAnims();
+
+			for (i in 0...TankmenBG.animationNotes.length)
+			{
+				if (FlxG.random.bool(16))
+				{
+					var tankman:TankmenBG = new TankmenBG(0, 0, false);
+					// new TankmenBG(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
+					tankman.strumTime = TankmenBG.animationNotes[i][0];
+					tankman.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
+					tankman.onded = (t) ->
+					{
+						tankmanRun.remove(t);
+						t.destroy();
+					}
+					tankmanRun.add(tankman);
+					trace('added tankguy #$i');
+				}
+			}
+		}
+
+		trace('tankmanRun');
 
 		var week6dialogue:Week6DialogueBox = new Week6DialogueBox(false, dialogue);
 		week6dialogue.scrollFactor.set();

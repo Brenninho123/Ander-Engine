@@ -9,7 +9,7 @@ class PackerCharacter extends SparrowCharacter
 		if (data.assetPath == null)
 			return;
 
-		var tex = Paths.getPackerAtlas('characters/${data.assetPath}');
+		var tex = Paths.getPackerAtlas('characters/${data.assetPath}', 'characters');
 		character.frames = tex;
 	}
 

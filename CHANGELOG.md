@@ -3,6 +3,8 @@
 THE GAME WORKS ON LATEST SHIT NOW!
 
 ## Added
+- Characters library that's always preloaded!
+	- Should help with loading character images I hope...
 - Headers in the preferences menu
 - Roses Censored Dialogue
 - Songs can now have dialogue play (graphicless but its whatev LOL) as long as there is a "$songname.txt" file in the "assets/data/dialogue" folder

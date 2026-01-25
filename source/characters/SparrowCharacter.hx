@@ -19,7 +19,7 @@ class SparrowCharacter implements ICharacter
 		if (data.assetPath == null)
 			return;
 
-		var tex = Paths.getSparrowAtlas('characters/${data.assetPath}');
+		var tex = Paths.getSparrowAtlas('characters/${data.assetPath}', 'characters');
 		character.frames = tex;
 	}
 

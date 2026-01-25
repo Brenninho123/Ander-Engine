@@ -45,9 +45,6 @@ class Character extends FlxSprite
 		if (animation.getNameList().length == 0)
 			trace(' * FAILED');
 
-		if (character == 'pico-speaker')
-			loadMappedAnims();
-
 		dance();
 
 		if (isPlayer)
@@ -91,8 +88,8 @@ class Character extends FlxSprite
 
 		TankmenBG.animationNotes = animationNotes;
 
-		trace(' * tankmen to prob shoot: ' + animationNotes.length);
-		animationNotes.sort(sortAnims);
+		trace('tankmen to prob shoot: ' + animationNotes.length);
+		// animationNotes.sort(sortAnims);
 	}
 
 	function sortAnims(val1:Array<Dynamic>, val2:Array<Dynamic>):Int
