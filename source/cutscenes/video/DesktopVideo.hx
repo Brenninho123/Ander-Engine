@@ -19,9 +19,9 @@ class DesktopVideo extends FlxBasic
 
 		if (video != null)
 		{
-			FlxG.state.add(video);
-
+			video.autoPause = false;
 			video.play(vidSrc, false);
+			FlxG.state.add(video);
 
 			video.bitmap.onEndReached.add(finishVideo);
 
