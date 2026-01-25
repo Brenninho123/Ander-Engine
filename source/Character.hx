@@ -213,7 +213,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'pico':
-				tex = Paths.getSparrowAtlas('characters/Pico_FNF_assetss');
+				tex = Paths.getSparrowAtlas('characters/pico/Pico_FNF_assetss');
 				frames = tex;
 				quickAnimAdd('idle', "Pico Idle Dance");
 				quickAnimAdd('singUP', 'pico Up note0');
@@ -237,14 +237,14 @@ class Character extends FlxSprite
 				quickAnimAdd('singUPmiss', 'pico Up note miss');
 				quickAnimAdd('singDOWNmiss', 'Pico Down Note MISS');
 
-				loadOffsetFile(curCharacter);
+				loadOffsetFile('pico/' + curCharacter);
 
 				playAnim('idle');
 
 				flipX = true;
 
 			case 'pico-speaker':
-				frames = Paths.getSparrowAtlas('characters/picoSpeaker');
+				frames = Paths.getSparrowAtlas('characters/pico/picoSpeaker');
 
 				quickAnimAdd('shoot1', "Pico shoot 1");
 				quickAnimAdd('shoot2', "Pico shoot 2");
@@ -252,7 +252,7 @@ class Character extends FlxSprite
 				quickAnimAdd('shoot4', "Pico shoot 4");
 
 				// here for now, will be replaced later for less copypaste
-				loadOffsetFile(curCharacter);
+				loadOffsetFile('pico/'+ curCharacter);
 				playAnim('shoot1');
 
 				loadMappedAnims();
@@ -640,8 +640,8 @@ class Character extends FlxSprite
 					}
 
 				case 'pico-speaker':
-				// lol weed
-				// playAnim('shoot' + FlxG.random.int(1, 4), true);
+					// lol weed
+					// playAnim('shoot' + FlxG.random.int(1, 4), true);
 
 				case 'tankman':
 					if (!animation.curAnim.name.endsWith('DOWN-alt'))
