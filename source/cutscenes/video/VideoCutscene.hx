@@ -37,4 +37,11 @@ class VideoCutscene extends flixel.FlxBasic
 		video = new FlxSprite();
 	}
 	#end
+
+	public function setCameras(cameras:Array<FlxCamera>)
+	{
+		#if !VIDEO_WEB
+		video.cameras = cameras;
+		#end
+	}
 }

@@ -943,7 +943,7 @@ class PlayState extends MusicBeatState
 			startCountdown();
 			cameraMovement();
 		};
-		vid.video.cameras = [camHUD];
+		vid.setCameras([camHUD]);
 
 		FlxG.camera.zoom = defaultCamZoom * 1.2;
 
@@ -968,7 +968,7 @@ class PlayState extends MusicBeatState
 			startCountdown();
 			cameraMovement();
 		};
-		vid.video.cameras = [camHUD];
+		vid.setCameras([camHUD]);
 	}
 
 	function stressIntro()
@@ -988,7 +988,7 @@ class PlayState extends MusicBeatState
 			startCountdown();
 			cameraMovement();
 		};
-		vid.video.cameras = [camHUD];
+		vid.setCameras([camHUD]);
 	}
 
 	function initDiscord():Void
