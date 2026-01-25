@@ -9,6 +9,8 @@ THE GAME WORKS ON LATEST SHIT NOW!
 	- There can also be censored or dialogue versions so that's cool!
 
 ## Fixed
+- HIGH SCROLLSPEED HOLD NOTE BUG!
+- SUSTAINS! THEY ARENT WEIRD ANYMORE!
 - VIDEOS WORK ON DESKTOP NOW! (THANK YOU HXCODEC !!!!!!!!!!)
 	- They've got a "videos" folder now too :D
 

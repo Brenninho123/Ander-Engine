@@ -30,6 +30,7 @@ class Note extends FlxSprite
 
 	public var altNote:Bool = false;
 	public var invisNote:Bool = false;
+	public var hitByCPU:Bool = false;
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;

@@ -1002,7 +1002,7 @@ class PlayState extends MusicBeatState
 				{
 					inCutscene = true;
 
-						dialogueBox.playMusic();
+					dialogueBox.playMusic();
 					add(dialogueBox);
 				}
 				else
@@ -1274,7 +1274,7 @@ class PlayState extends MusicBeatState
 				{
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true);
+					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + (Conductor.stepCrochet / 2), daNoteData, oldNote, true);
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
 
@@ -1760,6 +1760,8 @@ class PlayState extends MusicBeatState
 			unspawnNotes.shift();
 		}
 
+		if (!inCutscene)
+			keyShit();
 		if (generatedMusic)
 		{
 			notes.forEachAlive(function(daNote:Note)
@@ -1784,11 +1786,8 @@ class PlayState extends MusicBeatState
 
 					if (daNote.isSustainNote)
 					{
-						if (daNote.animation.curAnim.name.endsWith("end") && daNote.prevNote != null)
-							daNote.y += daNote.prevNote.height;
-						else
-							daNote.y += daNote.height / 2;
-
+						daNote.y -= daNote.frameHeight * daNote.scale.y;
+						daNote.y += Note.swagWidth / 2;
 						if ((!daNote.mustPress || (daNote.wasGoodHit || (daNote.prevNote.wasGoodHit && !daNote.canBeHit)))
 							&& daNote.y - daNote.offset.y * daNote.scale.y + daNote.height >= strumLineMid)
 						{
@@ -1804,7 +1803,6 @@ class PlayState extends MusicBeatState
 				else
 				{
 					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
-
 					if (daNote.isSustainNote
 						&& (!daNote.mustPress || (daNote.wasGoodHit || (daNote.prevNote.wasGoodHit && !daNote.canBeHit)))
 						&& daNote.y + daNote.offset.y * daNote.scale.y <= strumLineMid)
@@ -1817,8 +1815,9 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				if (!daNote.mustPress && daNote.wasGoodHit)
+				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByCPU)
 				{
+					daNote.hitByCPU = true;
 					if (SONG.song != 'Tutorial')
 						camZooming = true;
 
@@ -1850,9 +1849,12 @@ class PlayState extends MusicBeatState
 					if (SONG.needsVoices)
 						vocals.volume = 1;
 
-					daNote.kill();
-					notes.remove(daNote, true);
-					daNote.destroy();
+					if (!daNote.isSustainNote)
+					{
+						daNote.kill();
+						notes.remove(daNote, true);
+						daNote.destroy();
+					}
 				}
 
 				// WIP interpolation shit? Need to fix the pause issue
@@ -1895,9 +1897,6 @@ class PlayState extends MusicBeatState
 				}
 			});
 		}
-
-		if (!inCutscene)
-			keyShit();
 	}
 
 	function killCombo():Void
