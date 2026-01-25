@@ -178,7 +178,7 @@ class ChartingState extends MusicBeatState
 		tab_group_vocal.name = "Vocals";
 		tab_group_vocal.add(UI_vocalAdder);
 
-		vocalsList = new FlxText(UI_vocalAdder.x, UI_vocalAdder.y += UI_vocalAdder.height + 10, UI_box.width - 20, "");
+		vocalsList = new FlxText(UI_vocalAdder.x, UI_vocalAdder.y + UI_vocalAdder.height + 10, UI_box.width - 20, "");
 		tab_group_vocal.add(vocalsList);
 
 		UI_box.addGroup(tab_group_vocal);
@@ -486,20 +486,24 @@ class ChartingState extends MusicBeatState
 		if (UI_box.selected_tab_id == 'Vocals')
 			typingShit = UI_vocalAdder;
 		else if (UI_box.selected_tab_id == 'Song')
+		{
 			typingShit = UI_songTitle;
+			_song.song = typingShit.text;
+		}
 
 		var vocL:String = "";
 
-		for (vocal in _song?.vocalsList ?? [])
-		{
-			vocL += vocal + "\n";
-		}
+		if ((_song?.vocalsList ?? []).length > 0)
+			for (vocal in _song?.vocalsList ?? [])
+			{
+				vocL += " * " + vocal + "\n";
+			}
+		else
+			vocL = "None / Game with search for \n\"" + '${Paths.voices(_song.song)}' + "\"";
 
 		vocalsList.text = vocL;
 
 		Conductor.songPosition = FlxG.sound.music.time;
-
-		_song.song = typingShit.text;
 
 		strumLine.y = getYfromStrum((Conductor.songPosition - sectionStartTime()) % (Conductor.stepCrochet * _song.notes[curSection].lengthInSteps));
 
