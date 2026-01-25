@@ -76,7 +76,7 @@ class ChartingState extends MusicBeatState
 
 	var tempBpm:Float = 0;
 
-	var vocals:FlxSound;
+	var vocals:VoicesGroup;
 
 	var leftIcon:HealthIcon;
 	var rightIcon:HealthIcon;
@@ -150,6 +150,7 @@ class ChartingState extends MusicBeatState
 		UI_box.resize(300, 400);
 		UI_box.x = FlxG.width / 2;
 		UI_box.y = 20;
+		UI_box.selected_tab = tabs.length - 1;
 		add(UI_box);
 
 		addSongUI();
@@ -230,6 +231,15 @@ class ChartingState extends MusicBeatState
 		});
 		player2DropDown.selectedLabel = _song.player2;
 
+		var vocalz = _song.vocalsList ?? [];
+		vocalz.push('');
+
+		var vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y += player1DropDown.height + 16,
+			FlxUIDropDownMenu.makeStrIdLabelArray(vocalz, true), function(vocal:String)
+		{
+			trace(vocal);
+		});
+
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
 		tab_group_song.add(UI_songTitle);
@@ -244,6 +254,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(stepperSpeed);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
+		tab_group_song.add(vocalsDropDown);
 
 		UI_box.addGroup(tab_group_song);
 		UI_box.scrollFactor.set();
@@ -343,9 +354,10 @@ class ChartingState extends MusicBeatState
 
 		FlxG.sound.playMusic(Paths.inst(daSong), 0.6);
 
-		// WONT WORK FOR TUTORIAL OR TEST SONG!!! REDO LATER
-		vocals = new FlxSound().loadEmbedded(Paths.voices(daSong));
-		FlxG.sound.list.add(vocals);
+		if (_song.needsVoices)
+			vocals = new VoicesGroup(daSong, _song.vocalsList);
+		else
+			vocals = new VoicesGroup(daSong, null, false);
 
 		FlxG.sound.music.pause();
 		vocals.pause();
@@ -436,14 +448,6 @@ class ChartingState extends MusicBeatState
 
 	var updatedSection:Bool = false;
 
-	/* this function got owned LOL
-		function lengthBpmBullshit():Float
-		{
-			if (_song.notes[curSection].changeBPM)
-				return _song.notes[curSection].lengthInSteps * (_song.notes[curSection].bpm / _song.bpm);
-			else
-				return _song.notes[curSection].lengthInSteps;
-	}*/
 	function sectionStartTime():Float
 	{
 		var daBPM:Float = _song.bpm;
@@ -983,29 +987,6 @@ class ChartingState extends MusicBeatState
 		return FlxMath.remapToRange(strumTime, 0, 16 * Conductor.stepCrochet, gridBG.y, gridBG.y + gridBG.height);
 	}
 
-	/*
-		function calculateSectionLengths(?sec:SwagSection):Int
-		{
-			var daLength:Int = 0;
-
-			for (i in _song.notes)
-			{
-				var swagLength = i.lengthInSteps;
-
-				if (i.typeOfSection == Section.COPYCAT)
-					swagLength * 2;
-
-				daLength += swagLength;
-
-				if (sec != null && sec == i)
-				{
-					trace('swag loop??');
-					break;
-				}
-			}
-
-			return daLength;
-	}*/
 	private var daSpacing:Float = 0.3;
 
 	function loadLevel():Void
