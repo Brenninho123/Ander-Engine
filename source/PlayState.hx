@@ -1153,8 +1153,10 @@ class PlayState extends MusicBeatState
 			}
 
 			var introSndPaths:Array<String> = [
-				"intro3" + altSuffix, "intro2" + altSuffix,
-				"intro1" + altSuffix, "introGo" + altSuffix
+				"intro3" + altSuffix,
+				"intro2" + altSuffix,
+				"intro1" + altSuffix,
+				"introGo" + altSuffix
 			];
 
 			if (swagCounter > 0)
