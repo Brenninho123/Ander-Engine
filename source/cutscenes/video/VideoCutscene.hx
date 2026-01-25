@@ -38,12 +38,7 @@ class VideoCutscene extends VideoCutsceneClass
 
 		video = new FlxSprite();
 	}
-	#end
 
-	public function setCameras(cameras:Array<FlxCamera>)
-	{
-		#if !VIDEO_WEB
-		video.cameras = cameras;
-		#end
-	}
+	public function setCameras(cameras:Array<FlxCamera>) {}
+	#end
 }

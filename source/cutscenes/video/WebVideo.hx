@@ -60,5 +60,7 @@ class WebVideo extends FlxBasic
 		if (event.info.code == 'NetStream.Play.Complete')
 			finishVideo();
 	}
+	
+	public function setCameras(cameras:Array<FlxCamera>) {}
 }
 #end

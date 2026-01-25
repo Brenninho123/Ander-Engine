@@ -1,5 +1,6 @@
 package cutscenes.video;
 
+#if VIDEO_DESKTOP
 import flixel.util.FlxTimer;
 import flixel.FlxG;
 import hxcodec.flixel.FlxVideoSprite;
@@ -52,4 +53,10 @@ class DesktopVideo extends FlxBasic
 		if (finishCallback != null)
 			finishCallback();
 	}
+
+	public function setCameras(cameras:Array<FlxCamera>)
+	{
+		this.video.cameras = cameras;
+	}
 }
+#end
