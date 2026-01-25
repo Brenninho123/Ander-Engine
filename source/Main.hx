@@ -39,6 +39,7 @@ class Main extends Sprite
 		super();
 
 		var introShit:Array<String> = [
+			'',
 
 			'FUNKIN LEGACY',
 			'VERSION: ${Application.current.meta.get('version')}',
