@@ -719,13 +719,13 @@ class PlayState extends MusicBeatState
 
 		add(foregroundSprites);
 
-		var week6dialogue:Week6DialogueBox = new Week6DialogueBox(false, dialogue);
-		week6dialogue.scrollFactor.set();
-		week6dialogue.finishThing = startCountdown;
-
 		var basicdialogue:BasicDialogueBox = new BasicDialogueBox(false, dialogue);
 		basicdialogue.scrollFactor.set();
 		basicdialogue.finishThing = startCountdown;
+
+		var week6dialogue:Week6DialogueBox = new Week6DialogueBox(false, dialogue);
+		week6dialogue.scrollFactor.set();
+		week6dialogue.finishThing = startCountdown;
 
 		Conductor.songPosition = -5000;
 

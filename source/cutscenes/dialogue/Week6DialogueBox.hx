@@ -90,8 +90,19 @@ class Week6DialogueBox extends BasicDialogueBox
 		handSelect.visible = false;
 		add(handSelect);
 
+		try
+		{
+			dropText.color = 0xFFD89494;
+			swagDialogue.color = 0xFF3F2021;
+		}
+	}
+
+	override function startDialogue()
+	{
 		dropText.color = 0xFFD89494;
 		swagDialogue.color = 0xFF3F2021;
+		
+		super.startDialogue();
 	}
 
 	override function update(elapsed:Float)
