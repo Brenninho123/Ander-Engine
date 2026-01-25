@@ -1,5 +1,6 @@
 package;
 
+import haxe.Log;
 import openfl.events.UncaughtErrorEvent;
 import lime.app.Application;
 import flixel.FlxGame;
@@ -53,10 +54,19 @@ class Main extends Sprite
 			#if desktop 'DESKTOP', #end
 			#if desktop ' * Video Support (hxCodec)', #end
 
+			#if sys ' * Custom Trace', #end
+
 			#if (!web && !desktop) 'UNKNOWN', #end
 
 			'',
 		];
+
+		#if sys
+		Log.trace = (v, ?infos) ->
+		{
+			Sys.println('[' + '${infos.fileName}:${infos.lineNumber}'.lpad(' ', 20).rpad(' ', 40) + ']\t\t$v');
+		}
+		#end
 
 		for (thing in introShit)
 		{

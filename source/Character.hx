@@ -34,10 +34,13 @@ class Character extends FlxSprite
 
 		antialiasing = true;
 
+		trace('Loading character');
+		trace(' * CHARACTER: $character');
 		new SparrowCharacter(this, character).loadCharacter();
 		new PackerCharacter(this, character).loadCharacter();
 
-		trace('animations list: ${this.animation.getNameList()}');
+		if (animation.getNameList().length == 0)
+			trace(' * FAILED');
 
 		dance();
 
