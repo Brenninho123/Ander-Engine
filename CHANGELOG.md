@@ -4,6 +4,7 @@ THE GAME WORKS ON LATEST SHIT NOW!
 Also hashlink :D
 
 ## Added
+- MULTIPLE VOCALS SUPPORT!!!!!!!!!
 - Characters library that's always preloaded!
 	- Should help with loading character images I hope...
 - Headers in the preferences menu
