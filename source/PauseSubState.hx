@@ -153,6 +153,7 @@ class PauseSubState extends MusicBeatSubstate
 
 					PlayState.storyDifficulty = curSelected;
 
+					// TODO: "resetState" (most likely) is causing a crash, figure out why and patch that shit
 					FlxG.resetState();
 
 				case 'Toggle Practice Mode':
