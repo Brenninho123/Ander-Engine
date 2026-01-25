@@ -53,10 +53,5 @@ class DesktopVideo extends FlxBasic
 		if (finishCallback != null)
 			finishCallback();
 	}
-
-	public function setCameras(cameras:Array<FlxCamera>)
-	{
-		this.video.cameras = cameras;
-	}
 }
 #end

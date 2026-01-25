@@ -1,5 +1,7 @@
 package cutscenes.video;
 
+import flixel.FlxCamera;
+
 #if (!VIDEO_WEB && !VIDEO_DESKTOP)
 typedef VideoCutsceneClass = FlxBasic;
 #elseif VIDEO_WEB
@@ -38,7 +40,12 @@ class VideoCutscene extends VideoCutsceneClass
 
 		video = new FlxSprite();
 	}
-
-	public function setCameras(cameras:Array<FlxCamera>) {}
 	#end
+
+	public function setCameras(cameras:Array<FlxCamera>)
+	{
+		#if !VIDEO_WEB
+		video.cameras = cameras;
+		#end
+	}
 }
