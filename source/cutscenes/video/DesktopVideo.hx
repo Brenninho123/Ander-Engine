@@ -31,8 +31,7 @@ class DesktopVideo extends FlxBasic
 			{
 				video.setGraphicSize(FlxG.width, FlxG.height);
 				video.updateHitbox();
-				video.x = 0;
-				video.y = 0;
+				video.screenCenter();
 			});
 		}
 		else
