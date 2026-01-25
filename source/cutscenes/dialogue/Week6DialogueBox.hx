@@ -91,7 +91,7 @@ class Week6DialogueBox extends BasicDialogueBox
 		add(handSelect);
 
 		if (dropText != null)
-			dropText.color = 0xFFD89494;
+			dropText.color = 0xFFD89494; 
 		if (swagDialogue != null)
 			swagDialogue.color = 0xFF3F2021;
 	}
