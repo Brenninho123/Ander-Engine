@@ -234,7 +234,7 @@ class ChartingState extends MusicBeatState
 		var vocalz = _song.vocalsList ?? [];
 		vocalz.push('');
 
-		var vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y += player1DropDown.height + 16,
+		var vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y + 32,
 			FlxUIDropDownMenu.makeStrIdLabelArray(vocalz, true), function(vocal:String)
 		{
 			trace(vocal);
