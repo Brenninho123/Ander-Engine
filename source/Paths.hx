@@ -102,7 +102,7 @@ class Paths
 
 	inline static public function voices(song:String, ?suffix:String)
 	{
-		return 'songs:assets/songs/${song.toLowerCase()}/Voices${suffix != null ? '-' : ''}${suffix ?? ''}.$SOUND_EXT';
+		return 'songs:assets/songs/${song.toLowerCase()}/Voices${suffix != null  && suffix.length > 0 ? '-' : ''}${suffix ?? ''}.$SOUND_EXT';
 	}
 
 	inline static public function inst(song:String)
