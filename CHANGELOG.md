@@ -17,6 +17,8 @@ THE GAME WORKS ON LATEST SHIT NOW!
 	- They've got a "videos" folder now too :D
 
 ## Changed
+- Offset files are in "data/offsets" now
+	- Offset files no longer require "Offset" at the end and is now just the character name
 - Dialogue files are in "data/dialogue" now
 - The Options category "Mods" only appears on debug builds now
 - Song charts are in "data/songs" now instead of just "data"
