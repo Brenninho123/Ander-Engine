@@ -515,12 +515,14 @@ class ChartingState extends MusicBeatState
 		if ((_song?.vocalsList ?? []).length > 0)
 			for (vocal in _song?.vocalsList ?? [])
 			{
-				vocL += " * " + vocal + "\n";
+				vocL += " * " + '${Paths.voices(_song.song, vocal).split(':')[1].replace(vocal, '<path>$vocal<path>')}' + "\n";
 			}
 		else
-			vocL = "None / Game with search for \n\"" + '${Paths.voices(_song.song).split(':')[1]}' + "\"";
+			vocL = "None / Game with search for \n\"" + '<path>${Paths.voices(_song.song).split(':')[1]}<path>' + "\"";
 
-		vocalsList.text = vocL;
+		vocalsList.applyMarkup(vocL, [
+			new FlxTextFormatMarkerPair(new FlxTextFormat(FlxColor.GREEN), '<path>'),
+		]);
 
 		Conductor.songPosition = FlxG.sound.music.time;
 
