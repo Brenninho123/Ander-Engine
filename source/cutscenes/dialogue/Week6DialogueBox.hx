@@ -74,12 +74,9 @@ class Week6DialogueBox extends BasicDialogueBox
 		switch (PlayState.SONG.song.toLowerCase())
 		{
 			case 'senpai':
-				music = new FlxSound();
-				music.loadEmbedded(Paths.music('Lunchbox'));
+				music = new FlxSound().loadEmbedded(Paths.music('Lunchbox'));
 			case 'thorns':
-				music = new FlxSound();
-				music.loadEmbedded(Paths.music('LunchboxScary'));
-				music.fadeIn(1, 0, 0.8);
+				music = new FlxSound().loadEmbedded(Paths.music('LunchboxScary'));
 		}
 
 		super(talkingRight, dialogueList);
@@ -91,7 +88,7 @@ class Week6DialogueBox extends BasicDialogueBox
 		add(handSelect);
 
 		if (dropText != null)
-			dropText.color = 0xFFD89494; 
+			dropText.color = 0xFFD89494;
 		if (swagDialogue != null)
 			swagDialogue.color = 0xFF3F2021;
 	}
