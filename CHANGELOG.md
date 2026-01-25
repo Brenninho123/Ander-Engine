@@ -2,11 +2,17 @@
 
 THE GAME WORKS ON LATEST SHIT NOW!
 
+## Added
+- Roses Censored Dialogue
+- Songs can now have dialogue play (graphicless but its whatev LOL) as long as there is a "$songname.txt" file in the "assets/data/dialogue" folder
+	- There can also be censored or dialogue versions so that's cool!
+
 ## Fixed
 - VIDEOS WORK ON DESKTOP NOW! (THANK YOU HXCODEC !!!!!!!!!!)
 	- They've got a "videos" folder now too :D
 
 ## Changed
+- Dialogue files are in "data/dialogue" now
 - The Options category "Mods" only appears on debug builds now
 - Song charts are in "data/songs" now instead of just "data"
 - In freeplay the song text will darken if you can't play it (chart's missing)

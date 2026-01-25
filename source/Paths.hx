@@ -60,6 +60,11 @@ class Paths
 		return getPath('data/$key.txt', TEXT, library);
 	}
 
+	inline static public function dialogue(key:String, ?library:String)
+	{
+		return txt('dialogue/$key', library);
+	}
+
 	inline static public function xml(key:String, ?library:String)
 	{
 		return getPath('data/$key.xml', TEXT, library);
