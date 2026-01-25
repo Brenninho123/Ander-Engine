@@ -1232,13 +1232,13 @@ class PlayState extends MusicBeatState
 
 		if (SONG.needsVoices)
 		{
-			opponentVocals = new VoicesGroup(SONG.song, SONG.vocalsList.opponent);
 			playerVocals = new VoicesGroup(SONG.song, SONG.vocalsList.player);
+			opponentVocals = new VoicesGroup(SONG.song, SONG.vocalsList.opponent);
 		}
 		else
 		{
-			opponentVocals = new VoicesGroup(SONG.song, null, false);
 			playerVocals = new VoicesGroup(SONG.song, null, false);
+			opponentVocals = new VoicesGroup(SONG.song, null, false);
 		}
 
 		opponentVocals.members[0].onComplete = function()
@@ -1759,7 +1759,7 @@ class PlayState extends MusicBeatState
 				persistentDraw = false;
 				paused = true;
 
-					opponentVocals.stop();
+				opponentVocals.stop();
 				playerVocals.stop();
 				FlxG.sound.music.stop();
 
@@ -2062,6 +2062,8 @@ class PlayState extends MusicBeatState
 		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
 		// boyfriend.playAnim('hey');
 		playerVocals.volume = 1;
+		if (playerVocals.members == opponentVocals.members)
+			opponentVocals.volume = 0;
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
@@ -2427,6 +2429,8 @@ class PlayState extends MusicBeatState
 			songScore -= 10;
 
 		playerVocals.volume = 0;
+		if (playerVocals.members == opponentVocals.members)
+			opponentVocals.volume = 0;
 		FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 
 		/* boyfriend.stunned = true;
@@ -2507,6 +2511,8 @@ class PlayState extends MusicBeatState
 
 			note.wasGoodHit = true;
 			playerVocals.volume = 1;
+			if (playerVocals.members == opponentVocals.members)
+				opponentVocals.volume = 0;
 
 			if (!note.isSustainNote)
 			{

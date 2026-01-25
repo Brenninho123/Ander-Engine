@@ -71,7 +71,7 @@ class Song
 
 		if (swagShit.version != SWAGSHITVER)
 		{
-			trace(' * porting to $SWAGSHITVER...');
+			trace(' * porting to version: $SWAGSHITVER...');
 
 			if (swagShit.vocalsList == null)
 				swagShit.vocalsList = DEFAULTVOCALS;
