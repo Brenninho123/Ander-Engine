@@ -178,18 +178,6 @@ class ChartingState extends MusicBeatState
 			trace('CHECKED!');
 		};
 
-		var check_mute_inst = new FlxUICheckBox(10, 200, null, null, "Mute Instrumental (in editor)", 100);
-		check_mute_inst.checked = false;
-		check_mute_inst.callback = function()
-		{
-			var vol:Float = 1;
-
-			if (check_mute_inst.checked)
-				vol = 0;
-
-			FlxG.sound.music.volume = vol;
-		};
-
 		var saveButton:FlxButton = new FlxButton(110, 8, "Save", function()
 		{
 			saveLevel();
@@ -234,11 +222,23 @@ class ChartingState extends MusicBeatState
 		var vocalz = _song.vocalsList ?? [];
 		vocalz.push('');
 
-		var vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y + 64,
+		var vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y + 48,
 			FlxUIDropDownMenu.makeStrIdLabelArray(vocalz, true), function(vocal:String)
 		{
 			trace(vocal);
 		});
+
+		var check_mute_inst = new FlxUICheckBox(10, 400, null, null, "Mute Instrumental (in editor)", 100);
+		check_mute_inst.checked = false;
+		check_mute_inst.callback = function()
+		{
+			var vol:Float = 1;
+
+			if (check_mute_inst.checked)
+				vol = 0;
+
+			FlxG.sound.music.volume = vol;
+		};
 
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
@@ -259,7 +259,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
 
-		tab_group_song.add(new FlxText(vocalsDropDown.x, vocalsDropDown.y - 32, 0, 'Vocals List:', 16));
+		tab_group_song.add(new FlxText(vocalsDropDown.x, vocalsDropDown.y - 24, 0, 'Vocals List:', 8));
 		tab_group_song.add(vocalsDropDown);
 
 		UI_box.addGroup(tab_group_song);
