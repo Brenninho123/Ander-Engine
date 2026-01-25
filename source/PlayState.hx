@@ -3,7 +3,6 @@ package;
 import cutscenes.dialogue.BasicDialogueBox;
 import Section.SwagSection;
 import Song.SwagSong;
-import WiggleEffect.WiggleEffectType;
 import cutscenes.video.VideoCutscene;
 import cutscenes.dialogue.Week6DialogueBox;
 import flixel.FlxBasic;
@@ -128,7 +127,6 @@ class PlayState extends MusicBeatState
 	var santa:FlxSprite;
 
 	var bgGirls:BackgroundGirls;
-	var wiggleShit:WiggleEffect = new WiggleEffect();
 
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var gfCutsceneLayer:FlxGroup;
@@ -2635,7 +2633,6 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
-		wiggleShit.update(Conductor.crochet);
 
 		// HARDCODING FOR MILF ZOOMS!
 
