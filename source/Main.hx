@@ -64,7 +64,7 @@ class Main extends Sprite
 		#if sys
 		Log.trace = (v, ?infos) ->
 		{
-			Sys.println('[' + '${infos.fileName}:${infos.lineNumber}'.lpad(' ', 20).rpad(' ', 40) + ']\t\t$v');
+			Sys.println('${infos.fileName}:${infos.lineNumber}\t\t$v');
 		}
 		#end
 

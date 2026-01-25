@@ -281,8 +281,6 @@ class SparrowCharacter implements ICharacter
 				character.loadOffsetFile('pico/' + curCharacter);
 				character.playAnim('shoot1');
 
-				character.loadMappedAnims();
-
 			case 'bf' | 'bf-christmas' | 'bf-car' | 'bf-pixel' | 'bf-holding-gf':
 				var ass = 'BOYFRIEND';
 

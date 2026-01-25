@@ -72,26 +72,6 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function loadMappedAnims()
-	{
-		var swagshit = Song.loadFromJson('picospeaker', 'stress');
-
-		var notes = swagshit.notes;
-
-		for (section in notes)
-		{
-			for (idk in section.sectionNotes)
-			{
-				animationNotes.push(idk);
-			}
-		}
-
-		TankmenBG.animationNotes = animationNotes;
-
-		trace(animationNotes);
-		animationNotes.sort(sortAnims);
-	}
-
 	function sortAnims(val1:Array<Dynamic>, val2:Array<Dynamic>):Int
 	{
 		return FlxSort.byValues(FlxSort.ASCENDING, val1[0], val2[0]);
