@@ -36,8 +36,11 @@ class Character extends FlxSprite
 
 		trace('Loading character');
 		trace(' * CHARACTER: $character');
+		
 		new SparrowCharacter(this, character).loadCharacter();
 		new PackerCharacter(this, character).loadCharacter();
+
+		updateHitbox();
 
 		if (animation.getNameList().length == 0)
 			trace(' * FAILED');
