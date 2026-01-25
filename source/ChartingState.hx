@@ -518,7 +518,7 @@ class ChartingState extends MusicBeatState
 				vocL += " * " + vocal + "\n";
 			}
 		else
-			vocL = "None / Game with search for \n\"" + '${Paths.voices(_song.song).split(':')[0]}' + "\"";
+			vocL = "None / Game with search for \n\"" + '${Paths.voices(_song.song).split(':')[1]}' + "\"";
 
 		vocalsList.text = vocL;
 
