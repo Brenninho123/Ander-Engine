@@ -19,9 +19,9 @@ typedef SwagSong =
 	var player2:String;
 	var validScore:Bool;
 
-	var vocalsList:Array<String>;
+	var ?vocalsList:Array<String>;
 
-	var version:Int;
+	var version:Null<Int>;
 }
 
 class Song

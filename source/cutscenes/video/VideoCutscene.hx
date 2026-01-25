@@ -2,17 +2,15 @@ package cutscenes.video;
 
 import flixel.FlxCamera;
 
-#if (!VIDEO_WEB && !VIDEO_DESKTOP)
-typedef VideoCutsceneClass = FlxBasic;
-#elseif VIDEO_WEB
+#if VIDEO_WEB
 typedef VideoCutsceneClass = WebVideo;
 #elseif VIDEO_DESKTOP
 typedef VideoCutsceneClass = DesktopVideo;
-#end
+#else
+import flixel.FlxSprite;
 
-class VideoCutscene extends VideoCutsceneClass
+class VideoCutsceneClass
 {
-	#if (!VIDEO_WEB && !VIDEO_DESKTOP)
 	public var video:FlxSprite;
 
 	public var finishCallback(default, set):Void->Void;
@@ -25,7 +23,7 @@ class VideoCutscene extends VideoCutsceneClass
 		}
 		else
 		{
-			finishCallback = finishCallback;
+			finishCallback = callback;
 		}
 
 		if (finishCallback != null)
@@ -34,14 +32,17 @@ class VideoCutscene extends VideoCutsceneClass
 		return finishCallback;
 	}
 
-	override public function new(vidSrc:String)
+	public function new(vidSrc:String)
 	{
 		trace('not VIDEO_WEB or VIDEO_DESKTOP, set "finishCallback" to do whatever you need to');
 
 		video = new FlxSprite();
 	}
-	#end
+}
+#end
 
+class VideoCutscene extends VideoCutsceneClass
+{
 	public function setCameras(cameras:Array<FlxCamera>)
 	{
 		#if !VIDEO_WEB

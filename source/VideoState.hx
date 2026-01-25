@@ -3,11 +3,6 @@ package;
 import cutscenes.video.VideoCutscene;
 import flixel.FlxG;
 import openfl.display.Sprite;
-import openfl.events.MouseEvent;
-import openfl.events.NetStatusEvent;
-import openfl.media.Video;
-import openfl.net.NetConnection;
-import openfl.net.NetStream;
 
 class VideoState extends MusicBeatState
 {

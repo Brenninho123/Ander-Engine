@@ -249,7 +249,6 @@ class SparrowCharacter implements ICharacter
 					downName: 'Pico Down Note0',
 					leftName: (character.isPlayer) ? 'Pico NOTE LEFT0' : 'Pico Note Right0',
 					rightName: (character.isPlayer) ? 'Pico Note Right0' : 'Pico NOTE LEFT0',
-					offsetFile: 'pico/' + curCharacter
 				});
 
 				if (character.isPlayer)
@@ -278,7 +277,7 @@ class SparrowCharacter implements ICharacter
 				character.quickAnimAdd('shoot4', "Pico shoot 4");
 
 				// here for now, will be replaced later for less copypaste
-				character.loadOffsetFile('pico/' + curCharacter);
+				character.loadOffsetFile(curCharacter);
 				character.playAnim('shoot1');
 
 			case 'bf' | 'bf-christmas' | 'bf-car' | 'bf-pixel' | 'bf-holding-gf':
