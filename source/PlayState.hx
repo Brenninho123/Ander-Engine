@@ -608,11 +608,6 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				var tempTankman:TankmenBG = new TankmenBG(20, 500, true);
-				tempTankman.strumTime = 10;
-				tempTankman.resetShit(20, 600, true);
-				tankmanRun.add(tempTankman);
-
 				for (i in 0...TankmenBG.animationNotes.length)
 				{
 					if (FlxG.random.bool(16))
