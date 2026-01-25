@@ -596,17 +596,10 @@ class PlayState extends MusicBeatState
 				gf.x -= 50;
 				gf.y -= 200;
 
-				var swagshit = Song.loadFromJson('picospeaker', 'stress');
-
-				TankmenBG.animationNotes = [];
-				for (section in swagshit.notes)
-				{
-					for (idk in section.sectionNotes)
-					{
-						gf.animationNotes.push(idk);
-						TankmenBG.animationNotes.push(idk);
-					}
-				}
+				var tempTankman:TankmenBG = new TankmenBG(20, 500, true);
+				tempTankman.strumTime = 10;
+				tempTankman.resetShit(20, 600, true);
+				tankmanRun.add(tempTankman);
 
 				for (i in 0...TankmenBG.animationNotes.length)
 				{
@@ -726,13 +719,13 @@ class PlayState extends MusicBeatState
 
 		add(foregroundSprites);
 
-		var basicdialogue:BasicDialogueBox = new BasicDialogueBox(false, dialogue);
-		basicdialogue.scrollFactor.set();
-		basicdialogue.finishThing = startCountdown;
-
 		var week6dialogue:Week6DialogueBox = new Week6DialogueBox(false, dialogue);
 		week6dialogue.scrollFactor.set();
 		week6dialogue.finishThing = startCountdown;
+
+		var basicdialogue:BasicDialogueBox = new BasicDialogueBox(false, dialogue);
+		basicdialogue.scrollFactor.set();
+		basicdialogue.finishThing = startCountdown;
 
 		Conductor.songPosition = -5000;
 
@@ -1223,7 +1216,7 @@ class PlayState extends MusicBeatState
 
 	private function generateSong():Void
 	{
-		// trace(ChartParser.parse());
+		// FlxG.log.add(ChartParser.parse());
 
 		var songData = SONG;
 		Conductor.changeBPM(songData.bpm);
@@ -1324,7 +1317,7 @@ class PlayState extends MusicBeatState
 	{
 		for (i in 0...4)
 		{
-			// trace(i);
+			// FlxG.log.add(i);
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
 			var colorswap:ColorSwap = new ColorSwap();
 			babyArrow.shader = colorswap.shader;
@@ -2338,7 +2331,7 @@ class PlayState extends MusicBeatState
 
 			for (note in dumbNotes)
 			{
-				trace("killing dumb ass note at " + note.strumTime);
+				FlxG.log.add("killing dumb ass note at " + note.strumTime);
 				note.kill();
 				notes.remove(note, true);
 				note.destroy();
@@ -2633,12 +2626,12 @@ class PlayState extends MusicBeatState
 			if (SONG.notes[Math.floor(curStep / 16)].changeBPM)
 			{
 				Conductor.changeBPM(SONG.notes[Math.floor(curStep / 16)].bpm);
-				trace('CHANGED BPM!');
+				FlxG.log.add('CHANGED BPM!');
 			}
 			// else
 			// Conductor.changeBPM(SONG.bpm);
 		}
-		// trace('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
+		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 
 		// HARDCODING FOR MILF ZOOMS!
 
