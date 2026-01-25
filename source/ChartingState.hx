@@ -181,6 +181,18 @@ class ChartingState extends MusicBeatState
 		vocalsList = new FlxText(UI_vocalAdder.x, UI_vocalAdder.y + UI_vocalAdder.height + 10, UI_box.width - 20, "");
 		tab_group_vocal.add(vocalsList);
 
+		var addVocal:FlxButton = new FlxButton(UI_vocalAdder.x + UI_vocalAdder.width + 10, UI_vocalAdder.y, 'Add vocal suffix', function()
+			{
+				_song.vocalsList.push(typingShit.text);
+			});
+		tab_group_vocal.add(addVocal);
+
+		var removeVocal:FlxButton = new FlxButton(addVocal.x + addVocal.width + 10, addVocal.y, 'Remove vocal suffix', function()
+			{
+				_song.vocalsList.remove(typingShit.text);
+			});
+		tab_group_vocal.add(removeVocal);
+
 		UI_box.addGroup(tab_group_vocal);
 	}
 
