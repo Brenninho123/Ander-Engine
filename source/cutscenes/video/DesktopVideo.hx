@@ -15,25 +15,34 @@ class DesktopVideo extends FlxBasic
 		super();
 
 		video = new FlxVideoSprite(0, 0);
-		video.bitmap.onEndReached.add(finishVideo);
-		FlxG.state.add(video);
 
-		video.play(vidSrc, false);
-
-		// Resize video bigger or smaller than the screen.
-		video.bitmap.onTextureSetup.add(() ->
+		if (video != null)
 		{
-			video.setGraphicSize(FlxG.width, FlxG.height);
-			video.updateHitbox();
-			video.x = 0;
-			video.y = 0;
-			// video.scale.set(0.5, 0.5);
-		});
+			FlxG.state.add(video);
+
+			video.play(vidSrc, false);
+
+			video.bitmap.onEndReached.add(finishVideo);
+
+			// Resize video bigger or smaller than the screen.
+			video.bitmap.onTextureSetup.add(() ->
+			{
+				video.setGraphicSize(FlxG.width, FlxG.height);
+				video.updateHitbox();
+				video.x = 0;
+				video.y = 0;
+			});
+		}
+		else
+		{
+			finishVideo();
+		}
 	}
 
 	public function finishVideo()
 	{
-		FlxG.state.remove(video);
+		if (FlxG.state.members.contains(video))
+			FlxG.state.remove(video);
 
 		if (finishCallback != null)
 			finishCallback();
