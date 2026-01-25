@@ -19,6 +19,7 @@ class DesktopVideo extends FlxBasic
 
 		if (video != null)
 		{
+			trace('ITS VIDEO TIME BITCH!');
 			video.autoPause = false;
 			video.play(vidSrc, false);
 			FlxG.state.add(video);
