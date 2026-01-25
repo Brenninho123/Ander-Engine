@@ -239,7 +239,7 @@ class FreeplayState extends MusicBeatState
 		{
 			var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 
-			if (Assets.exists(Paths.json(songs[curSelected].songName.toLowerCase() + '/' + poop.toLowerCase())))
+			if (Assets.exists(Paths.chart(songs[curSelected].songName, poop)))
 			{
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
 				PlayState.isStoryMode = false;
@@ -251,8 +251,11 @@ class FreeplayState extends MusicBeatState
 			}
 			else
 			{
-				Application.current.window.alert('Missing Chart for difficulty: ${Highscore.formatSong('', curDifficulty).replace('-', '')}',
-					'Missing chart: ${Paths.json(songs[curSelected].songName.toLowerCase() + '/' + poop.toLowerCase())}');
+				var alert_title:String = 'Missing Chart for difficulty: ${Highscore.formatSong('', curDifficulty).replace('-', '')}';
+				if (FlxG.random.bool(1 / 100 * (10 * 'undertale'.length)))
+					alert_title = 'But it refused';
+
+				Application.current.window.alert(alert_title, 'Missing chart: ${Paths.chart(songs[curSelected].songName, poop)}');
 			}
 		}
 	}
@@ -277,7 +280,7 @@ class FreeplayState extends MusicBeatState
 		{
 			var poop:String = Highscore.formatSong(song.text.toLowerCase(), curDifficulty);
 
-			if (!Assets.exists(Paths.json(song.text.toLowerCase() + '/' + poop.toLowerCase())))
+			if (!Assets.exists(Paths.chart(song.text, poop)))
 			{
 				song.color = FlxColor.GRAY;
 			}

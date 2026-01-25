@@ -70,6 +70,11 @@ class Paths
 		return getPath('data/$key.json', TEXT, library);
 	}
 
+	inline static public function chart(song:String, chart:String, ?library:String)
+	{
+		return json('songs/${song.toLowerCase()}/${chart.toLowerCase()}.json', library);
+	}
+
 	static public function sound(key:String, ?library:String)
 	{
 		return getPath('sounds/$key.$SOUND_EXT', SOUND, library);

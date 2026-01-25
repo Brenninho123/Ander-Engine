@@ -2006,7 +2006,7 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('Lights_Shut_off'), function()
 					{
 						// no camFollow so it centers on horror tree
-						SONG = Song.loadFromJson(storyPlaylist[0].toLowerCase() + difficulty, storyPlaylist[0]);
+						SONG = Song.loadFromJson(storyPlaylist[0] + difficulty, storyPlaylist[0]);
 						LoadingState.loadAndSwitchState(new PlayState());
 					});
 				}
@@ -2014,7 +2014,7 @@ class PlayState extends MusicBeatState
 				{
 					prevCamFollow = camFollow;
 
-					SONG = Song.loadFromJson(storyPlaylist[0].toLowerCase() + difficulty, storyPlaylist[0]);
+					SONG = Song.loadFromJson(storyPlaylist[0] + difficulty, storyPlaylist[0]);
 					LoadingState.loadAndSwitchState(new PlayState());
 				}
 			}
