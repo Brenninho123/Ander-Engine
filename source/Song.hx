@@ -18,6 +18,10 @@ typedef SwagSong =
 	var player1:String;
 	var player2:String;
 	var validScore:Bool;
+
+	var vocalsList:Array<String>;
+
+	var version:Int;
 }
 
 class Song
@@ -51,9 +55,40 @@ class Song
 	public static function parseJSONshit(rawJson:String):SwagSong
 	{
 		var swagShit:SwagSong = cast Json.parse(rawJson).song;
-		
+
 		swagShit.validScore = true;
+		swagShit.version ??= 0;
+
+		trace('swagshit(${swagShit.song}) version: ${swagShit.version}');
+
+		if (swagShit.version != SWAGSHITVER)
+		{
+			trace(' * porting to $SWAGSHITVER...');
+
+			swagShit.vocalsList ??= [];
+
+			swagShit.version = SWAGSHITVER;
+		}
 
 		return swagShit;
 	}
+
+	public static var SWAGSHITVER:Int = 1;
+
+	public static var DUMBASS:SwagSong = {
+		song: 'Test',
+		notes: [],
+		bpm: 150,
+		
+		needsVoices: true,
+		
+		player1: 'bf',
+		player2: 'dad',
+		speed: 1,
+		
+		validScore: false,
+
+		version: SWAGSHITVER,
+		vocalsList: [],
+	};
 }
