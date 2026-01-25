@@ -1,5 +1,6 @@
 package;
 
+import openfl.events.UncaughtErrorEvent;
 import lime.app.Application;
 import flixel.FlxGame;
 import flixel.FlxState;
@@ -51,9 +52,10 @@ class Main extends Sprite
 
 			#if desktop 'DESKTOP', #end
 			#if desktop ' * Video Support (hxCodec)', #end
-			
+			#if desktop ' * Crash Handler', #end
+
 			#if (!web && !desktop) 'UNKNOWN', #end
-			
+
 			'',
 		];
 
@@ -117,5 +119,44 @@ class Main extends Sprite
 		fpsCounter = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);
 		#end
+
+		#if desktop
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
+
+		#if cpp
+		trace('[LOG] Enabling C++ critical error handler...');
+		untyped __global__.__hxcpp_set_critical_error_handler(onCriticalError);
+		#end
+		#end
+	}
+
+	static function onUncaughtError(e:UncaughtErrorEvent)
+	{
+		var errorMessage:String = "";
+		var callStack:Array<haxe.CallStack.StackItem> = haxe.CallStack.exceptionStack(true);
+
+		errorMessage += '${e.error}\n';
+
+		for (stackItem in callStack)
+		{
+			switch (stackItem)
+			{
+				case FilePos(innerStackItem, file, line, column):
+					errorMessage += ' in ${file}#${line}';
+					if (column != null)
+						errorMessage += ':${column}';
+				case CFunction:
+					errorMessage += '[Function] ';
+				case Module(m):
+					errorMessage += '[Module(${m})] ';
+				case Method(classname, method):
+					errorMessage += '[Function(${classname}.${method})] ';
+				case LocalFunction(v):
+					errorMessage += '[LocalFunction(${v})] ';
+			}
+			errorMessage += '\n';
+		}
+
+		Application.current.window.alert(errorMessage, e.error);
 	}
 }
