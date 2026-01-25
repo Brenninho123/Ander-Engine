@@ -1,5 +1,6 @@
 package;
 
+import Type.ValueType;
 import Section.SwagSection;
 import haxe.Json;
 import haxe.format.JsonParser;
@@ -19,9 +20,15 @@ typedef SwagSong =
 	var player2:String;
 	var validScore:Bool;
 
-	var ?vocalsList:Array<String>;
+	var ?vocalsList:VocalsDef;
 
 	var version:Null<Int>;
+}
+
+typedef VocalsDef =
+{
+	opponent:Array<String>,
+	player:Array<String>,
 }
 
 class Song
@@ -57,7 +64,8 @@ class Song
 		var swagShit:SwagSong = cast Json.parse(rawJson).song;
 
 		swagShit.validScore = true;
-		swagShit.version ??= 0;
+		if (swagShit.version == null)
+			swagShit.version = 0;
 
 		trace('swagshit(${swagShit.song}) version: ${swagShit.version}');
 
@@ -65,15 +73,25 @@ class Song
 		{
 			trace(' * porting to $SWAGSHITVER...');
 
-			swagShit.vocalsList ??= [];
+			if (swagShit.vocalsList == null)
+				swagShit.vocalsList = DEFAULTVOCALS;
+
+			if (swagShit.vocalsList.opponent == null)
+				swagShit.vocalsList.opponent = DEFAULTVOCALS.opponent;
+			if (swagShit.vocalsList.player == null)
+				swagShit.vocalsList.player = DEFAULTVOCALS.player;
 
 			swagShit.version = SWAGSHITVER;
+			trace('PORTED!');
 		}
+
+		for (shit in Reflect.fields(swagShit))
+			trace(' * $shit : ${Reflect.field(swagShit, shit)}');
 
 		return swagShit;
 	}
 
-	public static var SWAGSHITVER:Int = 1;
+	public static var SWAGSHITVER:Int = 2;
 
 	public static var DUMBASS:SwagSong = {
 		song: 'Test',
@@ -84,7 +102,12 @@ class Song
 		player2: 'dad',
 		speed: 1,
 		validScore: false,
-		version: SWAGSHITVER,
-		vocalsList: [],
+		version: 0,
+		vocalsList: Reflect.copy(DEFAULTVOCALS),
 	};
+
+	public static var DEFAULTVOCALS:VocalsDef = {
+		player: [],
+		opponent: [],
+	}
 }
