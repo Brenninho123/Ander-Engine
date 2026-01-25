@@ -1,5 +1,6 @@
 package cutscenes.video;
 
+import flixel.util.FlxTimer;
 import flixel.FlxG;
 import hxcodec.flixel.FlxVideoSprite;
 import flixel.FlxBasic;
@@ -35,7 +36,11 @@ class DesktopVideo extends FlxBasic
 		}
 		else
 		{
-			finishVideo();
+			trace('Null video shit');
+			FlxTimer.wait(.4, function()
+			{
+				finishVideo();
+			});
 		}
 	}
 
