@@ -234,7 +234,7 @@ class ChartingState extends MusicBeatState
 		var vocalz = _song.vocalsList ?? [];
 		vocalz.push('');
 
-		var vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y + 32,
+		var vocalsDropDown = new FlxUIDropDownMenu(player1DropDown.x, player1DropDown.y + 64,
 			FlxUIDropDownMenu.makeStrIdLabelArray(vocalz, true), function(vocal:String)
 		{
 			trace(vocal);
@@ -246,14 +246,20 @@ class ChartingState extends MusicBeatState
 
 		tab_group_song.add(check_voices);
 		tab_group_song.add(check_mute_inst);
+		
 		tab_group_song.add(saveButton);
 		tab_group_song.add(reloadSong);
+		
 		tab_group_song.add(reloadSongJson);
 		tab_group_song.add(loadAutosaveBtn);
+		
 		tab_group_song.add(stepperBPM);
 		tab_group_song.add(stepperSpeed);
+		
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
+
+		tab_group_song.add(new FlxText(vocalsDropDown.x, vocalsDropDown.y - 32, 0, 'Vocals List:', 16));
 		tab_group_song.add(vocalsDropDown);
 
 		UI_box.addGroup(tab_group_song);
