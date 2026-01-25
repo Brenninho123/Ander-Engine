@@ -1,6 +1,12 @@
 package cutscenes.video;
 
-class VideoCutscene extends #if VIDEO_WEB WebVideo #elseif VIDEO_DESKTOP DesktopVideo #else FlxBasic #end
+#if VIDEO_WEB
+class VideoCutscene extends WebVideo
+#elseif VIDEO_DESKTOP
+class VideoCutscene extends DesktopVideo
+#else
+class VideoCutscene extends flixel.FlxBasic
+#end
 {
 	#if (!VIDEO_WEB && !VIDEO_DESKTOP)
 	public var finishCallback(default, set):Void->Void;
