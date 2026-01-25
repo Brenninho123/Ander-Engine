@@ -129,8 +129,6 @@ class PlayState extends MusicBeatState
 	var bgGirls:BackgroundGirls;
 
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
-	var gfCutsceneLayer:FlxGroup;
-	var bfTankCutsceneLayer:FlxGroup;
 	var tankWatchtower:BGSprite;
 	var tankGround:BGSprite;
 
@@ -569,6 +567,7 @@ class PlayState extends MusicBeatState
 
 				add(stageCurtains);
 		}
+		trace('backgroundSprites');
 
 		var gfVersion:String = 'gf';
 
@@ -596,19 +595,18 @@ class PlayState extends MusicBeatState
 				gf.x -= 50;
 				gf.y -= 200;
 
-				var tempTankman:TankmenBG = new TankmenBG(20, 500, true);
-				tempTankman.strumTime = 10;
-				tempTankman.resetShit(20, 600, true);
-				tankmanRun.add(tempTankman);
-
 				for (i in 0...TankmenBG.animationNotes.length)
 				{
 					if (FlxG.random.bool(16))
 					{
-						var tankman:TankmenBG = tankmanRun.recycle(TankmenBG);
+						var tankman:TankmenBG = new TankmenBG(0,0,false);
 						// new TankmenBG(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
 						tankman.strumTime = TankmenBG.animationNotes[i][0];
 						tankman.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
+						tankman.onded = (t) -> {
+							tankmanRun.remove(t);
+							t.destroy();
+						}
 						tankmanRun.add(tankman);
 					}
 				}
@@ -704,20 +702,17 @@ class PlayState extends MusicBeatState
 
 		add(gf);
 
-		gfCutsceneLayer = new FlxGroup();
-		add(gfCutsceneLayer);
-
-		bfTankCutsceneLayer = new FlxGroup();
-		add(bfTankCutsceneLayer);
-
 		// Shitty layering but whatev it works LOL
 		if (curStage == 'limo')
 			add(limo);
 
 		add(dad);
 		add(boyfriend);
+		trace('boyfriend');
 
 		add(foregroundSprites);
+
+		trace('foregroundSprites');
 
 		var week6dialogue:Week6DialogueBox = new Week6DialogueBox(false, dialogue);
 		week6dialogue.scrollFactor.set();
@@ -726,6 +721,8 @@ class PlayState extends MusicBeatState
 		var basicdialogue:BasicDialogueBox = new BasicDialogueBox(false, dialogue);
 		basicdialogue.scrollFactor.set();
 		basicdialogue.finishThing = startCountdown;
+
+		trace('dialogue');
 
 		Conductor.songPosition = -5000;
 
@@ -813,6 +810,9 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		week6dialogue.cameras = [camHUD];
+		basicdialogue.cameras = [camHUD];
+
+		trace('ui');
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
