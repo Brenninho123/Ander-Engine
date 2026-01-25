@@ -1,0 +1,11 @@
+{
+	"defaultSeverity": "IGNORE",
+	"checks": [
+		{
+			"type": "TODOComment",
+			"props": {
+				"severity": "INFO"
+			}
+		}
+	]
+}
