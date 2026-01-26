@@ -375,7 +375,7 @@ class SparrowCharacter implements ICharacter
 					upName: (curCharacter == 'senpai-angry') ? 'Angry Senpai UP NOTE' : 'SENPAI UP NOTE',
 					downName: (curCharacter == 'senpai-angry') ? 'Angry Senpai DOWN NOTE' : 'SENPAI DOWN NOTE',
 					rightName: (curCharacter == 'senpai-angry') ? 'Angry Senpai RIGHT NOTE' : 'SENPAI RIGHT NOTE',
-					leftName: (curCharacter == 'senpai-angry') ? 'Angry Senpai LEFT NOTE NOTE' : 'SENPAI LEFT NOTE NOTE',
+					leftName: (curCharacter == 'senpai-angry') ? 'Angry Senpai LEFT NOTE' : 'SENPAI NOTE NOTE',
 				});
 
 				character.loadOffsetFile(curCharacter);
