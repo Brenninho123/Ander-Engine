@@ -1152,8 +1152,8 @@ class PlayState extends MusicBeatState
 
 			if (swagCounter > 0)
 				readySetGo(introSprPaths[swagCounter - 1]);
-			// FlxG.sound.play(Paths.sound(introSndPaths[swagCounter]), 0.6);
-			// beatHit();
+			FlxG.sound.play(Paths.sound(introSndPaths[swagCounter]), 0.6);
+			beatHit();
 
 			swagCounter += 1;
 		}, 4);
