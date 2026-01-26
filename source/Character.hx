@@ -216,7 +216,7 @@ class Character extends FlxSprite
 	{
 		if (animation.getByName(AnimName) == null)
 		{
-			trace('I dont have that: $AnimName');
+			// trace('I dont have that: $AnimName');
 			return;
 		}
 
