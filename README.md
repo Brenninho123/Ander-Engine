@@ -35,7 +35,9 @@ I am going to assume you've already downloaded the repo .zip for this
 - Run `hxpkg install` or `hxpkg install --force`
 - Run `lime rebuild systools [windows/mac/linux]`
 - Perform additional platform setup
-    - For Windows, download the [Visual Studio Build Tools](https://aka.ms/vs/17/release/vs_BuildTools.exe) - When prompted, select "Individual Components" and make sure to download the following: - MSVC v143 VS 2022 C++ x64/x86 build tools - Windows 10/11 SDK
+    - For Windows, download the [Visual Studio Build Tools](https://aka.ms/vs/17/release/vs_BuildTools.exe) - When prompted, select "Individual Components" and make sure to download the following:
+		- MSVC v143 VS 2022 C++ x64/x86 build tools 
+		- Windows 10/11 SDK
     - Mac: [`lime setup mac` Documentation](https://lime.openfl.org/docs/advanced-setup/macos/)
     - Linux: [`lime setup linux` Documentation](https://lime.openfl.org/docs/advanced-setup/linux/)
         - In order to build a application with `hxCodec` on Linux,
@@ -43,4 +45,4 @@ I am going to assume you've already downloaded the repo .zip for this
           from your distro's package manager.
         - Debian based distributions: `sudo apt-get install libvlc-dev libvlccore-dev`
         - Arch based distributions: `sudo pacman -S vlc`
-        - HTML5: Compiles without any extra setup
+    - HTML5: Compiles without any extra setup
