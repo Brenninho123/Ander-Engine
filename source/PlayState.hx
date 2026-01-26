@@ -1123,6 +1123,8 @@ class PlayState extends MusicBeatState
 
 		var swagCounter:Int = 0;
 
+		trace('COUNTDOWN TIME!');
+
 		startTimer.start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
 			// this just based on beatHit stuff but compact
@@ -1172,6 +1174,7 @@ class PlayState extends MusicBeatState
 						
 			}*/
 
+			trace('$swagCounter');
 			swagCounter += 1;
 		}, 4);
 	}
