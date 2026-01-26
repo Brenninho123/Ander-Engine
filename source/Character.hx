@@ -103,6 +103,12 @@ class Character extends FlxSprite
 		trace('   * quickanimadd($name, $prefix)');
 		animation.addByPrefix(name, prefix, 24, false);
 	}
+	
+	public function indicwes(name:String, prefix:String, indices:Array<Int>, looped:Bool = false, fps:Int = 24)
+	{
+		trace('   * indicwes($name, $prefix, $indices, $looped, $fps)');
+		animation.addByIndices(name, prefix, indices, '', fps, looped);
+	}
 
 	public function loadOffsetFile(offsetCharacter:String)
 	{

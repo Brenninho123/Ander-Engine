@@ -76,12 +76,12 @@ class SparrowCharacter implements ICharacter
 	public function loadDamselAnimations(data:DamselAnimations)
 	{
 		if (data.danceLeft_indices != null)
-			character.animation.addByIndices('danceLeft', data.danceLeft, data.danceLeft_indices, "", 24, false);
+			character.indicwes('danceLeft', data.danceLeft, data.danceLeft_indices, false);
 		else
 			character.quickAnimAdd('danceLeft', data.danceLeft);
 
 		if (data.danceRight != null)
-			character.animation.addByIndices('danceRight', data.danceRight, data.danceRight_indices, "", 24, false);
+			character.indicwes('danceRight', data.danceRight, data.danceRight_indices, false);
 		else
 			character.quickAnimAdd('danceRight', data.danceRight);
 	}
@@ -162,12 +162,12 @@ class SparrowCharacter implements ICharacter
 				});
 
 				if (curCharacter == 'gf-car')
-					character.animation.addByIndices('idleHair', 'GF Dancing Beat Hair blowing CAR', [10, 11, 12, 25, 26, 27], "", 24, true);
+					character.indicwes('idleHair', 'GF Dancing Beat Hair blowing CAR', [10, 11, 12, 25, 26, 27], true);
 
 				if (curCharacter == 'gf-tankmen')
 				{
 					off = 'gf';
-					character.animation.addByIndices('sad', 'GF Crying at Gunpoint', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, true);
+					character.indicwes('sad', 'GF Crying at Gunpoint', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], true);
 				}
 
 				if (curCharacter == 'gf')
@@ -180,9 +180,9 @@ class SparrowCharacter implements ICharacter
 					customAnims.set('cheer', 'GF Cheer');
 					customAnims.set('scared', 'GF FEAR');
 
-					character.animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
-					character.animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
-					character.animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, true);
+					character.indicwes('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3]);
+					character.indicwes('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], false);
+					character.indicwes('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], true);
 				}
 
 				loadDamsel({
@@ -209,19 +209,20 @@ class SparrowCharacter implements ICharacter
 				});
 
 			case 'spooky':
-				loadSinger({
+				loadDamselSinger({
 					assetPath: 'spooky_kids_assets',
-					idleName: null,
+
 					upName: 'spooky UP NOTE',
 					downName: 'spooky DOWN note',
 					leftName: 'note sing left',
 					rightName: 'spooky sing right',
+
+					danceLeft: 'spooky dance idle',
+					danceRight: 'spooky dance idle',
+
+					danceLeft_indices: [0,2,6],
+					danceRight_indices: [8,10,12,14],
 				});
-
-				character.animation.addByIndices('danceLeft', 'spooky dance idle', [0, 2, 6], "", 12, false);
-				character.animation.addByIndices('danceRight', 'spooky dance idle', [8, 10, 12, 14], "", 12, false);
-
-				character.playAnim('danceRight');
 
 			case 'mom' | 'mom-car':
 				loadSinger({
@@ -234,7 +235,7 @@ class SparrowCharacter implements ICharacter
 				});
 
 				if (curCharacter == 'mom-car')
-					character.animation.addByIndices('idleHair', "Mom Idle", [10, 11, 12, 13], "", 24, true);
+					character.indicwes('idleHair', "Mom Idle", [10, 11, 12, 13], true);
 
 			case 'monster' | 'monster-christmas':
 				loadSinger({
@@ -341,7 +342,7 @@ class SparrowCharacter implements ICharacter
 					character.quickAnimAdd('catch', 'BF catches GF');
 
 				if (curCharacter == 'bf-car')
-					character.animation.addByIndices('idleHair', 'BF idle dance', [10, 11, 12, 13], "", 24, true);
+					character.indicwes('idleHair', 'BF idle dance', [10, 11, 12, 13], true);
 
 				if (curCharacter == 'bf-pixel')
 				{
@@ -433,7 +434,6 @@ class SparrowCharacter implements ICharacter
 
 			default:
 				hasImplementation = false;
-				trace('no sparrow implementation');
 		}
 		info(hasImplementation);
 	}
@@ -441,11 +441,13 @@ class SparrowCharacter implements ICharacter
 	public function info(hasImplementation:Bool)
 	{
 		if (hasImplementation)
+		{
 			exclusiveInfo();
+		}
 	}
 
 	public function exclusiveInfo()
 	{
-		trace(' * CHARACTER TYPE: SPARROW');
+		trace(' * IMPLEMENTATION: SPARROW');
 	}
 }

@@ -45,6 +45,6 @@ class PackerCharacter extends SparrowCharacter
 
 	override function exclusiveInfo()
 	{
-		trace(' * CHARACTER TYPE: PACKER');
+		trace(' * IMPLEMENTATION: PACKER');
 	}
 }
