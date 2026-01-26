@@ -39,8 +39,6 @@ class TitleState extends MusicBeatState
 	var startedIntro:Bool;
 
 	var blackScreen:FlxSprite;
-	var credGroup:FlxGroup;
-	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 
@@ -198,26 +196,12 @@ class TitleState extends MusicBeatState
 		logo.antialiasing = true;
 		// add(logo);
 
-		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
-		// FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
-
-		credGroup = new FlxGroup();
-		add(credGroup);
 		textGroup = new FlxGroup();
 
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		credGroup.add(blackScreen);
+		add(blackScreen);
 
-		// var atlasBullShit:FlxSprite = new FlxSprite();
-		// atlasBullShit.frames = CoolUtil.fromAnimate(Paths.image('money'), Paths.file('images/money.json'));
-		// credGroup.add(atlasBullShit);
-
-		credTextShit = new Alphabet(0, 0, "ninjamuffin99\nPhantomArcade\nkawaisprite\nevilsk8er", true);
-		credTextShit.screenCenter();
-
-		// credTextShit.alignment = CENTER;
-
-		credTextShit.visible = false;
+		add(textGroup);
 
 		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
 		add(ngSpr);
@@ -226,8 +210,6 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = true;
-
-		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		FlxG.mouse.visible = false;
 
@@ -240,7 +222,6 @@ class TitleState extends MusicBeatState
 			FlxG.sound.music.onComplete = function() FlxG.switchState(() -> new VideoState());
 
 		startedIntro = true;
-		// credGroup.add(credTextShit);
 	}
 
 	function getIntroTextShit():Array<Array<String>>
@@ -266,17 +247,6 @@ class TitleState extends MusicBeatState
 		if (FlxG.keys.justPressed.EIGHT)
 			FlxG.switchState(() -> new CutsceneAnimTestState());
 		#end
-
-		/* 
-			if (FlxG.keys.justPressed.R)
-			{
-				#if polymod
-				polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
-				trace('reinitialized');
-				#end
-			}
-
-		 */
 
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
@@ -343,41 +313,24 @@ class TitleState extends MusicBeatState
 	function createCoolText(textArray:Array<String>)
 	{
 		for (i in 0...textArray.length)
-		{
-			var money:Alphabet = new Alphabet(0, 0, textArray[i], true, false);
-			money.screenCenter(X);
-			money.y += (i * 60) + 200;
-			credGroup.add(money);
-			textGroup.add(money);
-		}
+			addMoreText(textArray[i]);
 	}
 
 	function addMoreText(text:String)
 	{
-		var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
+		var coolText:Alphabet = new Alphabet(0, (textGroup.length * 60) + 200, text, true, false);
 		coolText.screenCenter(X);
-		coolText.y += (textGroup.length * 60) + 200;
-		credGroup.add(coolText);
 		textGroup.add(coolText);
 	}
 
 	function deleteCoolText()
 	{
-		while (textGroup.members.length > 0)
-		{
-			credGroup.remove(textGroup.members[0], true);
-			textGroup.remove(textGroup.members[0], true);
-		}
+		textGroup.clear();
 	}
-
-	var isRainbow:Bool = false;
 
 	override function beatHit()
 	{
 		super.beatHit();
-
-		if (!startedIntro)
-			return;
 
 		if (skippedIntro)
 		{
@@ -399,42 +352,42 @@ class TitleState extends MusicBeatState
 			{
 				for (i in lastBeat...curBeat)
 				{
-					var scene:OneOfTwo<Array<String>, String> = TitleStateGlobal.introTextList[i];
+					var scene:Array<String> = TitleStateGlobal.introTextList[i];
 					var arr:Array<String> = [];
 
-					var parseSceneString = function(str:String) {
-						str = str.trim();
-						
-						var key = str.split('=')[0];
-						var keyVal = str.split('=')[1];
-
-						switch (key)
+					var parseSceneString = function(str:String)
+					{
+						if (str.startsWith('%'))
 						{
-							case 'ngSpr': ngSpr.visible = keyVal == "1"; return;
-							case 'wacky': addMoreText(curWacky[Std.parseInt(keyVal)]); return;
-							case '': return;
-						}
+							var key = str.split('=')[0];
+							var keyVal = str.split('=')[1];
 
-						if (str == null)
-						{
-							deleteCoolText();
+							trace(key + '=' + keyVal);
+
+							switch (key)
+							{
+								case '%ngSpr':
+									ngSpr.visible = keyVal == "1";
+								case '%wacky':
+									addMoreText(curWacky[Std.parseInt(keyVal)]);
+								case '%skipIntro':
+									skipIntro();
+								case '%clear':
+									deleteCoolText();
+							}
+
 							return;
 						}
 
-						addMoreText(str);
+						if (str.trim() != '')
+							addMoreText(str);
 					}
 
-					if (Type.typeof(scene) == Type.typeof(arr))
+					for (i in scene)
 					{
-						for (i in scene)
-							parseSceneString(scene[i]);
+						trace('scene bit: ${Std.string(i)}');
+						parseSceneString(i);
 					}
-					else
-					{
-						parseSceneString(scene);
-					}
-
-					trace('beat scene: $scene');
 				}
 			}
 			lastBeat = curBeat;
@@ -450,7 +403,8 @@ class TitleState extends MusicBeatState
 			remove(ngSpr);
 
 			FlxG.camera.flash(FlxColor.WHITE, 4);
-			remove(credGroup);
+			remove(textGroup);
+			remove(blackScreen);
 			skippedIntro = true;
 		}
 	}

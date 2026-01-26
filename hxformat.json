@@ -4,7 +4,8 @@
 		"rightCurly": "both",
 		"objectLiteralCurly": {
 			"leftCurly": "after"
-		}
+		},
+		"emptyCurly": "noBreak"
 	},
 	"sameLine": {
 		"ifElse": "next",

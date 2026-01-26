@@ -130,8 +130,6 @@
 	<!--haxelib name="newgrounds" unless="switch"/> -->
 	<haxelib name="polymod"/>
 	
-	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
-	
 	<!-- <haxelib name="flixel-animate" /> -->
 	<!-- <haxelib name="spinehaxe" /> -->
 	<!-- https://github.com/ninjamuffin99/Flixel-Animate-Atlas-Player -->
