@@ -12,6 +12,7 @@ Also hashlink :D
 	- There can also be censored or dialogue versions so that's cool!
 
 ## Fixed
+- Fixed camera being very fast on desktop
 - HIGH SCROLLSPEED HOLD NOTE BUG!
 - SUSTAINS! THEY ARENT WEIRD ANYMORE!
 - VIDEOS WORK ON DESKTOP NOW! (THANK YOU HXCODEC !!!!!!!!!!)
