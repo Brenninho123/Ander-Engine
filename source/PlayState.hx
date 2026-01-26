@@ -1465,9 +1465,7 @@ class PlayState extends MusicBeatState
 		if (paused)
 		{
 			if (FlxG.sound.music != null && !startingSong)
-			{
-				resyncVocals(true, true);
-			}
+				resyncVocals();
 
 			if (!startTimer.finished)
 				startTimer.active = true;
@@ -1507,7 +1505,7 @@ class PlayState extends MusicBeatState
 	}
 	#end
 
-	function resyncVocals(player:Bool, opponent:Bool):Void
+	function resyncVocals():Void
 	{
 		if (_exiting)
 			return;
@@ -1516,15 +1514,17 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.play();
 		Conductor.songPosition = FlxG.sound.music.time + Conductor.offset;
 
-		if (!playerVocalsFinished && player)
+		if (!playerVocalsFinished)
 		{
+			playerVocals.pause();
 			playerVocals.time = Conductor.songPosition;
 			playerVocals.play();
 		}
 
-		if (!opponentVocalsFinished && opponent)
+		if (!opponentVocalsFinished)
 		{
-			opponentVocals.time = playerVocals.time;
+			opponentVocals.pause();
+			opponentVocals.time = Conductor.songPosition;
 			opponentVocals.play();
 		}
 	}
@@ -2634,24 +2634,15 @@ class PlayState extends MusicBeatState
 
 	override function stepHit()
 	{
-		var desyncmax:Float = 20 * 1000;
+		var desyncmax:Float = 20;
 		var instDesynced = Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > desyncmax;
-
-		var playerVocDesynced = Math.abs(playerVocals.time - FlxG.sound.music.time) > desyncmax;
-		var opponentVocDesynced = Math.abs(opponentVocals.time - playerVocals.time) > desyncmax;
+		var playerVocDesynced = Math.abs(playerVocals.time - (Conductor.songPosition - Conductor.offset)) > desyncmax;
+		var opponentVocDesynced = Math.abs(opponentVocals.time - (Conductor.songPosition - Conductor.offset)) > desyncmax;
 
 		super.stepHit();
-
-		if (instDesynced)
-			trace('inst desyncec by ${FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset) / 1000}s');
-		if (SONG.needsVoices && playerVocDesynced)
-			trace('player desyncec by ${playerVocals.time - FlxG.sound.music.time / 1000}s');
-		if (SONG.needsVoices && opponentVocDesynced)
-			trace('opponent desyncec by ${opponentVocals.time - playerVocals.time / 1000}s');
-
 		if (instDesynced || (SONG.needsVoices && (playerVocDesynced || opponentVocDesynced)))
 		{
-			resyncVocals(playerVocDesynced, opponentVocDesynced);
+			resyncVocals();
 		}
 	}
 
