@@ -122,81 +122,65 @@ class SparrowCharacter implements ICharacter
 	{
 		var hasImplementation:Bool = true;
 
+		trace(curCharacter);
+
 		switch (curCharacter)
 		{
-			case 'gf' | 'gf-christmas' | 'gf-tankmen' | 'gf-car' | 'gf-pixel':
-				var danceAnims:Map<String, String> = [
-					'dance' => 'GF Dancing Beat',
-					'dance_gf-pixel' => 'GF IDLE',
-					'dance_gf-tankmen' => 'GF Dancing at Gunpoint',
-				];
+			case 'gf' | 'gf-christmas':
+				loadDamselSinger({
+					assetPath: (curCharacter == 'gf-christmas') ? 'gfChristmas' : 'GF_assets',
 
-				var customAnims:Map<String, String> = [];
-
-				var ass = 'GF_assets';
-				var off = curCharacter;
-
-				if (curCharacter == 'gf-pixel')
-				{
-					ass = 'gfPixel';
-
-					character.setGraphicSize(Std.int(character.width * PlayState.daPixelZoom));
-					character.updateHitbox();
-					character.antialiasing = false;
-				}
-
-				if (curCharacter == 'gf-car')
-					ass = 'gfCar';
-
-				if (curCharacter == 'gf-christmas')
-				{
-					ass = 'gfChristmas';
-					customAnims.set('cheer', 'GF Cheer');
-				}
-
-				if (curCharacter == 'gf-tankmen')
-					ass = 'gfTankmen';
-
-				loadImage({
-					assetPath: ass
-				});
-
-				if (curCharacter == 'gf-car')
-					character.indicwes('idleHair', 'GF Dancing Beat Hair blowing CAR', [10, 11, 12, 25, 26, 27], true);
-
-				if (curCharacter == 'gf-tankmen')
-				{
-					off = 'gf';
-					character.indicwes('sad', 'GF Crying at Gunpoint', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], true);
-				}
-
-				if (curCharacter == 'gf')
-				{
-					customAnims.set('singLEFT', 'GF left note');
-					customAnims.set('singDOWN', 'GF Down note');
-					customAnims.set('singUP', 'GF Up note');
-					customAnims.set('singUP', 'GF Right note');
-
-					customAnims.set('cheer', 'GF Cheer');
-					customAnims.set('scared', 'GF FEAR');
-
-					character.indicwes('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3]);
-					character.indicwes('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], false);
-					character.indicwes('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], true);
-				}
-
-				loadDamsel({
-					assetPath: ass,
-
-					danceLeft: danceAnims.get('dance_$curCharacter') ?? danceAnims.get('dance'),
-					danceRight: danceAnims.get('dance_$curCharacter') ?? danceAnims.get('dance'),
+					danceLeft: 'GF Dancing Beat0',
+					danceRight: 'GF Dancing Beat0',
 
 					danceLeft_indices: [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 					danceRight_indices: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
 
-					custom: customAnims,
-					offsetFile: off,
+					custom: ['cheer' => 'GF Cheer', 'scared' => 'GF FEAR',],
+
+					upName: 'Gf Up note',
+					downName: 'Gf Down note',
+					leftName: 'Gf left note',
+					rightName: 'Gf Right note'
 				});
+
+				character.indicwes('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], true);
+
+				if (curCharacter == 'gf')
+				{
+					character.indicwes('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3]);
+					character.indicwes('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], false);
+				}
+
+			case 'gf-car' | 'gf-tankmen':
+				loadDamsel({
+					assetPath: (curCharacter == 'gf-car') ? 'gfCar' : 'gfTankmen',
+
+					danceLeft: 'GF Dancing',
+					danceRight: 'GF Dancing',
+
+					danceLeft_indices: [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+					danceRight_indices: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+
+					offsetFile: (curCharacter == 'gf-tankmen') ? 'gf' : curCharacter
+				});
+				if (curCharacter == 'gf-tankmen')
+					character.indicwes('sad', 'GF Crying at Gunpoint', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], true);
+
+			case 'gf-pixel':
+				loadDamsel({
+					assetPath: 'gfPixel',
+
+					danceLeft: 'GF IDLE',
+					danceRight: 'GF IDLE',
+
+					danceLeft_indices: [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+					danceRight_indices: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+				});
+
+				character.setGraphicSize(Std.int(character.width * PlayState.daPixelZoom));
+				character.updateHitbox();
+				character.antialiasing = false;
 
 			case 'dad':
 				loadSinger({
@@ -220,8 +204,8 @@ class SparrowCharacter implements ICharacter
 					danceLeft: 'spooky dance idle',
 					danceRight: 'spooky dance idle',
 
-					danceLeft_indices: [0,2,6],
-					danceRight_indices: [8,10,12,14],
+					danceLeft_indices: [0, 2, 6],
+					danceRight_indices: [8, 10, 12, 14],
 				});
 
 			case 'mom' | 'mom-car':
