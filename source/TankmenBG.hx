@@ -17,8 +17,6 @@ class TankmenBG extends FlxSprite
   {
     super(x, y);
 
-    // makeGraphic(200, 200);
-
     frames = Paths.getSparrowAtlas('tankmanKilled1');
     antialiasing = true;
     animation.addByPrefix('run', 'tankman running', 24, true);

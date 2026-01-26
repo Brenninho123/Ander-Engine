@@ -22,6 +22,7 @@ using StringTools;
 import Discord.DiscordClient;
 #end
 
+@:nullSafety
 class TitleState extends MusicBeatState
 {
   public static var initialized:Bool = false;

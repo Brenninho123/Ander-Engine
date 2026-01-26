@@ -20,7 +20,7 @@ class OptionsState extends MusicBeatState
 
   override function create()
   {
-    var menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+    var menuBG = new FlxSprite(Paths.image('menuDesat'));
     menuBG.color = 0xFFea71fd;
     menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
     menuBG.updateHitbox();
@@ -31,7 +31,7 @@ class OptionsState extends MusicBeatState
     var options = addPage(Options, new OptionsMenu(false));
     var preferences = addPage(Preferences, new PreferencesMenu());
     var controls = addPage(Controls, new ControlsMenu());
-    // var colors = addPage(Colors, new ColorsMenu());
+    var colors = addPage(Colors, new ColorsMenu());
 
     #if (cpp && debug)
     var mods = addPage(Mods, new ModMenu());
@@ -41,7 +41,7 @@ class OptionsState extends MusicBeatState
     {
       options.onExit.add(exitToMainMenu);
       controls.onExit.add(switchPage.bind(Options));
-      // colors.onExit.add(switchPage.bind(Options));
+      colors.onExit.add(switchPage.bind(Options));
       preferences.onExit.add(switchPage.bind(Options));
 
       #if (cpp && debug)

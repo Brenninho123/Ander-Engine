@@ -235,11 +235,11 @@ class PlayState extends MusicBeatState
       case 'pico' | 'blammed' | 'philly':
         curStage = 'philly';
 
-        var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('philly/sky'));
+        var bg:FlxSprite = new FlxSprite(-100, 0, Paths.image('philly/sky'));
         bg.scrollFactor.set(0.1, 0.1);
         add(bg);
 
-        var city:FlxSprite = new FlxSprite(-10).loadGraphic(Paths.image('philly/city'));
+        var city:FlxSprite = new FlxSprite(-10, 0, Paths.image('philly/city'));
         city.scrollFactor.set(0.3, 0.3);
         city.setGraphicSize(Std.int(city.width * 0.85));
         city.updateHitbox();
@@ -252,7 +252,7 @@ class PlayState extends MusicBeatState
 
         for (i in 0...5)
         {
-          var light:FlxSprite = new FlxSprite(city.x).loadGraphic(Paths.image('philly/win' + i));
+          var light:FlxSprite = new FlxSprite(city.x, city.y, Paths.image('philly/win' + i));
           light.scrollFactor.set(0.3, 0.3);
           light.visible = false;
           light.setGraphicSize(Std.int(light.width * 0.85));
@@ -262,22 +262,22 @@ class PlayState extends MusicBeatState
           phillyCityLights.add(light);
         }
 
-        var streetBehind:FlxSprite = new FlxSprite(-40, 50).loadGraphic(Paths.image('philly/behindTrain'));
+        var streetBehind:FlxSprite = new FlxSprite(-40, 50, Paths.image('philly/behindTrain'));
         add(streetBehind);
 
-        phillyTrain = new FlxSprite(2000, 360).loadGraphic(Paths.image('philly/train'));
+        phillyTrain = new FlxSprite(2000, 360, Paths.image('philly/train'));
         add(phillyTrain);
 
         trainSound = new FlxSound().loadEmbedded(Paths.sound('train_passes'));
         FlxG.sound.list.add(trainSound);
 
-        var street:FlxSprite = new FlxSprite(-40, streetBehind.y).loadGraphic(Paths.image('philly/street'));
+        var street:FlxSprite = new FlxSprite(-40, streetBehind.y, Paths.image('philly/street'));
         add(street);
       case "milf" | 'satin-panties' | 'high':
         curStage = 'limo';
         defaultCamZoom = 0.90;
 
-        var skyBG:FlxSprite = new FlxSprite(-120, -50).loadGraphic(Paths.image('limo/limoSunset'));
+        var skyBG:FlxSprite = new FlxSprite(-120, -50, Paths.image('limo/limoSunset'));
         skyBG.scrollFactor.set(0.1, 0.1);
         add(skyBG);
 
@@ -304,13 +304,13 @@ class PlayState extends MusicBeatState
         limo.animation.play('drive');
         limo.antialiasing = true;
 
-        fastCar = new FlxSprite(-300, 160).loadGraphic(Paths.image('limo/fastCarLol'));
+        fastCar = new FlxSprite(-300, 160, Paths.image('limo/fastCarLol'));
       case "cocoa" | 'eggnog':
         curStage = 'mall';
 
         defaultCamZoom = 0.80;
 
-        var bg:FlxSprite = new FlxSprite(-1000, -500).loadGraphic(Paths.image('christmas/bgWalls'));
+        var bg:FlxSprite = new FlxSprite(-1000, -500, Paths.image('christmas/bgWalls'));
         bg.antialiasing = true;
         bg.scrollFactor.set(0.2, 0.2);
         bg.active = false;
@@ -327,7 +327,7 @@ class PlayState extends MusicBeatState
         upperBoppers.updateHitbox();
         add(upperBoppers);
 
-        var bgEscalator:FlxSprite = new FlxSprite(-1100, -600).loadGraphic(Paths.image('christmas/bgEscalator'));
+        var bgEscalator:FlxSprite = new FlxSprite(-1100, -600, Paths.image('christmas/bgEscalator'));
         bgEscalator.antialiasing = true;
         bgEscalator.scrollFactor.set(0.3, 0.3);
         bgEscalator.active = false;
@@ -335,7 +335,7 @@ class PlayState extends MusicBeatState
         bgEscalator.updateHitbox();
         add(bgEscalator);
 
-        var tree:FlxSprite = new FlxSprite(370, -250).loadGraphic(Paths.image('christmas/christmasTree'));
+        var tree:FlxSprite = new FlxSprite(370, -250, Paths.image('christmas/christmasTree'));
         tree.antialiasing = true;
         tree.scrollFactor.set(0.40, 0.40);
         add(tree);
@@ -349,7 +349,7 @@ class PlayState extends MusicBeatState
         bottomBoppers.updateHitbox();
         add(bottomBoppers);
 
-        var fgSnow:FlxSprite = new FlxSprite(-600, 700).loadGraphic(Paths.image('christmas/fgSnow'));
+        var fgSnow:FlxSprite = new FlxSprite(-600, 700, Paths.image('christmas/fgSnow'));
         fgSnow.active = false;
         fgSnow.antialiasing = true;
         add(fgSnow);
@@ -361,7 +361,7 @@ class PlayState extends MusicBeatState
         add(santa);
       case 'winter-horrorland':
         curStage = 'mallEvil';
-        var bg:FlxSprite = new FlxSprite(-400, -500).loadGraphic(Paths.image('christmas/evilBG'));
+        var bg:FlxSprite = new FlxSprite(-400, -500, Paths.image('christmas/evilBG'));
         bg.antialiasing = true;
         bg.scrollFactor.set(0.2, 0.2);
         bg.active = false;
@@ -369,34 +369,32 @@ class PlayState extends MusicBeatState
         bg.updateHitbox();
         add(bg);
 
-        var evilTree:FlxSprite = new FlxSprite(300, -300).loadGraphic(Paths.image('christmas/evilTree'));
+        var evilTree:FlxSprite = new FlxSprite(300, -300, Paths.image('christmas/evilTree'));
         evilTree.antialiasing = true;
         evilTree.scrollFactor.set(0.2, 0.2);
         add(evilTree);
 
-        var evilSnow:FlxSprite = new FlxSprite(-200, 700).loadGraphic(Paths.image("christmas/evilSnow"));
+        var evilSnow:FlxSprite = new FlxSprite(-200, 700, Paths.image("christmas/evilSnow"));
         evilSnow.antialiasing = true;
         add(evilSnow);
       case 'senpai' | 'roses':
         curStage = 'school';
 
-        // defaultCamZoom = 0.9;
-
-        var bgSky = new FlxSprite().loadGraphic(Paths.image('weeb/weebSky'));
+        var bgSky = new FlxSprite(Paths.image('weeb/weebSky'));
         bgSky.scrollFactor.set(0.1, 0.1);
         add(bgSky);
 
         var repositionShit = -200;
 
-        var bgSchool:FlxSprite = new FlxSprite(repositionShit, 0).loadGraphic(Paths.image('weeb/weebSchool'));
+        var bgSchool:FlxSprite = new FlxSprite(repositionShit, 0, Paths.image('weeb/weebSchool'));
         bgSchool.scrollFactor.set(0.6, 0.90);
         add(bgSchool);
 
-        var bgStreet:FlxSprite = new FlxSprite(repositionShit).loadGraphic(Paths.image('weeb/weebStreet'));
+        var bgStreet:FlxSprite = new FlxSprite(repositionShit, Paths.image('weeb/weebStreet'));
         bgStreet.scrollFactor.set(0.95, 0.95);
         add(bgStreet);
 
-        var fgTrees:FlxSprite = new FlxSprite(repositionShit + 170, 130).loadGraphic(Paths.image('weeb/weebTreesBack'));
+        var fgTrees:FlxSprite = new FlxSprite(repositionShit + 170, 130, Paths.image('weeb/weebTreesBack'));
         fgTrees.scrollFactor.set(0.9, 0.9);
         add(fgTrees);
 
@@ -536,7 +534,7 @@ class PlayState extends MusicBeatState
         var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
         add(bg);
 
-        var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+        var stageFront:FlxSprite = new FlxSprite(-650, 600, Paths.image('stagefront'));
         stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
         stageFront.updateHitbox();
         stageFront.antialiasing = true;
@@ -544,7 +542,7 @@ class PlayState extends MusicBeatState
         stageFront.active = false;
         add(stageFront);
 
-        var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+        var stageCurtains:FlxSprite = new FlxSprite(-500, -300, Paths.image('stagecurtains'));
         stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
         stageCurtains.updateHitbox();
         stageCurtains.antialiasing = true;
@@ -759,7 +757,7 @@ class PlayState extends MusicBeatState
 
     FlxG.fixedTimestep = false;
 
-    healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
+    healthBarBG = new FlxSprite(0, FlxG.height * 0.9, Paths.image('healthBar'));
     healthBarBG.screenCenter(X);
     healthBarBG.scrollFactor.set();
     add(healthBarBG);
@@ -1586,26 +1584,6 @@ class PlayState extends MusicBeatState
     else
       iconP2.animation.curAnim.curFrame = 0;
 
-    /* if (FlxG.keys.justPressed.NINE)
-      FlxG.switchState(() -> new Charting()); */
-
-    #if debug
-    if (FlxG.keys.justPressed.ONE) endSong();
-    if (FlxG.keys.justPressed.EIGHT)
-    {
-      /*    8 for opponent char
-                 SHIFT+8 for player char
-        CTRL+SHIFT+8 for gf */
-      if (FlxG.keys.pressed.SHIFT) if (FlxG.keys.pressed.CONTROL) FlxG.switchState(() -> new AnimationDebug(gf.curCharacter));
-      else
-        FlxG.switchState(() -> new AnimationDebug(SONG.player1));
-      else
-        FlxG.switchState(() -> new AnimationDebug(SONG.player2));
-    }
-    if (FlxG.keys.justPressed.PAGEUP) changeSection(1);
-    if (FlxG.keys.justPressed.PAGEDOWN) changeSection(-1);
-    #end
-
     if (generatedMusic && SONG.notes[Std.int(curStep / 16)] != null)
     {
       cameraRightSide = SONG.notes[Std.int(curStep / 16)].mustHitSection;
@@ -1681,13 +1659,9 @@ class PlayState extends MusicBeatState
         vocals.stop();
         FlxG.sound.music.stop();
 
-        // unloadAssets();
-
         deathCounter += 1;
 
         openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-
-        // FlxG.switchState(() -> new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
         #if discord_rpc
         // Game Over doesn't get his own variable because it's only used here
@@ -2010,15 +1984,6 @@ class PlayState extends MusicBeatState
     // Only add the score if you're not on practice mode
     if (!practiceMode) songScore += score;
 
-    // ludum dare rating system
-    /* if (combo > 60)
-        daRating = 'sick';
-      else if (combo > 12)
-        daRating = 'good'
-      else if (combo > 4)
-        daRating = 'bad';
-     */
-
     var ratingPath:String = daRating;
 
     if (curStage.startsWith('school')) ratingPath = "weeb/pixelUI/" + ratingPath + "-pixel";
@@ -2068,7 +2033,7 @@ class PlayState extends MusicBeatState
       pixelShitPart2 = '-pixel';
     }
 
-    var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
+    var comboSpr:FlxSprite = new FlxSprite(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
     comboSpr.y = FlxG.camera.scroll.y + FlxG.camera.height * 0.4 + 80;
     comboSpr.x = FlxG.width * 0.55;
     // make sure combo is visible lol!
@@ -2117,7 +2082,7 @@ class PlayState extends MusicBeatState
     var daLoop:Int = 1;
     for (i in seperatedScore)
     {
-      var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
+      var numScore:FlxSprite = new FlxSprite(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
       numScore.y = comboSpr.y;
 
       if (curStage.startsWith('school'))

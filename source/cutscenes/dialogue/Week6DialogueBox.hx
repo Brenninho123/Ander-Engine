@@ -53,7 +53,7 @@ class Week6DialogueBox extends BasicDialogueBox
         box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
         box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 
-        var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
+        var face:FlxSprite = new FlxSprite(320, 170, Paths.image('weeb/spiritFaceForward'));
         face.setGraphicSize(Std.int(face.width * 6));
         add(face);
 
@@ -80,7 +80,7 @@ class Week6DialogueBox extends BasicDialogueBox
 
     super(talkingRight, dialogueList);
 
-    handSelect = new FlxSprite(1042, 590).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
+    handSelect = new FlxSprite(1042, 590, Paths.image('weeb/pixelUI/hand_textbox'));
     handSelect.setGraphicSize(Std.int(handSelect.width * PlayState.daPixelZoom * 0.9));
     handSelect.updateHitbox();
     handSelect.visible = false;

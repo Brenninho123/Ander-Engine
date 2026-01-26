@@ -55,14 +55,14 @@ class Main extends Sprite
       #if desktop 'DESKTOP', #end
       #if desktop ' * Video Support (hxCodec)', #end
 
-      #if sys ' * Custom Trace', #end
+      #if (sys && !debug) ' * Custom Trace', #end
 
       #if (!web && !desktop) 'UNKNOWN', #end
 
       '',
     ];
 
-    #if sys
+    #if (sys && !debug)
     Log.trace = (v, ?infos) -> {
       Sys.println('${'${infos.fileName}:${infos.lineNumber}'.rpad(' ', 48) + ':'}'.rpad(' ', 48 + 8) + '${Std.string(v)}');
     }

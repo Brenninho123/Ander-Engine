@@ -2,11 +2,11 @@ package;
 
 import flixel.FlxSprite;
 
+/**
+ * Cool lil utility thing just so that it can easy do antialiasing and scrollfactor bullshit
+ */
 class BGSprite extends FlxSprite
 {
-  /**
-    Cool lil utility thing just so that it can easy do antialiasing and scrollfactor bullshit
-   */
   public var idleAnim:String;
 
   public function new(image:String, x:Float = 0, y:Float = 0, parX:Float = 1, parY:Float = 1, ?daAnimations:Array<String>, ?loopingAnim:Bool = false)

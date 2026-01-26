@@ -89,11 +89,7 @@ class FreeplayState extends MusicBeatState
 
     if (StoryMenuState.weekUnlocked[7] || isDebug) addWeek(['Ugh', 'Guns', 'Stress'], 7, ['tankman']);
 
-    // LOAD MUSIC
-
-    // LOAD CHARACTERS
-
-    bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+    bg = new FlxSprite(Paths.image('menuDesat'));
     add(bg);
 
     grpSongs = new FlxTypedGroup<Alphabet>();

@@ -91,22 +91,12 @@
 	<assets path="assets/week6"    library="week6"    exclude="*.fla|*.mp3" unless="web"/>
 	<assets path="assets/week7"    library="week7"    exclude="*.fla|*.ogg" if="web"/>
 	<assets path="assets/week7"    library="week7"    exclude="*.fla|*.mp3" unless="web"/>
-	
-	<!-- <assets path='example_mods' rename='mods' embed='false'/> -->
 
 	<template path="example_mods" rename="mods" />
 
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
-	<!-- <template path='mods' /> -->
-	
 	<assets path="CHANGELOG.md" rename='changelog.txt'/>
-
-	<!-- NOTE FOR FUTURE SELF SINCE FONTS ARE ALWAYS FUCKY 
-		TO FIX ONE OF THEM, I CONVERTED IT TO OTF. DUNNO IF YOU NEED TO
-		THEN UHHH I USED THE NAME OF THE FONT WITH SETFORMAT() ON THE TEXT!!!
-		NOT USING A DIRECT THING TO THE ASSET!!!
-	-->
-	<assets path="assets/fonts" embed='true'/>
+	<assets path="assets/fonts" />
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
@@ -117,7 +107,7 @@
 	<haxelib name="hscript" />
 
 	<!--In case you want to use the ui package-->
-	<haxelib name="flixel-ui" />
+	<haxelib name="flixel-ui" version="2.6.4" />
 	<haxelib name="polymod"/>
 	
 	<!-- <haxelib name="flixel-animate" /> -->
@@ -171,7 +161,7 @@
 	<define name="VIDEO_WEB" if="html5"/>
 	<define name="VIDEO_DESKTOP" if="desktop || android" unless="hl"/>
 
-	<haxelib name="hxCodec" if="VIDEO_DESKTOP" unless="VIDEO_WEB"/>
+	<haxelib name="hxvlc" version="2.2.5" if="VIDEO_DESKTOP" unless="VIDEO_WEB"/>
 
 	<define name="VOICES_GROUP" unless="DISABLE_VOICES_GROUP"/>
 </project>
