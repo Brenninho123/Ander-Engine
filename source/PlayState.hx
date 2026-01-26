@@ -68,7 +68,11 @@ class PlayState extends MusicBeatState
 
 	var halloweenLevel:Bool = false;
 
+	#if (MULTIPLE_VOICES || VOICES_GROUP)
 	private var vocals:VoicesGroup;
+	#else
+	private var vocals:FlxSound;
+	#end
 	private var vocalsFinished:Bool = false;
 
 	private var dad:Character;
@@ -1215,6 +1219,7 @@ class PlayState extends MusicBeatState
 
 		curSong = songData.song;
 
+		#if (MULTIPLE_VOICES || VOICES_GROUP)
 		if (SONG.needsVoices)
 			vocals = new VoicesGroup(SONG.song, SONG.vocalsList);
 		else
@@ -1224,6 +1229,17 @@ class PlayState extends MusicBeatState
 		{
 			vocalsFinished = true;
 		};
+		#else
+		if (SONG.needsVoices)
+			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song));
+		else
+			vocals = new FlxSound();
+
+		vocals.onComplete = function()
+		{
+			vocalsFinished = true;
+		};
+		#end
 
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
@@ -1518,7 +1534,6 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			vocals.time = FlxG.sound.music.time;
 			Conductor.songPosition = FlxG.sound.music.time + Conductor.offset; // 20 is THE MILLISECONDS??
 			// Conductor.songPosition += FlxG.elapsed * 1000;
 
