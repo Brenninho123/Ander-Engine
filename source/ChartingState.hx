@@ -558,7 +558,7 @@ class ChartingState extends MusicBeatState
 			if (_song.vocalsList.player.length == 0)
 				vocL += missing + "\n";
 
-			vocL += "\nOpponent Vocals: \n";
+			vocL += "Opponent Vocals: \n";
 			for (vocal in (_song.vocalsList ?? Song.DEFAULTVOCALS)?.opponent)
 				vocL += " * " + getVoc(vocal) + "\n";
 			
