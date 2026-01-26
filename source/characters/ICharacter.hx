@@ -6,7 +6,11 @@ interface ICharacter
 {
 	public function loadImage(data:AssetPath):Void;
 
+	public function loadOffset(data:OffsetFile):Void;
+
 	public function loadCustomAnimations(data:CustomAnimations):Void;
+
+	public function loadCustom(data:CustomCharacterData):Void;
 
 	public function loadSingerAnimations(data:SingerAnimations):Void;
 

@@ -29,6 +29,13 @@ typedef CustomAnimations =
 	?custom:Map<String, String>,
 }
 
+typedef CustomCharacterData =
+{
+	> OffsetFile,
+	> AssetPath,
+	> CustomAnimations,
+}
+
 typedef SingerCharacterData =
 {
 	> OffsetFile,

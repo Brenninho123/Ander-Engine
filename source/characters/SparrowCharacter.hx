@@ -29,6 +29,18 @@ class SparrowCharacter implements ICharacter
 			character.quickAnimAdd(name, prefix);
 	}
 
+	public function loadCustom(data:CustomCharacterData)
+	{
+		loadImage(data);
+		loadCustomAnimations(data);
+		loadOffset(data);
+	}
+
+	public function loadOffset(data:OffsetFile)
+	{
+		character.loadOffsetFile(data.offsetFile ?? curCharacter);
+	}
+
 	public function loadSingerAnimations(data:SingerAnimations)
 	{
 		character.quickAnimAdd('singUP', data.upName);
@@ -48,7 +60,7 @@ class SparrowCharacter implements ICharacter
 		loadSingerAnimations(data);
 		loadCustomAnimations(data);
 
-		character.loadOffsetFile(data.offsetFile ?? curCharacter);
+		loadOffset(data);
 
 		if (data.idleName != null)
 			character.playAnim('idle');
@@ -80,7 +92,7 @@ class SparrowCharacter implements ICharacter
 		loadDamselAnimations(data);
 		loadCustomAnimations(data);
 
-		character.loadOffsetFile(data.offsetFile ?? curCharacter);
+		loadOffset(data);
 
 		character.playAnim('danceLeft');
 	}
@@ -100,7 +112,7 @@ class SparrowCharacter implements ICharacter
 		loadDeathAnimations(data);
 		loadCustomAnimations(data);
 
-		character.loadOffsetFile(data.offsetFile ?? curCharacter);
+		loadOffset(data);
 
 		character.playAnim('firstDeath');
 	}
@@ -278,10 +290,8 @@ class SparrowCharacter implements ICharacter
 				character.flipX = true;
 
 			case 'pico-speaker':
-				loadImage({
-					assetPath: 'pico/picoSpeaker'
-				});
-				loadCustomAnimations({
+				loadCustom({
+					assetPath: 'pico/picoSpeaker',
 					custom: [
 						'shoot1' => 'Pico shoot 1',
 						'shoot2' => 'Pico shoot 2',
