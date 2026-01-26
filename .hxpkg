@@ -61,6 +61,10 @@
 			{
 				"name": "systools",
 				"link": "https://github.com/haya3218/retools.git"
+			},
+			{
+				"name": "discord_rpc",
+				"link": "https://github.com/Aidan63/linc_discord-rpc.git"
 			}
 		]
 	}

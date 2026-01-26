@@ -1,23 +1,17 @@
 package;
 
-import flixel.util.typeLimit.OneOfTwo;
 import global.TitleStateGlobal;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
-import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.Assets;
-import shaderslmfao.BuildingShaders;
 import shaderslmfao.ColorSwap;
 import ui.PreferencesMenu;
 import GameJolt.GameJoltAPI;
@@ -26,11 +20,6 @@ using StringTools;
 
 #if discord_rpc
 import Discord.DiscordClient;
-#end
-#if desktop
-import sys.FileSystem;
-import sys.io.File;
-import sys.thread.Thread;
 #end
 
 class TitleState extends MusicBeatState
@@ -47,14 +36,12 @@ class TitleState extends MusicBeatState
   var wackyImage:FlxSprite;
   var lastBeat:Int = 0;
   var swagShader:ColorSwap;
-  var alphaShader:BuildingShaders;
   var thingie:FlxSprite;
 
   override public function create():Void
   {
     #if polymod
     polymod.Polymod.init({modRoot: "mods", dirs: ['introMod'], framework: OPENFL});
-    // FlxG.bitmap.clearCache();
     #end
 
     startedIntro = false;
@@ -62,7 +49,6 @@ class TitleState extends MusicBeatState
     FlxG.game.focusLostFramerate = 60;
 
     swagShader = new ColorSwap();
-    alphaShader = new BuildingShaders();
 
     FlxG.sound.muteKeys = [ZERO];
 
@@ -73,43 +59,23 @@ class TitleState extends MusicBeatState
     super.create();
 
     FlxG.save.bind('legacy', 'Macohi');
-    // FlxG.save.mergeFrom('funkin', 'ninjamuffin99');
     PreferencesMenu.initPrefs();
     PlayerSettings.init();
     Highscore.load();
 
     if (FlxG.save.data.weekUnlocked != null)
     {
-      // FIX LATER!!!
-      // WEEK UNLOCK PROGRESSION!!
-      // StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
-
       if (StoryMenuState.weekUnlocked.length < 4) StoryMenuState.weekUnlocked.insert(0, true);
-
-      // QUICK PATCH OOPS!
       if (!StoryMenuState.weekUnlocked[0]) StoryMenuState.weekUnlocked[0] = true;
     }
 
     VideoState.seenVideo = true;
 
-    #if FREEPLAY
-    FlxG.switchState(() -> new FreeplayState());
-    #elseif ANIMATE
-    FlxG.switchState(() -> new CutsceneAnimTestState());
-    #elseif CHARTING
-    FlxG.switchState(() -> new ChartingState());
-    #else
-    new FlxTimer().start(1, function(tmr:FlxTimer) {
-      startIntro();
-    });
-    #end
+    FlxTimer.wait(1, () -> startIntro());
 
     #if discord_rpc
     DiscordClient.initialize();
-
-    Application.current.onExit.add(function(exitCode) {
-      DiscordClient.shutdown();
-    });
+    Application.current.onExit.add(_ -> DiscordClient.shutdown());
     #end
 
     #if tentools
@@ -128,13 +94,9 @@ class TitleState extends MusicBeatState
   {
     if (!initialized)
     {
-      var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
-      diamond.persist = true;
-      diamond.destroyOnNoUse = false;
-
-      FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 1, new FlxPoint(0, -1), {asset: diamond, width: 32, height: 32},
+      FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 1, new FlxPoint(0, -1), null,
         new FlxRect(-200, -200, FlxG.width * 1.4, FlxG.height * 1.4));
-      FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.7, new FlxPoint(0, 1), {asset: diamond, width: 32, height: 32},
+      FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.7, new FlxPoint(0, 1), null,
         new FlxRect(-200, -200, FlxG.width * 1.4, FlxG.height * 1.4));
     }
 
@@ -147,13 +109,6 @@ class TitleState extends MusicBeatState
     Conductor.changeBPM(102);
     persistentUpdate = true;
 
-    var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-    // bg.antialiasing = true;
-    // bg.setGraphicSize(Std.int(bg.width * 0.6));
-    // bg.updateHitbox();
-
-    add(bg);
-
     logoBl = new FlxSprite(20, 20);
     logoBl.frames = Paths.getSparrowAtlas('FLegacyBumpin');
     logoBl.antialiasing = true;
@@ -163,11 +118,6 @@ class TitleState extends MusicBeatState
     logoBl.updateHitbox();
 
     logoBl.shader = swagShader.shader;
-    // logoBl.shader = alphaShader.shader;
-
-    // trace();
-    // logoBl.screenCenter();
-    // logoBl.color = FlxColor.BLACK;
 
     gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
     gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
@@ -187,13 +137,7 @@ class TitleState extends MusicBeatState
     titleText.antialiasing = true;
     titleText.animation.play('idle');
     titleText.updateHitbox();
-    // titleText.screenCenter(X);
     add(titleText);
-
-    var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
-    logo.screenCenter();
-    logo.antialiasing = true;
-    // add(logo);
 
     textGroup = new FlxGroup();
 
@@ -202,7 +146,7 @@ class TitleState extends MusicBeatState
 
     add(textGroup);
 
-    ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
+    ngSpr = new FlxSprite(0, FlxG.height * 0.52, Paths.image('newgrounds_logo'));
     add(ngSpr);
     ngSpr.visible = false;
     ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
@@ -222,49 +166,24 @@ class TitleState extends MusicBeatState
   function getIntroTextShit():Array<Array<String>>
   {
     var fullText:String = Assets.getText(TitleStateGlobal.introTextPath);
-
-    var firstArray:Array<String> = fullText.split('\n');
-    var swagGoodArray:Array<Array<String>> = [];
-
-    for (i in firstArray)
-    {
-      swagGoodArray.push(i.split('--'));
-    }
-
-    return swagGoodArray;
+    return [for (i in fullText.split('\n')) i.split('--')];
   }
 
   var transitioning:Bool = false;
 
   override function update(elapsed:Float)
   {
-    #if debug
-    if (FlxG.keys.justPressed.EIGHT) FlxG.switchState(() -> new CutsceneAnimTestState());
-    #end
-
     if (FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
-    // FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
     if (FlxG.keys.justPressed.F) FlxG.fullscreen = !FlxG.fullscreen;
 
     var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
-
-    #if mobile
-    for (touch in FlxG.touches.list)
-    {
-      if (touch.justPressed) pressedEnter = true;
-    }
-    #end
 
     var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
     if (gamepad != null)
     {
       if (gamepad.justPressed.START) pressedEnter = true;
-
-      #if switch
-      if (gamepad.justPressed.B) pressedEnter = true;
-      #end
     }
 
     if (pressedEnter && !transitioning && skippedIntro)
@@ -277,19 +196,13 @@ class TitleState extends MusicBeatState
       FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
       transitioning = true;
-      // FlxG.sound.music.stop();
 
       FlxG.switchState(() -> new MainMenuState());
-      // FlxG.sound.play(Paths.music('titleShoot'), 0.7);
     }
 
     if (pressedEnter && !skippedIntro && initialized) skipIntro();
 
-    // if (FlxG.keys.justPressed.SPACE)
-    // swagShader.hasOutline = !swagShader.hasOutline;
-
     if (controls.UI_LEFT) swagShader.update(-elapsed * 0.1);
-
     if (controls.UI_RIGHT) swagShader.update(elapsed * 0.1);
 
     super.update(elapsed);
@@ -308,7 +221,7 @@ class TitleState extends MusicBeatState
     textGroup.add(coolText);
   }
 
-  function deleteCoolText()
+  inline function deleteCoolText()
   {
     textGroup.clear();
   }
@@ -329,9 +242,6 @@ class TitleState extends MusicBeatState
     }
     else
     {
-      trace(curBeat);
-      // if the user is draggin the window some beats will
-      // be missed so this is just to compensate
       if (curBeat > lastBeat)
       {
         for (i in lastBeat...curBeat)

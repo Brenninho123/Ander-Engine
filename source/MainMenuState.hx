@@ -26,10 +26,6 @@ using StringTools;
 #if discord_rpc
 import Discord.DiscordClient;
 #end
-#if newgrounds
-import io.newgrounds.NG;
-import ui.NgPrompt;
-#end
 
 class MainMenuState extends MusicBeatState
 {
@@ -125,14 +121,11 @@ class MainMenuState extends MusicBeatState
 
     FlxG.cameras.reset(new SwagCamera());
     FlxG.camera.follow(camFollow, null, 0.06);
-    // FlxG.camera.setScrollBounds(bg.x, bg.x + bg.width, bg.y, bg.y + bg.height * 1.2);
 
     var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version'), 12);
     versionShit.scrollFactor.set();
     versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     add(versionShit);
-
-    // NG.core.calls.event.logEvent('swag').send();
 
     super.create();
   }
@@ -140,13 +133,7 @@ class MainMenuState extends MusicBeatState
   override function finishTransIn()
   {
     super.finishTransIn();
-
     menuItems.enabled = true;
-
-    // #if newgrounds
-    // if (NGio.savedSessionFailed)
-    // 	showSavedSessionFailed();
-    // #end
   }
 
   function onMenuItemChange(selected:MenuItem)

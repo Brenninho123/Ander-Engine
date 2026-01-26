@@ -170,7 +170,6 @@ class PlayState extends MusicBeatState
     FlxG.sound.cache(Paths.inst(PlayState.SONG.song));
     FlxG.sound.cache(Paths.voices(PlayState.SONG.song));
 
-    // var gameCam:FlxCamera = FlxG.camera;
     camGame = new SwagCamera();
     camHUD = new FlxCamera();
     camHUD.bgColor.alpha = 0;
@@ -272,8 +271,6 @@ class PlayState extends MusicBeatState
         trainSound = new FlxSound().loadEmbedded(Paths.sound('train_passes'));
         FlxG.sound.list.add(trainSound);
 
-        // var cityLights:FlxSprite = new FlxSprite().loadGraphic(AssetPaths.win0.png);
-
         var street:FlxSprite = new FlxSprite(-40, streetBehind.y).loadGraphic(Paths.image('philly/street'));
         add(street);
       case "milf" | 'satin-panties' | 'high':
@@ -301,13 +298,6 @@ class PlayState extends MusicBeatState
           grpLimoDancers.add(dancer);
         }
 
-        var overlayShit:FlxSprite = new FlxSprite(-500, -600).loadGraphic(Paths.image('limo/limoOverlay'));
-        overlayShit.alpha = 0.5;
-        // add(overlayShit);
-        // var shaderBullshit = new BlendModeEffect(new OverlayShader(), FlxColor.RED);
-        // FlxG.camera.setFilters([new ShaderFilter(cast shaderBullshit.shader)]);
-        // overlayShit.shader = shaderBullshit;
-
         limo = new FlxSprite(-120, 550);
         limo.frames = Paths.getSparrowAtlas('limo/limoDrive');
         limo.animation.addByPrefix('drive', "Limo stage", 24);
@@ -315,7 +305,6 @@ class PlayState extends MusicBeatState
         limo.antialiasing = true;
 
         fastCar = new FlxSprite(-300, 160).loadGraphic(Paths.image('limo/fastCarLol'));
-      // add(limo);
       case "cocoa" | 'eggnog':
         curStage = 'mall';
 
@@ -522,15 +511,12 @@ class PlayState extends MusicBeatState
 
         moveTank();
 
-        // smokeLeft.screenCenter();
-
         var fgTank0:BGSprite = new BGSprite('tank0', -500, 650, 1.7, 1.5, ['fg']);
         foregroundSprites.add(fgTank0);
 
         var fgTank1:BGSprite = new BGSprite('tank1', -300, 750, 2, 0.2, ['fg']);
         foregroundSprites.add(fgTank1);
 
-        // just called 'foreground' just cuz small inconsistency no bbiggei
         var fgTank2:BGSprite = new BGSprite('tank2', 450, 940, 1.5, 1.5, ['foreground']);
         foregroundSprites.add(fgTank2);
 
@@ -656,13 +642,8 @@ class PlayState extends MusicBeatState
         gf.x += 180;
         gf.y += 300;
       case 'schoolEvil':
-        // trailArea.scrollFactor.set();
-
         var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
-        // evilTrail.changeValuesEnabled(false, false, false, false);
-        // evilTrail.changeGraphic()
         add(evilTrail);
-        // evilTrail.scrollFactor.set(1.1, 1.1);
 
         boyfriend.x += 200;
         boyfriend.y += 220;
@@ -756,8 +737,6 @@ class PlayState extends MusicBeatState
     playerStrums = new FlxTypedGroup<FlxSprite>();
 
     generateSong();
-
-    // add(strumLine);
 
     camFollow = new FlxObject(0, 0, 1, 1);
 

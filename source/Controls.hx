@@ -374,7 +374,7 @@ class Controls extends FlxActionSet
   static function init():Void
   {
     var actions = new FlxActionManager();
-    FlxG.inputs.add(actions);
+    FlxG.inputs.addUniqueType(actions);
   }
 
   /**
@@ -653,8 +653,8 @@ class Controls extends FlxActionSet
   {
     addGamepadLiteral(id, [
 
-      Control.ACCEPT => [#if switch B #else A #end],
-      Control.BACK => [#if switch A #else B #end, FlxGamepadInputID.BACK],
+      Control.ACCEPT => [A],
+      Control.BACK => [B, FlxGamepadInputID.BACK],
       Control.UI_UP => [DPAD_UP, LEFT_STICK_DIGITAL_UP],
       Control.UI_DOWN => [DPAD_DOWN, LEFT_STICK_DIGITAL_DOWN],
       Control.UI_LEFT => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT],
