@@ -243,11 +243,14 @@ private class MainMenuItem extends AtlasMenuItem
 
 	override function setData(name:String, ?callback:Void->Void)
 	{
+		this.name = name;
+
+		if (callback != null)
+			this.callback = callback;
+
 		frames = atlas;
 		animation.addByPrefix('idle', '$name white', 24);
-		animation.addByPrefix('selected', '$name black', 24);
-
-		super.setData(name, callback);
+		animation.addByPrefix('selected', '$name basic', 24);
 	}
 
 	override function changeAnim(anim:String)
