@@ -36,35 +36,35 @@ class VoicesGroup extends FlxTypedGroup<FlxSound>
 	// prob a better / cleaner way to do all these forEach stuff?
 	public function pause()
 	{
-		forEachAlive(function(snd)
+		for (snd in members)
 		{
 			snd.pause();
-		});
+		}
 	}
 
 	public function play()
 	{
-		forEachAlive(function(snd)
+		for (snd in members)
 		{
 			snd.play();
-		});
+		}
 	}
 
 	public function stop()
 	{
-		forEachAlive(function(snd)
+		for (snd in members)
 		{
 			snd.stop();
-		});
+		}
 	}
 
 	function set_time(time:Float):Float
 	{
-		forEachAlive(function(snd)
+		for (snd in members)
 		{
 			// account for different offsets per sound?
 			snd.time = time;
-		});
+		}
 
 		return time;
 	}
@@ -72,10 +72,10 @@ class VoicesGroup extends FlxTypedGroup<FlxSound>
 	// in PlayState, adjust the code so that it only mutes the player1 vocal tracks?
 	function set_volume(volume:Float):Float
 	{
-		forEachAlive(function(snd)
+		for (snd in members)
 		{
 			snd.volume = volume;
-		});
+		}
 
 		return volume;
 	}
