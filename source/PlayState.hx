@@ -707,6 +707,7 @@ class PlayState extends MusicBeatState
 		{
 			gf.loadMappedAnims();
 
+			var c = 0;
 			for (i in 0...TankmenBG.animationNotes.length)
 			{
 				if (FlxG.random.bool(16))
@@ -721,7 +722,8 @@ class PlayState extends MusicBeatState
 						t.destroy();
 					}
 					tankmanRun.add(tankman);
-					trace('added tankguy #$i');
+					c++;
+					trace('added tankguy #$c');
 				}
 			}
 			trace('tankmanRun');
