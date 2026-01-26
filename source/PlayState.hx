@@ -704,7 +704,7 @@ class PlayState extends MusicBeatState
 
 			for (i in 0...TankmenBG.animationNotes.length)
 			{
-				if (FlxG.random.bool(16))
+				if (FlxG.random.bool(8))
 				{
 					var tankman:TankmenBG = new TankmenBG(0, 0, false);
 					// new TankmenBG(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
@@ -719,9 +719,8 @@ class PlayState extends MusicBeatState
 					trace('added tankguy #$i');
 				}
 			}
+			trace('tankmanRun');
 		}
-
-		trace('tankmanRun');
 
 		var week6dialogue:Week6DialogueBox = new Week6DialogueBox(false, dialogue);
 		week6dialogue.scrollFactor.set();

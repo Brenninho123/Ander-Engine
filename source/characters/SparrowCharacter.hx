@@ -409,29 +409,12 @@ class SparrowCharacter implements ICharacter
 			case 'tankman':
 				loadSinger({
 					assetPath: 'tankmanCaptain',
-					idleName: 'Pico Idle Dance',
+					idleName: 'Tankman Idle Dance instance',
 					upName: 'Tankman UP note ',
 					downName: 'Tankman DOWN note ',
 					leftName: (character.isPlayer) ? 'Tankman Note Left' : 'Tankman Right Note',
 					rightName: (character.isPlayer) ? 'Tankman Right Note' : 'Tankman Note Left',
 				});
-
-				character.frames = Paths.getSparrowAtlas('characters/tankmanCaptain');
-
-				if (character.isPlayer)
-				{
-					character.quickAnimAdd('singLEFTmiss', 'Tankman Note Left MISS');
-					character.quickAnimAdd('singRIGHTmiss', 'Tankman Right Note MISS');
-				}
-				else
-				{
-					// Need to be flipped! REDO THIS LATER
-					character.quickAnimAdd('singLEFTmiss', 'Tankman Right Note MISS');
-					character.quickAnimAdd('singRIGHTmiss', 'Tankman Note Left MISS');
-				}
-
-				character.quickAnimAdd('singUPmiss', 'Tankman UP note MISS');
-				character.quickAnimAdd('singDOWNmiss', 'Tankman DOWN note MISS');
 
 				// PRETTY GOOD tankman
 				// TANKMAN UGH instanc
@@ -440,8 +423,6 @@ class SparrowCharacter implements ICharacter
 				character.quickAnimAdd('singUP-alt', 'TANKMAN UGH');
 
 				character.loadOffsetFile(curCharacter);
-
-				character.playAnim('idle');
 
 				character.flipX = true;
 
@@ -456,10 +437,7 @@ class SparrowCharacter implements ICharacter
 	public function info(hasImplementation:Bool)
 	{
 		if (hasImplementation)
-		{
 			exclusiveInfo();
-			trace(' * ASSET PATH: ${character.graphic.assetsKey}');
-		}
 	}
 
 	public function exclusiveInfo()

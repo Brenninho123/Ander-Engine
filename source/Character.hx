@@ -42,7 +42,7 @@ class Character extends FlxSprite
 
 		updateHitbox();
 
-		if (animation.getNameList().length == 0)
+		if (animation.getAnimationList().length == 0)
 			trace(' * FAILED');
 
 		dance();
@@ -74,6 +74,7 @@ class Character extends FlxSprite
 
 	public function loadMappedAnims()
 	{
+		trace('MAPPED SHIT');
 		var swagshit = Song.loadFromJson('picospeaker', 'stress');
 
 		var notes = swagshit.notes;
@@ -99,6 +100,7 @@ class Character extends FlxSprite
 
 	public function quickAnimAdd(name:String, prefix:String)
 	{
+		trace('   * quickanimadd($name, $prefix)');
 		animation.addByPrefix(name, prefix, 24, false);
 	}
 
@@ -212,6 +214,12 @@ class Character extends FlxSprite
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
+		if (animation.getByName(AnimName) == null)
+		{
+			trace('I dont have that: $AnimName');
+			return;
+		}
+
 		animation.play(AnimName, Force, Reversed, Frame);
 
 		var daOffset = animOffsets.get(AnimName);
