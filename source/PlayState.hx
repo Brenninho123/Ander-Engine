@@ -68,10 +68,8 @@ class PlayState extends MusicBeatState
 
 	var halloweenLevel:Bool = false;
 
-	private var opponentVocals:VoicesGroup;
-	private var opponentVocalsFinished:Bool = false;
-	private var playerVocals:VoicesGroup;
-	private var playerVocalsFinished:Bool = false;
+	private var vocals:VoicesGroup;
+	private var vocalsFinished:Bool = false;
 
 	private var dad:Character;
 	private var gf:Character;
@@ -1211,8 +1209,7 @@ class PlayState extends MusicBeatState
 		if (!paused)
 			FlxG.sound.playMusic(Paths.inst(SONG.song), 1, false);
 		FlxG.sound.music.onComplete = endSong;
-		playerVocals.play();
-		opponentVocals.play();
+		vocals.play();
 
 		#if discord_rpc
 		// Song duration in a float, useful for the time left feature
@@ -1233,24 +1230,13 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 
 		if (SONG.needsVoices)
-		{
-			opponentVocals = new VoicesGroup(SONG.song, SONG.vocalsList.opponent);
-			playerVocals = new VoicesGroup(SONG.song, SONG.vocalsList.player);
-		}
+			vocals = new VoicesGroup(SONG.song, SONG.vocalsList);
 		else
-		{
-			opponentVocals = new VoicesGroup(SONG.song, null, false);
-			playerVocals = new VoicesGroup(SONG.song, null, false);
-		}
+			vocals = new VoicesGroup(SONG.song, null, false);
 
-		opponentVocals.members[0].onComplete = function()
+		vocals.members[0].onComplete = function()
 		{
-			opponentVocalsFinished = true;
-		};
-
-		playerVocals.members[0].onComplete = function()
-		{
-			playerVocalsFinished = true;
+			vocalsFinished = true;
 		};
 
 		notes = new FlxTypedGroup<Note>();
@@ -1449,8 +1435,7 @@ class PlayState extends MusicBeatState
 			if (FlxG.sound.music != null)
 			{
 				FlxG.sound.music.pause();
-				opponentVocals.pause();
-				playerVocals.pause();
+				vocals.pause();
 			}
 
 			if (!startTimer.finished)
@@ -1510,22 +1495,15 @@ class PlayState extends MusicBeatState
 		if (_exiting)
 			return;
 
-		playerVocals.pause();
-		opponentVocals.pause();
+		vocals.pause();
 		FlxG.sound.music.play();
 		Conductor.songPosition = FlxG.sound.music.time + Conductor.offset;
 
-		if (!playerVocalsFinished)
-		{
-			playerVocals.time = Conductor.songPosition;
-			playerVocals.play();
-		}
+		if (vocalsFinished)
+			return;
 
-		if (!opponentVocalsFinished)
-		{
-			opponentVocals.time = Conductor.songPosition;
-			opponentVocals.play();
-		}
+		vocals.time = Conductor.songPosition;
+		vocals.play();
 	}
 
 	private var paused:Bool = false;
@@ -1728,8 +1706,7 @@ class PlayState extends MusicBeatState
 			switch (curBeat)
 			{
 				case 128, 129, 130:
-					opponentVocals.volume = 0;
-					playerVocals.volume = 0;
+					vocals.volume = 0;
 					// FlxG.sound.music.stop();
 					// FlxG.switchState(() -> new PlayState());
 			}
@@ -1761,8 +1738,7 @@ class PlayState extends MusicBeatState
 				persistentDraw = false;
 				paused = true;
 
-					opponentVocals.stop();
-				playerVocals.stop();
+				vocals.stop();
 				FlxG.sound.music.stop();
 
 				// unloadAssets();
@@ -1876,7 +1852,7 @@ class PlayState extends MusicBeatState
 					dad.holdTimer = 0;
 
 					if (SONG.needsVoices)
-						opponentVocals.volume = 1;
+						vocals.volume = 1;
 
 					if (!daNote.isSustainNote)
 					{
@@ -1913,7 +1889,7 @@ class PlayState extends MusicBeatState
 					if (daNote.tooLate)
 					{
 						health -= 0.0475;
-						playerVocals.volume = 0;
+						vocals.volume = 0;
 						killCombo();
 					}
 
@@ -1966,8 +1942,7 @@ class PlayState extends MusicBeatState
 		deathCounter = 0;
 		canPause = false;
 		FlxG.sound.music.volume = 0;
-		opponentVocals.volume = 0;
-		playerVocals.volume = 0;
+		vocals.volume = 0;
 		if (SONG.validScore)
 		{
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
@@ -2022,8 +1997,7 @@ class PlayState extends MusicBeatState
 				FlxTransitionableState.skipNextTransOut = true;
 
 				FlxG.sound.music.stop();
-				playerVocals.stop();
-				opponentVocals.stop();
+				vocals.stop();
 
 				if (SONG.song.toLowerCase() == 'eggnog')
 				{
@@ -2063,7 +2037,7 @@ class PlayState extends MusicBeatState
 	{
 		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
 		// boyfriend.playAnim('hey');
-		playerVocals.volume = 1;
+		vocals.volume = 1;
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
@@ -2268,7 +2242,7 @@ class PlayState extends MusicBeatState
 			}
 
 			if (dad.curCharacter == 'mom')
-				opponentVocals.volume = 1;
+				vocals.volume = 1;
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 				tweenCamIn();
@@ -2428,7 +2402,7 @@ class PlayState extends MusicBeatState
 		if (!practiceMode)
 			songScore -= 10;
 
-		playerVocals.volume = 0;
+		vocals.volume = 0;
 		FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 
 		/* boyfriend.stunned = true;
@@ -2508,7 +2482,7 @@ class PlayState extends MusicBeatState
 			});
 
 			note.wasGoodHit = true;
-			playerVocals.volume = 1;
+			vocals.volume = 1;
 
 			if (!note.isSustainNote)
 			{
@@ -2627,15 +2601,16 @@ class PlayState extends MusicBeatState
 
 	override function stepHit()
 	{
-		var desyncmax:Float = 20;
-		var playerVocDesynced = Math.abs(playerVocals.time - (Conductor.songPosition - Conductor.offset)) > desyncmax;
-		var opponentVocDesynced = Math.abs(opponentVocals.time - (Conductor.songPosition - Conductor.offset)) > desyncmax;
-
 		super.stepHit();
-		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > desyncmax
-			|| (SONG.needsVoices && (playerVocDesynced || opponentVocDesynced)))
+		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > 20
+			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > 20))
 		{
 			resyncVocals();
+		}
+
+		if (dad.curCharacter == 'spooky' && curStep % 4 == 2)
+		{
+			// dad.dance();
 		}
 	}
 

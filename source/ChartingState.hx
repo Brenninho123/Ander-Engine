@@ -76,8 +76,7 @@ class ChartingState extends MusicBeatState
 
 	var tempBpm:Float = 0;
 
-	var playerVocals:VoicesGroup;
-	var opponentVocals:VoicesGroup;
+	var vocals:VoicesGroup;
 
 	var leftIcon:HealthIcon;
 	var rightIcon:HealthIcon;
@@ -174,7 +173,6 @@ class ChartingState extends MusicBeatState
 
 	var UI_vocalAdder:FlxUIInputText;
 	var vocalsList:FlxText;
-	var vocalTYpe:FlxUICheckBox;
 
 	function addVocalUI():Void
 	{
@@ -190,37 +188,17 @@ class ChartingState extends MusicBeatState
 
 		var addVocal:FlxButton = new FlxButton(UI_vocalAdder.x + UI_vocalAdder.width + 10, UI_vocalAdder.y, 'Add vocal', function()
 		{
-			if (vocalTYpe.checked)
-			{
-				if (!_song.vocalsList.player.contains(typingShit.text))
-					_song.vocalsList.player.push(typingShit.text);
-			}
-			else
-			{
-				if (!_song.vocalsList.opponent.contains(typingShit.text))
-					_song.vocalsList.opponent.push(typingShit.text);
-			}
+			if (!_song.vocalsList.contains(typingShit.text))
+				_song.vocalsList.push(typingShit.text);
 		});
 		tab_group_vocal.add(addVocal);
 
 		var removeVocal:FlxButton = new FlxButton(addVocal.x + addVocal.width + 10, addVocal.y, 'Remove vocal', function()
 		{
-			if (vocalTYpe.checked)
-			{
-				if (_song.vocalsList.player.contains(typingShit.text))
-					_song.vocalsList.player.remove(typingShit.text);
-			}
-			else
-			{
-				if (_song.vocalsList.opponent.contains(typingShit.text))
-					_song.vocalsList.opponent.remove(typingShit.text);
-			}
+			if (_song.vocalsList.contains(typingShit.text))
+				_song.vocalsList.remove(typingShit.text);
 		});
 		tab_group_vocal.add(removeVocal);
-
-		vocalTYpe = new FlxUICheckBox(removeVocal.x + removeVocal.width + 10, removeVocal.y, null, null, "Adding Player Vocal", 100);
-		vocalTYpe.checked = true;
-		tab_group_vocal.add(vocalTYpe);
 
 		UI_box.addGroup(tab_group_vocal);
 	}
@@ -412,26 +390,17 @@ class ChartingState extends MusicBeatState
 		FlxG.sound.playMusic(Paths.inst(daSong), 0.6);
 
 		if (_song.needsVoices)
-		{
-			playerVocals = new VoicesGroup(daSong, _song.vocalsList?.player ?? []);
-			opponentVocals = new VoicesGroup(daSong, _song.vocalsList?.opponent ?? []);
-		}
+			vocals = new VoicesGroup(daSong, _song.vocalsList);
 		else
-		{
-			playerVocals = new VoicesGroup(daSong, null, false);
-			opponentVocals = new VoicesGroup(daSong, null, false);
-		}
+			vocals = new VoicesGroup(daSong, null, false);
 
 		FlxG.sound.music.pause();
-		playerVocals.pause();
-		opponentVocals.pause();
+		vocals.pause();
 
 		FlxG.sound.music.onComplete = function()
 		{
-			playerVocals.pause();
-			playerVocals.time = 0;
-			opponentVocals.pause();
-			opponentVocals.time = 0;
+			vocals.pause();
+			vocals.time = 0;
 			FlxG.sound.music.pause();
 			FlxG.sound.music.time = 0;
 			changeSection();
@@ -529,11 +498,6 @@ class ChartingState extends MusicBeatState
 		return daPos;
 	}
 
-	public function getVoc(vocal:String)
-	{
-		return '${Paths.voices(_song.song, vocal).split(':')[1].replace('$vocal.${Paths.SOUND_EXT}', '<path>$vocal<path>.${Paths.SOUND_EXT}')}';
-	}
-
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
@@ -547,28 +511,18 @@ class ChartingState extends MusicBeatState
 		}
 
 		var vocL:String = "";
-		var missing = "None / Game will search for \n\"" + '${Paths.voices(_song.song).split(':')[1]}' + "\" most likely";
 
-		if (_song.vocalsList != null)
-		{
-			vocL += "Player Vocals: \n";
-			for (vocal in (_song.vocalsList ?? Song.DEFAULTVOCALS)?.player)
-				vocL += " * " + getVoc(vocal) + "\n";
-
-			if (_song.vocalsList.player.length == 0)
-				vocL += missing + "\n";
-
-			vocL += "Opponent Vocals: \n";
-			for (vocal in (_song.vocalsList ?? Song.DEFAULTVOCALS)?.opponent)
-				vocL += " * " + getVoc(vocal) + "\n";
-			
-			if (_song.vocalsList.player.length == 0)
-				vocL += missing + "\n";
-		}
+		if ((_song?.vocalsList ?? []).length > 0)
+			for (vocal in _song?.vocalsList ?? [])
+			{
+				vocL += " * " + '${Paths.voices(_song.song, vocal).split(':')[1].replace(vocal, '<path>$vocal<path>')}' + "\n";
+			}
 		else
-			vocL += "That shit's null, game is defenitely just gonna look for " + Paths.voices(_song.song).split(':')[1];
+			vocL = "None / Game with search for \n\"" + '<path>${Paths.voices(_song.song).split(':')[1]}<path>' + "\"";
 
-		vocalsList.applyMarkup(vocL, [new FlxTextFormatMarkerPair(new FlxTextFormat(FlxColor.GREEN), '<path>'),]);
+		vocalsList.applyMarkup(vocL, [
+			new FlxTextFormatMarkerPair(new FlxTextFormat(FlxColor.GREEN), '<path>'),
+		]);
 
 		Conductor.songPosition = FlxG.sound.music.time;
 
@@ -645,8 +599,7 @@ class ChartingState extends MusicBeatState
 
 			PlayState.SONG = _song;
 			FlxG.sound.music.stop();
-			playerVocals.stop();
-			opponentVocals.stop();
+			vocals.stop();
 			FlxG.switchState(() -> new PlayState());
 		}
 
@@ -682,13 +635,11 @@ class ChartingState extends MusicBeatState
 				if (FlxG.sound.music.playing)
 				{
 					FlxG.sound.music.pause();
-					playerVocals.pause();
-					opponentVocals.pause();
+					vocals.pause();
 				}
 				else
 				{
-					opponentVocals.play();
-					playerVocals.play();
+					vocals.play();
 					FlxG.sound.music.play();
 				}
 			}
@@ -704,12 +655,10 @@ class ChartingState extends MusicBeatState
 			if (FlxG.mouse.wheel != 0)
 			{
 				FlxG.sound.music.pause();
-				playerVocals.pause();
-				opponentVocals.pause();
+				vocals.pause();
 
 				FlxG.sound.music.time -= (FlxG.mouse.wheel * Conductor.stepCrochet * 0.4);
-				playerVocals.time = FlxG.sound.music.time;
-				opponentVocals.time = playerVocals.time;
+				vocals.time = FlxG.sound.music.time;
 			}
 
 			if (!FlxG.keys.pressed.SHIFT)
@@ -717,8 +666,7 @@ class ChartingState extends MusicBeatState
 				if (FlxG.keys.pressed.W || FlxG.keys.pressed.S)
 				{
 					FlxG.sound.music.pause();
-					playerVocals.pause();
-					opponentVocals.pause();
+					vocals.pause();
 
 					var daTime:Float = 700 * FlxG.elapsed;
 
@@ -729,8 +677,7 @@ class ChartingState extends MusicBeatState
 					else
 						FlxG.sound.music.time += daTime;
 
-					playerVocals.time = FlxG.sound.music.time;
-					opponentVocals.time = playerVocals.time;
+					vocals.time = FlxG.sound.music.time;
 				}
 			}
 			else
@@ -738,8 +685,7 @@ class ChartingState extends MusicBeatState
 				if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.S)
 				{
 					FlxG.sound.music.pause();
-					playerVocals.pause();
-					opponentVocals.pause();
+					vocals.pause();
 
 					var daTime:Float = Conductor.stepCrochet * 2;
 
@@ -750,8 +696,7 @@ class ChartingState extends MusicBeatState
 					else
 						FlxG.sound.music.time += daTime;
 
-					playerVocals.time = FlxG.sound.music.time;
-					opponentVocals.time = playerVocals.time;
+					vocals.time = FlxG.sound.music.time;
 				}
 			}
 		}
@@ -833,8 +778,7 @@ class ChartingState extends MusicBeatState
 		updateGrid();
 
 		FlxG.sound.music.pause();
-		playerVocals.pause();
-		opponentVocals.pause();
+		vocals.pause();
 
 		// Basically old shit from changeSection???
 		FlxG.sound.music.time = sectionStartTime();
@@ -845,8 +789,7 @@ class ChartingState extends MusicBeatState
 			curSection = 0;
 		}
 
-		playerVocals.time = FlxG.sound.music.time;
-		opponentVocals.time = playerVocals.time;
+		vocals.time = FlxG.sound.music.time;
 		updateCurStep();
 
 		updateGrid();
@@ -866,8 +809,7 @@ class ChartingState extends MusicBeatState
 			if (updateMusic)
 			{
 				FlxG.sound.music.pause();
-				playerVocals.pause();
-				opponentVocals.pause();
+				vocals.pause();
 
 				/*var daNum:Int = 0;
 					var daLength:Float = 0;
@@ -878,8 +820,7 @@ class ChartingState extends MusicBeatState
 				}*/
 
 				FlxG.sound.music.time = sectionStartTime();
-				playerVocals.time = FlxG.sound.music.time;
-				opponentVocals.time = playerVocals.time;
+				vocals.time = FlxG.sound.music.time;
 				updateCurStep();
 			}
 
@@ -920,13 +861,13 @@ class ChartingState extends MusicBeatState
 	{
 		if (check_mustHitSection.checked)
 		{
-			leftIcon.changeIcon(_song?.player1);
-			rightIcon.changeIcon(_song?.player2);
+			leftIcon.changeIcon(_song.player1);
+			rightIcon.changeIcon(_song.player2);
 		}
 		else
 		{
-			leftIcon.changeIcon(_song?.player2);
-			rightIcon.changeIcon(_song?.player1);
+			leftIcon.changeIcon(_song.player2);
+			rightIcon.changeIcon(_song.player1);
 		}
 	}
 
