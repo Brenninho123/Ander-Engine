@@ -11,6 +11,7 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.media.Video;
 import openfl.net.NetStream;
+import GameJolt;
 
 using StringTools;
 
