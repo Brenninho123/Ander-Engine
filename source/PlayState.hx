@@ -1263,11 +1263,13 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 
-		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.85)));
-		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.85)));
+		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, Math.exp(-elapsed * 8))));
+		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, Math.exp(-elapsed * 8))));
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
+
+		iconP1.y = iconP2.y = healthBar.y - (iconP2.height / 2);
 
 		var iconOffset:Int = 26;
 
