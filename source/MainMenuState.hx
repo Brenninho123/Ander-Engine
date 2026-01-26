@@ -265,8 +265,8 @@ private class MainMenuItem extends AtlasMenuItem
 			this.callback = callback;
 
 		frames = atlas;
-		animation.addByPrefix('idle', '$name white', 12);
-		animation.addByPrefix('selected', '$name basic', 24);
+		animation.addByPrefix('idle', '$name basic', 12);
+		animation.addByPrefix('selected', '$name white', 24);
 	}
 
 	override function changeAnim(anim:String)

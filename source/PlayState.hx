@@ -694,7 +694,7 @@ class PlayState extends MusicBeatState
 		// Shitty layering but whatev it works LOL
 		if (curStage == 'limo')
 		{
-		trace('limo');
+			trace('limo');
 			add(limo);
 		}
 
@@ -1349,12 +1349,12 @@ class PlayState extends MusicBeatState
 							babyArrow.x += Note.swagWidth * 0;
 							babyArrow.animation.add('static', [0]);
 							babyArrow.animation.add('pressed', [4, 8], 12, false);
-							babyArrow.animation.add('confirm', [12, 16], 24, false);
+							babyArrow.animation.add('confirm', [12, 16], 12, false);
 						case 1:
 							babyArrow.x += Note.swagWidth * 1;
 							babyArrow.animation.add('static', [1]);
 							babyArrow.animation.add('pressed', [5, 9], 12, false);
-							babyArrow.animation.add('confirm', [13, 17], 24, false);
+							babyArrow.animation.add('confirm', [13, 17], 12, false);
 						case 2:
 							babyArrow.x += Note.swagWidth * 2;
 							babyArrow.animation.add('static', [2]);
@@ -1364,7 +1364,7 @@ class PlayState extends MusicBeatState
 							babyArrow.x += Note.swagWidth * 3;
 							babyArrow.animation.add('static', [3]);
 							babyArrow.animation.add('pressed', [7, 11], 12, false);
-							babyArrow.animation.add('confirm', [15, 19], 24, false);
+							babyArrow.animation.add('confirm', [15, 19], 12, false);
 					}
 
 				default:
@@ -1416,6 +1416,16 @@ class PlayState extends MusicBeatState
 
 			if (player == 1)
 				playerStrums.add(babyArrow);
+			else
+				babyArrow.animation.finishCallback = (animName:String) ->
+				{
+					if (animName == "confirm")
+					{
+						babyArrow.animation.play("static");
+						babyArrow.centerOffsets();
+						babyArrow.centerOrigin();
+					}
+				};
 
 			babyArrow.animation.play('static');
 			babyArrow.x += 50;
@@ -1797,7 +1807,7 @@ class PlayState extends MusicBeatState
 						daNote.y -= daNote.frameHeight * daNote.scale.y;
 						daNote.y += Note.swagWidth / 2;
 						if ((!daNote.mustPress || (daNote.wasGoodHit || (daNote.prevNote.wasGoodHit && !daNote.canBeHit)))
-							&& daNote.y - daNote.offset.y * daNote.scale.y + daNote.height >= strumLineMid)
+							&& daNote.y + daNote.height >= strumLineMid)
 						{
 							// clipRect is applied to graphic itself so use frame Heights
 							var swagRect:FlxRect = new FlxRect(0, 0, daNote.frameWidth, daNote.frameHeight);
@@ -1813,7 +1823,7 @@ class PlayState extends MusicBeatState
 					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
 					if (daNote.isSustainNote
 						&& (!daNote.mustPress || (daNote.wasGoodHit || (daNote.prevNote.wasGoodHit && !daNote.canBeHit)))
-						&& daNote.y + daNote.offset.y * daNote.scale.y <= strumLineMid)
+						&& daNote.y <= strumLineMid)
 					{
 						var swagRect:FlxRect = new FlxRect(0, 0, daNote.width / daNote.scale.x, daNote.height / daNote.scale.y);
 
@@ -1825,6 +1835,7 @@ class PlayState extends MusicBeatState
 
 				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByCPU)
 				{
+					final enemyStrumNote = strumLineNotes.members[daNote.noteData % 4];
 					daNote.hitByCPU = true;
 					if (SONG.song != 'Tutorial')
 						camZooming = true;
@@ -1853,6 +1864,10 @@ class PlayState extends MusicBeatState
 					}
 
 					dad.holdTimer = 0;
+					enemyStrumNote.animation.play("confirm", true);
+					enemyStrumNote.centerOffsets();
+					if (!curStage.contains('school'))
+						enemyStrumNote.offset.subtract(13, 13);
 
 					if (SONG.needsVoices)
 						vocals.volume = 1;
@@ -2605,14 +2620,14 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
-	
+
 		/*
-		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > 20
-			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > 20))
-		{
-			resyncVocals();
-		}
-		*/
+			if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > 20
+				|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > 20))
+			{
+				resyncVocals();
+			}
+		 */
 	}
 
 	var lightningStrikeBeat:Int = 0;
