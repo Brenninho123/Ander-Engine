@@ -5,3 +5,5 @@ dump/
 APIStuff.hx
 .DS_STORE
 RECOVER_**.fla
+source/GJKeys.hx
+GJKeys.hx

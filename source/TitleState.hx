@@ -20,6 +20,7 @@ import openfl.Assets;
 import shaderslmfao.BuildingShaders;
 import shaderslmfao.ColorSwap;
 import ui.PreferencesMenu;
+import GameJolt.GameJoltAPI;
 
 using StringTools;
 
@@ -113,6 +114,11 @@ class TitleState extends MusicBeatState
 		{
 			DiscordClient.shutdown();
 		});
+		#end
+
+		#if tentools
+		GameJoltAPI.connect();
+		GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
 		#end
 	}
 

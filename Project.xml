@@ -206,6 +206,10 @@
 		<!-- pretends that the saved session Id was expired, forcing the reconnect prompt -->
 		<!-- <haxedef name="NG_FORCE_EXPIRED_SESSION" if="debug" /> -->
 	</section>
+
+	<haxelib name="tentools" />
+	<haxelib name="systools" />
+	<ndll name="systools" haxelib="systools" />
 	
 	<haxeflag name="--dce full" if="release" />
 
