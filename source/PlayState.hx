@@ -1617,6 +1617,9 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.SEVEN)
 		{
+			FlxG.sound.music.stop();
+			vocals.stop();
+
 			FlxG.switchState(() -> new ChartingState());
 
 			#if discord_rpc
@@ -1961,10 +1964,7 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
-		if (SONG.validScore)
-		{
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
-		}
 
 		if (isStoryMode)
 		{
@@ -1990,10 +1990,7 @@ class PlayState extends MusicBeatState
 				// if ()
 				StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
 
-				if (SONG.validScore)
-				{
 					Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
-				}
 
 				FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
 				FlxG.save.flush();

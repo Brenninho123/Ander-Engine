@@ -1,3 +1,14 @@
+# 0.2.10 - (1/26/2026)
+
+## Added
+- Added basic GameJolt integration
+
+## Changed
+- validScore is unrequired for song score saving now (the field will eventually be removed)
+
+## Fixed
+- Song playing when entering ChartingState
+
 # 0.2.9 - (1/26/2026)
 
 THE GAME WORKS ON LATEST SHIT NOW!

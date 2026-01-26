@@ -19,7 +19,9 @@ typedef SwagSong =
 
 	var player1:String;
 	var player2:String;
-	var validScore:Bool;
+
+	@:deprecated('This is unused now, remove your code checking for it')
+	var ?validScore:Bool;
 
 	var ?vocalsList:Array<String>;
 
@@ -58,7 +60,6 @@ class Song
 	{
 		var swagShit:SwagSong = cast Json.parse(rawJson).song;
 
-		swagShit.validScore = true;
 		swagShit.version ??= "1.0.0";
 
 		trace('swagshit(${swagShit.song}) version: ${swagShit.version}');
@@ -77,7 +78,7 @@ class Song
 		return swagShit;
 	}
 
-	public static var SWAGSHITVER:Version = "1.0.0";
+	public static var SWAGSHITVER:Version = "1.0.1";
 
 	public static var DUMBASS:SwagSong = {
 		song: 'Test',
@@ -87,7 +88,6 @@ class Song
 		player1: 'bf',
 		player2: 'dad',
 		speed: 1,
-		validScore: false,
 		version: SWAGSHITVER,
 		vocalsList: [],
 	};

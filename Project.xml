@@ -2,7 +2,14 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Funkin' Legacy" file="Flegacy" packageName="com.macohi.flegacy" package="com.macohi.flegacy" main="Main" version="0.2.9" company="Macohi" />
+	<app 
+		title="Funkin' Legacy" 
+		file="Flegacy" 
+		packageName="com.macohi.flegacy" 
+		main="Main" 
+		version="2.10.0"
+		company="Macohi" 
+	/>
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
