@@ -5,6 +5,7 @@ Also hashlink :D
 
 ## Added
 - MULTIPLE VOCALS SUPPORT!!!!!!!!!
+	- Player and opponent vocals ain't split tho :/
 - Characters library that's always preloaded!
 	- Should help with loading character images I hope...
 - Headers in the preferences menu
