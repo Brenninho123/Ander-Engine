@@ -124,95 +124,78 @@ class SparrowCharacter implements ICharacter
 		switch (curCharacter)
 		{
 			case 'gf' | 'gf-christmas' | 'gf-tankmen' | 'gf-car' | 'gf-pixel':
+				var danceAnims:Map<String, String> = [
+					'dance' => 'GF Dancing Beat',
+					'dance_gf-pixel' => 'GF IDLE',
+					'dance_gf-tankmen' => 'GF Dancing at Gunpoint',
+				];
+
+				var customAnims:Map<String, String> = [];
+
+				var ass = 'GF_assets';
+				var off = curCharacter;
+
 				if (curCharacter == 'gf-pixel')
 				{
-					loadDamsel({
-						assetPath: 'gfPixel',
-
-						danceLeft: 'GF IDLE',
-						danceRight: 'GF IDLE',
-
-						danceLeft_indices: [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-						danceRight_indices: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
-					});
+					ass = 'gfPixel';
 
 					character.setGraphicSize(Std.int(character.width * PlayState.daPixelZoom));
 					character.updateHitbox();
 					character.antialiasing = false;
-
-					return;
 				}
 
 				if (curCharacter == 'gf-car')
+					ass = 'gfCar';
+
+				if (curCharacter == 'gf-christmas')
 				{
-					loadDamsel({
-						assetPath: 'gfCar',
-
-						danceLeft: 'GF Dancing Beat Hair blowing CAR',
-						danceRight: 'GF Dancing Beat Hair blowing CAR',
-
-						danceLeft_indices: [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-						danceRight_indices: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
-					});
-
-					character.animation.addByIndices('idleHair', 'GF Dancing Beat Hair blowing CAR', [10, 11, 12, 25, 26, 27], "", 24, true);
-
-					return;
+					ass = 'gfChristmas';
+					customAnims.set('cheer', 'GF Cheer');
 				}
 
 				if (curCharacter == 'gf-tankmen')
+					ass = 'gfTankmen';
+
+				loadImage({
+					assetPath: ass
+				});
+
+				if (curCharacter == 'gf-car')
+					character.animation.addByIndices('idleHair', 'GF Dancing Beat Hair blowing CAR', [10, 11, 12, 25, 26, 27], "", 24, true);
+
+				if (curCharacter == 'gf-tankmen')
 				{
-					loadDamsel({
-						assetPath: 'gfTankmen',
-
-						danceLeft: 'GF Dancing at Gunpoint',
-						danceRight: 'GF Dancing at Gunpoint',
-
-						danceLeft_indices: [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-						danceRight_indices: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
-
-						offsetFile: 'gf'
-					});
-
+					off = 'gf';
 					character.animation.addByIndices('sad', 'GF Crying at Gunpoint', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, true);
-					return;
 				}
 
-				var constData:DamselCharacterData = {
-					assetPath: (curCharacter == 'gf-christmas') ? 'gfChristmas' : 'GF_assets',
+				if (curCharacter == 'gf')
+				{
+					customAnims.set('singLEFT', 'GF left note');
+					customAnims.set('singDOWN', 'GF Down note');
+					customAnims.set('singUP', 'GF Up note');
+					customAnims.set('singUP', 'GF Right note');
 
-					danceLeft: 'GF Dancing Beat',
-					danceRight: 'GF Dancing Beat',
+					customAnims.set('cheer', 'GF Cheer');
+					customAnims.set('scared', 'GF FEAR');
+
+					character.animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
+					character.animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
+					character.animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, true);
+				}
+
+				loadDamsel({
+					assetPath: ass,
+
+					danceLeft: danceAnims.get('dance_$curCharacter') ?? danceAnims.get('dance'),
+					danceRight: danceAnims.get('dance_$curCharacter') ?? danceAnims.get('dance'),
 
 					danceLeft_indices: [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 					danceRight_indices: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
-				};
 
-				if (curCharacter == 'gf')
-					loadDamselSinger({
-						assetPath: constData.assetPath,
-
-						danceLeft: constData.danceLeft,
-						danceRight: constData.danceRight,
-
-						danceLeft_indices: constData.danceLeft_indices,
-						danceRight_indices: constData.danceRight_indices,
-
-						leftName: 'GF left note',
-						downName: 'GF Down note',
-						upName: 'GF Up note',
-						rightName: 'GF Right note',
-					});
-				else
-					loadDamsel(constData);
-
-				character.quickAnimAdd('cheer', 'GF Cheer');
-
-				character.animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
-				character.animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
-				character.animation.addByPrefix('scared', 'GF FEAR', 24, true);
-
-				character.animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, true);
+					custom: customAnims,
+					offsetFile: off,
+				});
 
 			case 'dad':
 				loadSinger({
@@ -453,7 +436,6 @@ class SparrowCharacter implements ICharacter
 				hasImplementation = false;
 				trace('no sparrow implementation');
 		}
-
 		info(hasImplementation);
 	}
 
