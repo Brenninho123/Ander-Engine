@@ -23,6 +23,12 @@ class SparrowCharacter implements ICharacter
 		character.frames = tex;
 	}
 
+	public function loadCustomAnimations(data:CustomAnimations)
+	{
+		for (name => prefix in data.custom)
+			character.quickAnimAdd(name, prefix);
+	}
+
 	public function loadSingerAnimations(data:SingerAnimations)
 	{
 		character.quickAnimAdd('singUP', data.upName);
@@ -40,6 +46,7 @@ class SparrowCharacter implements ICharacter
 			character.quickAnimAdd('idle', data.idleName);
 
 		loadSingerAnimations(data);
+		loadCustomAnimations(data);
 
 		character.loadOffsetFile(data.offsetFile ?? curCharacter);
 
@@ -71,6 +78,7 @@ class SparrowCharacter implements ICharacter
 		loadImage(data);
 
 		loadDamselAnimations(data);
+		loadCustomAnimations(data);
 
 		character.loadOffsetFile(data.offsetFile ?? curCharacter);
 
@@ -90,6 +98,7 @@ class SparrowCharacter implements ICharacter
 		loadImage(data);
 
 		loadDeathAnimations(data);
+		loadCustomAnimations(data);
 
 		character.loadOffsetFile(data.offsetFile ?? curCharacter);
 
@@ -269,14 +278,18 @@ class SparrowCharacter implements ICharacter
 				character.flipX = true;
 
 			case 'pico-speaker':
-				character.frames = Paths.getSparrowAtlas('characters/pico/picoSpeaker');
+				loadImage({
+					assetPath: 'pico/picoSpeaker'
+				});
+				loadCustomAnimations({
+					custom: [
+						'shoot1' => 'Pico shoot 1',
+						'shoot2' => 'Pico shoot 2',
+						'shoot3' => 'Pico shoot 3',
+						'shoot4' => 'Pico shoot 4',
+					]
+				});
 
-				character.quickAnimAdd('shoot1', "Pico shoot 1");
-				character.quickAnimAdd('shoot2', "Pico shoot 2");
-				character.quickAnimAdd('shoot3', "Pico shoot 3");
-				character.quickAnimAdd('shoot4', "Pico shoot 4");
-
-				// here for now, will be replaced later for less copypaste
 				character.loadOffsetFile(curCharacter);
 				character.playAnim('shoot1');
 

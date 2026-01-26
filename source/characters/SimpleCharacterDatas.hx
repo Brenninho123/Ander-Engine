@@ -24,10 +24,16 @@ typedef SingerAnimations =
 	idleName:String,
 }
 
+typedef CustomAnimations =
+{
+	?custom:Map<String, String>,
+}
+
 typedef SingerCharacterData =
 {
 	> OffsetFile,
 	> AssetPath,
+	> CustomAnimations,
 	> SingerAnimations,
 }
 
@@ -42,6 +48,7 @@ typedef DeathCharacterData =
 {
 	> OffsetFile,
 	> AssetPath,
+	> CustomAnimations,
 	> DeathAnimations,
 }
 
@@ -58,6 +65,7 @@ typedef DamselCharacterData =
 {
 	> OffsetFile,
 	> AssetPath,
+	> CustomAnimations,
 	> DamselAnimations,
 }
 
