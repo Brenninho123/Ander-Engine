@@ -5,6 +5,7 @@ Also hashlink, kinda
 
 ## Added
 
+- Opponent notes glow :D
 - You can do "SHIFT + H" in the pause screen to hide or show it
 - Characters library that's always preloaded!
   - Should help with loading character images I hope...
