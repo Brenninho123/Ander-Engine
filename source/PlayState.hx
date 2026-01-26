@@ -68,6 +68,8 @@ class PlayState extends MusicBeatState
 
 	var halloweenLevel:Bool = false;
 
+	static public var autoScore:Bool = false;
+
 	#if (MULTIPLE_VOICES || VOICES_GROUP)
 	private var vocals:VoicesGroup;
 	#else
@@ -1427,6 +1429,19 @@ class PlayState extends MusicBeatState
 					}
 				};
 
+			if (autoScore)
+			{
+				babyArrow.animation.finishCallback = (animName:String) ->
+				{
+					if (animName == "confirm")
+					{
+						babyArrow.animation.play("static");
+						babyArrow.centerOffsets();
+						babyArrow.centerOrigin();
+					}
+				};
+			}
+
 			babyArrow.animation.play('static');
 			babyArrow.x += 50;
 			babyArrow.x += ((FlxG.width / 2) * player);
@@ -1588,6 +1603,9 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		scoreTxt.text = "Score:" + songScore;
+		if (autoScore)
+			scoreTxt.text += '(Invalid,AutoPlay)';
+		scoreTxt.screenCenter(X);
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
@@ -1778,12 +1796,22 @@ class PlayState extends MusicBeatState
 			unspawnNotes.shift();
 		}
 
-		if (!inCutscene)
+		if (!inCutscene && !autoScore)
 			keyShit();
+		else
+			pDance();
+
 		if (generatedMusic)
 		{
 			notes.forEachAlive(function(daNote:Note)
 			{
+				if (autoScore && daNote.mustPress)
+				{
+					if (daNote.strumTime <= Conductor.songPosition)
+					{
+						goodNoteHit(daNote);
+					}
+				}
 				if ((PreferencesMenu.getPref('downscroll') && daNote.y < -daNote.height)
 					|| (!PreferencesMenu.getPref('downscroll') && daNote.y > FlxG.height))
 				{
@@ -1962,9 +1990,7 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
 		if (SONG.validScore)
-		{
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
-		}
 
 		if (isStoryMode)
 		{
@@ -2091,8 +2117,8 @@ class PlayState extends MusicBeatState
 			grpNoteSplashes.add(noteSplash);
 		}
 
-		// Only add the score if you're not on practice mode
-		if (!practiceMode)
+		// Only add the score if you're not on practice mode or autoscore
+		if (!practiceMode && !autoScore)
 			songScore += score;
 
 		// ludum dare rating system
@@ -2409,6 +2435,17 @@ class PlayState extends MusicBeatState
 			else
 				spr.centerOffsets();
 		});
+	}
+
+	function pDance()
+	{
+		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001)
+		{
+			if (boyfriend.animation.name.startsWith('sing') && !boyfriend.animation.name.endsWith('miss'))
+			{
+				boyfriend.playAnim('idle');
+			}
+		}
 	}
 
 	function noteMiss(direction:Int = 1):Void

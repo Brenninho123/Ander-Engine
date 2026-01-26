@@ -22,6 +22,7 @@ class PauseSubState extends MusicBeatSubstate
 		'Restart Song',
 		'Change Difficulty',
 		'Toggle Practice Mode',
+		'Toggle AutoPlay',
 		'Exit to menu'
 	];
 	var difficultyChoices:Array<String> = ['EASY', 'NORMAL', 'HARD', 'BACK'];
@@ -76,8 +77,10 @@ class PauseSubState extends MusicBeatSubstate
 		practiceText.setFormat(Paths.font('vcr.ttf'), 32);
 		practiceText.updateHitbox();
 		practiceText.x = FlxG.width - (practiceText.width + 20);
-		practiceText.visible = PlayState.practiceMode;
+		practiceText.visible = PlayState.practiceMode || PlayState.autoScore;
 		add(practiceText);
+		if (PlayState.autoScore)
+			practiceText.text = "botplay";
 
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
@@ -91,6 +94,7 @@ class PauseSubState extends MusicBeatSubstate
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
 		FlxTween.tween(deathCounter, {alpha: 1, y: deathCounter.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
+		FlxTween.tween(practiceText, {alpha: 1, y: practiceText.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.9});
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
@@ -165,6 +169,8 @@ class PauseSubState extends MusicBeatSubstate
 					regenMenu();
 				case "Restart Song":
 					LoadingState.loadAndSwitchState(new PlayState());
+				case 'Toggle AutoPlay':
+					PlayState.autoScore = !PlayState.autoScore;
 				case "Exit to menu":
 					PlayState.seenCutscene = false;
 					PlayState.deathCounter = 0;
