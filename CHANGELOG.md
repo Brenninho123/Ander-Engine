@@ -1,7 +1,7 @@
 # 0.2.9 - (1/26/2026)
 
 THE GAME WORKS ON LATEST SHIT NOW!
-Also hashlink :D
+Also hashlink, kinda
 
 ## Added
 - Characters library that's always preloaded!
@@ -12,10 +12,10 @@ Also hashlink :D
 	- There can also be censored or dialogue versions so that's cool!
 
 ## Fixed
-- Fixed camera being very fast on desktop
+- [DESKTOP] Fixed camera being very fast on desktop
 - HIGH SCROLLSPEED HOLD NOTE BUG!
 - SUSTAINS! THEY ARENT WEIRD ANYMORE!
-- VIDEOS WORK ON DESKTOP NOW! (THANK YOU HXCODEC !!!!!!!!!!)
+- [DESKTOP] VIDEOS WORK ON DESKTOP NOW! (THANK YOU HXCODEC !!!!!!!!!!)
 	- They've got a "videos" folder now too :D
 
 ## Changed
