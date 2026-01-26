@@ -1,3 +1,4 @@
+# note, this branch is just a test. dont touch it!
 # Funkin Legacy / Flegacy
 
 This is the repository for "Funkin Legacy",
