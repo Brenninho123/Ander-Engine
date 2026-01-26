@@ -26,6 +26,8 @@ class SparrowCharacter implements ICharacter
 
 	public function loadCustomAnimations(data:CustomAnimations)
 	{
+		if (data.custom == null) return;
+
 		for (name => prefix in data.custom)
 			character.quickAnimAdd(name, prefix);
 	}

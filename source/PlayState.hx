@@ -684,13 +684,18 @@ class PlayState extends MusicBeatState
 				}
 		}
 
+		trace('gf');
 		add(gf);
 
 		// Shitty layering but whatev it works LOL
 		if (curStage == 'limo')
+		{
+		trace('limo');
 			add(limo);
+		}
 
 		add(dad);
+		trace('dad');
 		add(boyfriend);
 		trace('boyfriend');
 
@@ -1147,7 +1152,7 @@ class PlayState extends MusicBeatState
 
 			if (swagCounter > 0)
 				readySetGo(introSprPaths[swagCounter - 1]);
-			FlxG.sound.play(Paths.sound(introSndPaths[swagCounter]), 0.6);
+			// FlxG.sound.play(Paths.sound(introSndPaths[swagCounter]), 0.6);
 			// beatHit();
 
 			swagCounter += 1;
