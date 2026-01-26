@@ -11,6 +11,7 @@ class PackerCharacter extends SparrowCharacter
 
 		var tex = Paths.getPackerAtlas('characters/${data.assetPath}', 'characters');
 		character.frames = tex;
+		trace(' * packer: ${Paths.image('characters/${data.assetPath}', 'characters')}');
 	}
 
 	override function loadCharacter()
