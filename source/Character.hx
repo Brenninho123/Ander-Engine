@@ -40,8 +40,6 @@ class Character extends FlxSprite
 		new SparrowCharacter(this, character).loadCharacter();
 		new PackerCharacter(this, character).loadCharacter();
 
-		updateHitbox();
-
 		if (animation.getAnimationList().length == 0)
 			trace(' * FAILED');
 

@@ -237,26 +237,26 @@ class SparrowCharacter implements ICharacter
 				loadSinger({
 					assetPath: 'pico/Pico_FNF_assetss',
 					idleName: 'Pico Idle Dance',
-					upName: 'pico Up note0',
-					downName: 'Pico Down Note0',
-					leftName: (character.isPlayer) ? 'Pico NOTE LEFT0' : 'Pico Note Right0',
-					rightName: (character.isPlayer) ? 'Pico Note Right0' : 'Pico NOTE LEFT0',
+					upName: 'pico Up note instance',
+					downName: 'Pico Down Note instance',
+					leftName: (character.isPlayer) ? 'Pico NOTE LEFT instance' : 'Pico Note Right instance',
+					rightName: (character.isPlayer) ? 'Pico Note Right instance' : 'Pico NOTE LEFT instance',
 				});
 
 				if (character.isPlayer)
 				{
-					character.quickAnimAdd('singRIGHTmiss', 'Pico Note Right Miss');
-					character.quickAnimAdd('singLEFTmiss', 'Pico NOTE LEFT miss');
+					character.quickAnimAdd('singRIGHTmiss', 'Pico Note Right Miss instance');
+					character.quickAnimAdd('singLEFTmiss', 'Pico NOTE LEFT miss instance');
 				}
 				else
 				{
 					// Need to be flipped! REDO THIS LATER!
-					character.quickAnimAdd('singRIGHTmiss', 'Pico NOTE LEFT miss');
-					character.quickAnimAdd('singLEFTmiss', 'Pico Note Right Miss');
+					character.quickAnimAdd('singRIGHTmiss', 'Pico NOTE LEFT miss instance');
+					character.quickAnimAdd('singLEFTmiss', 'Pico Note Right Miss instance');
 				}
 
-				character.quickAnimAdd('singUPmiss', 'pico Up note miss');
-				character.quickAnimAdd('singDOWNmiss', 'Pico Down Note MISS');
+				character.quickAnimAdd('singUPmiss', 'pico Up note miss instance');
+				character.quickAnimAdd('singDOWNmiss', 'Pico Down Note MISS instance');
 
 				character.flipX = true;
 
