@@ -96,7 +96,7 @@ class MainMenuState extends MusicBeatState
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
 
-			menuItems.createItem('support', selectDonate, hasPopupBlocker);
+		menuItems.createItem('support', selectDonate, hasPopupBlocker);
 		#end
 		menuItems.createItem('options', function() startExitState(new OptionsState()));
 
@@ -239,6 +239,15 @@ private class MainMenuItem extends AtlasMenuItem
 	{
 		super(x, y, name, atlas, callback);
 		scrollFactor.set();
+	}
+
+	override function setData(name:String, ?callback:Void->Void)
+	{
+		frames = atlas;
+		animation.addByPrefix('idle', '$name white', 24);
+		animation.addByPrefix('selected', '$name black', 24);
+
+		super.setData(name, callback);
 	}
 
 	override function changeAnim(anim:String)
