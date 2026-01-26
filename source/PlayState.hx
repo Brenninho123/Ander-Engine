@@ -1123,64 +1123,41 @@ class PlayState extends MusicBeatState
 
 		var swagCounter:Int = 0;
 
+		var introSprPaths:Array<String> = ["ready", "set", "go"];
+		var altSuffix:String = "";
+
+		if (curStage.startsWith("school"))
+		{
+			altSuffix = '-pixel';
+			introSprPaths = ['weeb/pixelUI/ready-pixel', 'weeb/pixelUI/set-pixel', 'weeb/pixelUI/date-pixel'];
+		}
+
+		var introSndPaths:Array<String> = [
+			"intro3" + altSuffix,
+			"intro2" + altSuffix,
+			"intro1" + altSuffix,
+			"introGo" + altSuffix
+		];
+
 		trace('COUNTDOWN TIME!');
 
 		startTimer.start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
-			// this just based on beatHit stuff but compact
-			if (swagCounter % gfSpeed == 0)
-				gf.dance();
-			if (swagCounter % 2 == 0)
-			{
-				if (!boyfriend.animation.name.startsWith("sing"))
-					boyfriend.playAnim('idle');
-				if (!dad.animation.name.startsWith("sing"))
-					dad.dance();
-			}
-			else if (dad.curCharacter == 'spooky' && !dad.animation.name.startsWith("sing"))
-				dad.dance();
-			if (generatedMusic)
-				notes.sort(sortNotes, FlxSort.DESCENDING);
-
-			var introSprPaths:Array<String> = ["ready", "set", "go"];
-			var altSuffix:String = "";
-
-			if (curStage.startsWith("school"))
-			{
-				altSuffix = '-pixel';
-				introSprPaths = ['weeb/pixelUI/ready-pixel', 'weeb/pixelUI/set-pixel', 'weeb/pixelUI/date-pixel'];
-			}
-
-			var introSndPaths:Array<String> = [
-				"intro3" + altSuffix,
-				"intro2" + altSuffix,
-				"intro1" + altSuffix,
-				"introGo" + altSuffix
-			];
+			trace(swagCounter);
 
 			if (swagCounter > 0)
-				readySetGo(introSprPaths[swagCounter - 1]);
-			FlxG.sound.play(Paths.sound(introSndPaths[swagCounter]), 0.6);
+				// readySetGo(introSprPaths[swagCounter - 1]);
+			// FlxG.sound.play(Paths.sound(introSndPaths[swagCounter]), 0.6);
+			// beatHit();
 
-			/* switch (swagCounter)
-				{
-					case 0:
-						
-					case 1:
-						
-					case 2:
-						
-					case 3:
-						
-			}*/
-
-			trace('$swagCounter');
 			swagCounter += 1;
 		}, 4);
 	}
 
 	function readySetGo(path:String):Void
 	{
+		trace(path);
+
 		var spr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(path));
 		spr.scrollFactor.set();
 
