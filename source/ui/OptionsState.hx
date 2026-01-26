@@ -1,5 +1,6 @@
 package ui;
 
+import GameJolt.GameJoltLogin;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -31,6 +32,7 @@ class OptionsState extends MusicBeatState
     var options = addPage(Options, new OptionsMenu(false));
     var preferences = addPage(Preferences, new PreferencesMenu());
     var controls = addPage(Controls, new ControlsMenu());
+    var gamejoly = addPage(Gamejolt, new JolyPage());
     // var colors = addPage(Colors, new ColorsMenu());
 
     #if (cpp && debug)
@@ -43,6 +45,7 @@ class OptionsState extends MusicBeatState
       controls.onExit.add(switchPage.bind(Options));
       // colors.onExit.add(switchPage.bind(Options));
       preferences.onExit.add(switchPage.bind(Options));
+	  gamejoly.onExit.add(switchPage.bind(Options));
 
       #if (cpp && debug)
       mods.onExit.add(switchPage.bind(Options));
@@ -178,12 +181,13 @@ class OptionsMenu extends Page
     #if (cpp && debug)
     createItem('mods', function() switchPage(Mods));
     #end
+    createItem("gamejolt", function() switchPage(Gamejolt));
 
     #if CAN_OPEN_LINKS
     if (showDonate)
     {
       var hasPopupBlocker = #if web true #else false #end;
-      createItem('donate', selectDonate, hasPopupBlocker);
+      createItem('support', MainMenuState.selectDonate, hasPopupBlocker);
     }
     #end
     createItem("exit", exit);
@@ -211,17 +215,6 @@ class OptionsMenu extends Page
   {
     return items.length > 2;
   }
-
-  #if CAN_OPEN_LINKS
-  function selectDonate()
-  {
-    #if linux
-    Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
-    #else
-    FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
-    #end
-  }
-  #end
 }
 
 enum PageName
@@ -231,4 +224,5 @@ enum PageName
   Colors;
   Mods;
   Preferences;
+  Gamejolt;
 }

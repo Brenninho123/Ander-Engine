@@ -152,7 +152,7 @@ class MainMenuState extends MusicBeatState
   }
 
   #if CAN_OPEN_LINKS
-  function selectDonate()
+  public static function selectDonate()
   {
     var link = 'https://ko-fi.com/sphis/tip';
 
