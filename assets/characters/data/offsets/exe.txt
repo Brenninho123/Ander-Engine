@@ -1,0 +1,6 @@
+laugh 100 104
+idle 120 110
+singUP 187 182
+singLEFT 200 121
+singRIGHT 120 110
+singDOWN 119 109

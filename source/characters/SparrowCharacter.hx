@@ -417,6 +417,16 @@ class SparrowCharacter implements ICharacter
 				character.quickAnimAdd('singUP-alt', 'TANKMAN UGH instance');
 
 				character.flipX = true;
+			case "exe":
+				loadSinger({
+					assetPath: "exe",
+					idleName: "exe Idle",
+					upName: "exe Up",
+					downName: "exe Down",
+					leftName: "exe Left",
+					rightName: "exe Right"
+				});
+				character.flipX = false;
 
 			default:
 				hasImplementation = false;
