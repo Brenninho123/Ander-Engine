@@ -38,6 +38,12 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
+	var spacing = 0;
+	var top(get, never):Float;
+
+	function get_top():Float
+		return (FlxG.height - (spacing * (menuItems.length - 1))) / 2;
+
 	override function create()
 	{
 		#if discord_rpc
@@ -101,14 +107,24 @@ class MainMenuState extends MusicBeatState
 		menuItems.createItem('options', function() startExitState(new OptionsState()));
 
 		// center vertically
-		var spacing = 160;
-		var top = (FlxG.height - (spacing * (menuItems.length - 1))) / 2;
+
+		spacing = 180;
 		for (i in 0...menuItems.length)
 		{
 			var menuItem = menuItems.members[i];
+
+			menuItem.scale.set(.9, .9);
+			if (menuItem.name == 'support')
+				menuItem.scale.set(.8, .8);
+			menuItem.updateHitbox();
+
 			menuItem.x = FlxG.width / 2;
 			menuItem.y = top + spacing * i;
+
+			menuItem.idle();
 		}
+
+		menuItems.selectItem(0);
 
 		FlxG.cameras.reset(new SwagCamera());
 		FlxG.camera.follow(camFollow, null, 0.06);
@@ -249,7 +265,7 @@ private class MainMenuItem extends AtlasMenuItem
 			this.callback = callback;
 
 		frames = atlas;
-		animation.addByPrefix('idle', '$name white', 24);
+		animation.addByPrefix('idle', '$name white', 12);
 		animation.addByPrefix('selected', '$name basic', 24);
 	}
 
