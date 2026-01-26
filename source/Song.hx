@@ -59,7 +59,7 @@ class Song
 		var swagShit:SwagSong = cast Json.parse(rawJson).song;
 
 		swagShit.validScore = true;
-		swagShit.version ??= new Version(0, 0, 0);
+		swagShit.version ??= "1.0.0";
 
 		trace('swagshit(${swagShit.song}) version: ${swagShit.version}');
 
@@ -77,7 +77,7 @@ class Song
 		return swagShit;
 	}
 
-	public static var SWAGSHITVER:Version = new Version(1, 0, 0);
+	public static var SWAGSHITVER:Version = "1.0.0";
 
 	public static var DUMBASS:SwagSong = {
 		song: 'Test',
