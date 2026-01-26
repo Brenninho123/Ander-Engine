@@ -29,9 +29,9 @@ I am going to assume you've already downloaded the repo .zip for this
 
 - Install haxe
 - Install haxeflixel
-- Run `haxelib --global install hmm` and then `haxelib --global run hmm setup` to install hmm.json
+- Run `haxelib --global install hxpkg` and then `haxelib --global run hxpkg setup` to install hxpkg
 - Make sure you have a command prompt open for the source code folder (not `source/`)
-- Run `hmm install`
+- Run `hxpkg install` or `hxpkg install --force`
 - Perform additional platform setup
 	- For Windows, download the [Visual Studio Build Tools](https://aka.ms/vs/17/release/vs_BuildTools.exe)
     	- When prompted, select "Individual Components" and make sure to download the following:
