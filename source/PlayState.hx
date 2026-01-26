@@ -1132,12 +1132,12 @@ class PlayState extends MusicBeatState
 				gf.dance();
 			if (swagCounter % 2 == 0)
 			{
-				if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+				if (!boyfriend.animation.name.startsWith("sing"))
 					boyfriend.playAnim('idle');
-				if (!dad.animation.curAnim.name.startsWith("sing"))
+				if (!dad.animation.name.startsWith("sing"))
 					dad.dance();
 			}
-			else if (dad.curCharacter == 'spooky' && !dad.animation.curAnim.name.startsWith("sing"))
+			else if (dad.curCharacter == 'spooky' && !dad.animation.name.startsWith("sing"))
 				dad.dance();
 			if (generatedMusic)
 				notes.sort(sortNotes, FlxSort.DESCENDING);
@@ -2371,7 +2371,7 @@ class PlayState extends MusicBeatState
 
 		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && !holdArray.contains(true))
 		{
-			if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
+			if (boyfriend.animation.name.startsWith('sing') && !boyfriend.animation.name.endsWith('miss'))
 			{
 				boyfriend.playAnim('idle');
 			}
@@ -2379,12 +2379,12 @@ class PlayState extends MusicBeatState
 
 		playerStrums.forEach(function(spr:FlxSprite)
 		{
-			if (pressArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
+			if (pressArray[spr.ID] && spr.animation.name != 'confirm')
 				spr.animation.play('pressed');
 			if (!holdArray[spr.ID])
 				spr.animation.play('static');
 
-			if (spr.animation.curAnim.name == 'confirm' && !curStage.startsWith('school'))
+			if (spr.animation.name == 'confirm' && !curStage.startsWith('school'))
 			{
 				spr.centerOffsets();
 				spr.offset.x -= 13;
@@ -2668,14 +2668,14 @@ class PlayState extends MusicBeatState
 
 		if (curBeat % 2 == 0)
 		{
-			if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+			if (!boyfriend.animation.name.startsWith("sing"))
 				boyfriend.playAnim('idle');
-			if (!dad.animation.curAnim.name.startsWith("sing"))
+			if (!dad.animation.name.startsWith("sing"))
 				dad.dance();
 		}
 		else if (dad.curCharacter == 'spooky')
 		{
-			if (!dad.animation.curAnim.name.startsWith("sing"))
+			if (!dad.animation.name.startsWith("sing"))
 				dad.dance();
 		}
 
