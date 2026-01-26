@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxBasic;
 import Controls.Control;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -100,6 +101,8 @@ class PauseSubState extends MusicBeatSubstate
 		// cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
+	var icanhideu:Array<FlxBasic> = [];
+
 	private function regenMenu():Void
 	{
 		while (grpMenuShit.members.length > 0)
@@ -117,6 +120,11 @@ class PauseSubState extends MusicBeatSubstate
 
 		curSelected = 0;
 		changeSelection();
+
+		icanhideu = [];
+		for (thing in members)
+			if (thing.visible)
+				icanhideu.push(thing);
 	}
 
 	override function update(elapsed:Float)
@@ -175,10 +183,10 @@ class PauseSubState extends MusicBeatSubstate
 			}
 		}
 
-		if (FlxG.keys.justPressed.J)
+		if (FlxG.keys.pressed.SHIFT && FlxG.keys.justReleased.H)
 		{
-			// for reference later!
-			// PlayerSettings.player1.controls.replaceBinding(Control.LEFT, Keys, FlxKey.J, null);
+			for (thing in icanhideu)
+				thing.visible = !thing.visible;
 		}
 	}
 

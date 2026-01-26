@@ -36,11 +36,9 @@ class Character extends FlxSprite
 
 		// trace('Loading character');
 		// trace(' * CHARACTER: $character');
-		
+
 		new SparrowCharacter(this, character).loadCharacter();
 		new PackerCharacter(this, character).loadCharacter();
-
-		updateHitbox();
 
 		if (animation.getAnimationList().length == 0)
 			trace(' * FAILED');
@@ -103,7 +101,7 @@ class Character extends FlxSprite
 		trace('   * quickanimadd($name, $prefix)');
 		animation.addByPrefix(name, prefix, 24, false);
 	}
-	
+
 	public function indicwes(name:String, prefix:String, indices:Array<Int>, looped:Bool = false, fps:Int = 24)
 	{
 		trace('   * indicwes($name, $prefix, $indices, $looped, $fps)');
