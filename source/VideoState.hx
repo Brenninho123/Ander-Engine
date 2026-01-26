@@ -6,42 +6,39 @@ import openfl.display.Sprite;
 
 class VideoState extends MusicBeatState
 {
-	var video:VideoCutscene;
-	private var overlay:Sprite;
+  var video:VideoCutscene;
+  private var overlay:Sprite;
 
-	public static var seenVideo:Bool = false;
+  public static var seenVideo:Bool = false;
 
-	override function create()
-	{
-		super.create();
+  override function create()
+  {
+    super.create();
 
-		seenVideo = true;
+    seenVideo = true;
 
-		FlxG.save.data.seenVideo = true;
-		FlxG.save.flush();
+    FlxG.save.data.seenVideo = true;
+    FlxG.save.flush();
 
-		if (FlxG.sound.music != null)
-			FlxG.sound.music.stop();
+    if (FlxG.sound.music != null) FlxG.sound.music.stop();
 
-		video = new VideoCutscene(Paths.mp4('kickstarterTrailer'));
+    video = new VideoCutscene(Paths.mp4('kickstarterTrailer'));
 
-		video.finishCallback = function()
-		{
-			TitleState.initialized = false;
-			FlxG.switchState(() -> new TitleState());
-		};
-	}
+    video.finishCallback = function() {
+      TitleState.initialized = false;
+      FlxG.switchState(() -> new TitleState());
+    };
+  }
 
-	override function update(elapsed:Float)
-	{
-		if (controls.ACCEPT)
-			finishVid();
+  override function update(elapsed:Float)
+  {
+    if (controls.ACCEPT) finishVid();
 
-		super.update(elapsed);
-	}
+    super.update(elapsed);
+  }
 
-	function finishVid():Void
-	{
-		video.finishCallback();
-	}
+  function finishVid():Void
+  {
+    video.finishCallback();
+  }
 }

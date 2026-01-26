@@ -1,175 +1,1654 @@
-﻿{"ATLAS": {"SPRITES":[ 
-{"SPRITE" : {"name": "0000","x":6114,"y":3468,"w":328,"h":173,"rotated": false}},
-{"SPRITE" : {"name": "0001","x":2189,"y":1066,"w":71,"h":271,"rotated": true}},
-{"SPRITE" : {"name": "0002","x":8018,"y":1878,"w":170,"h":433,"rotated": true}},
-{"SPRITE" : {"name": "0003","x":7001,"y":2802,"w":167,"h":441,"rotated": true}},
-{"SPRITE" : {"name": "0004","x":1681,"y":4906,"w":215,"h":597,"rotated": true}},
-{"SPRITE" : {"name": "0005","x":1145,"y":3354,"w":175,"h":329,"rotated": true}},
-{"SPRITE" : {"name": "0006","x":7850,"y":911,"w":308,"h":98,"rotated": false}},
-{"SPRITE" : {"name": "0007","x":5284,"y":4657,"w":316,"h":496,"rotated": true}},
-{"SPRITE" : {"name": "0008","x":563,"y":4674,"w":500,"h":298,"rotated": false}},
-{"SPRITE" : {"name": "0009","x":2471,"y":2845,"w":306,"h":513,"rotated": true}},
-{"SPRITE" : {"name": "0010","x":7146,"y":4814,"w":255,"h":524,"rotated": true}},
-{"SPRITE" : {"name": "0011","x":5608,"y":4871,"w":525,"h":245,"rotated": false}},
-{"SPRITE" : {"name": "0012","x":8018,"y":2319,"w":146,"h":417,"rotated": true}},
-{"SPRITE" : {"name": "0013","x":4291,"y":1997,"w":136,"h":414,"rotated": true}},
-{"SPRITE" : {"name": "0014","x":2281,"y":3776,"w":134,"h":415,"rotated": true}},
-{"SPRITE" : {"name": "0015","x":5052,"y":3926,"w":421,"h":124,"rotated": false}},
-{"SPRITE" : {"name": "0016","x":4493,"y":3796,"w":424,"h":121,"rotated": false}},
-{"SPRITE" : {"name": "0017","x":7202,"y":1910,"w":115,"h":423,"rotated": true}},
-{"SPRITE" : {"name": "0018","x":1338,"y":1979,"w":110,"h":423,"rotated": true}},
-{"SPRITE" : {"name": "0019","x":7434,"y":911,"w":408,"h":101,"rotated": false}},
-{"SPRITE" : {"name": "0020","x":2073,"y":1969,"w":90,"h":400,"rotated": true}},
-{"SPRITE" : {"name": "0021","x":7202,"y":2341,"w":86,"h":368,"rotated": true}},
-{"SPRITE" : {"name": "0022","x":2189,"y":1345,"w":65,"h":289,"rotated": true}},
-{"SPRITE" : {"name": "0023","x":2189,"y":1642,"w":60,"h":282,"rotated": true}},
-{"SPRITE" : {"name": "0024","x":6537,"y":1910,"w":657,"h":884,"rotated": true}},
-{"SPRITE" : {"name": "0025","x":2835,"y":2708,"w":532,"h":927,"rotated": true}},
-{"SPRITE" : {"name": "0026","x":4148,"y":3995,"w":281,"h":934,"rotated": true}},
-{"SPRITE" : {"name": "0027","x":7232,"y":3852,"w":292,"h":954,"rotated": true}},
-{"SPRITE" : {"name": "0028","x":3783,"y":4588,"w":225,"h":866,"rotated": true}},
-{"SPRITE" : {"name": "0029","x":5181,"y":1045,"w":194,"h":808,"rotated": true}},
-{"SPRITE" : {"name": "0030","x":1596,"y":4936,"w":75,"h":463,"rotated": true}},
-{"SPRITE" : {"name": "0031","x":7296,"y":2341,"w":21,"h":102,"rotated": true}},
-{"SPRITE" : {"name": "0032","x":4493,"y":3399,"w":416,"h":389,"rotated": false}},
-{"SPRITE" : {"name": "0033","x":4996,"y":2710,"w":104,"h":88,"rotated": true}},
-{"SPRITE" : {"name": "0034","x":4,"y":2722,"w":574,"h":784,"rotated": false}},
-{"SPRITE" : {"name": "0035","x":5611,"y":4334,"w":595,"h":529,"rotated": false}},
-{"SPRITE" : {"name": "0036","x":4996,"y":2814,"w":794,"h":507,"rotated": false}},
-{"SPRITE" : {"name": "0037","x":3375,"y":2713,"w":879,"h":525,"rotated": false}},
-{"SPRITE" : {"name": "0038","x":7202,"y":2780,"w":918,"h":466,"rotated": false}},
-{"SPRITE" : {"name": "0039","x":6537,"y":2802,"w":456,"h":929,"rotated": true}},
-{"SPRITE" : {"name": "0040","x":1338,"y":2875,"w":376,"h":924,"rotated": true}},
-{"SPRITE" : {"name": "0041","x":2073,"y":2845,"w":390,"h":923,"rotated": true}},
-{"SPRITE" : {"name": "0042","x":1722,"y":2875,"w":298,"h":863,"rotated": true}},
-{"SPRITE" : {"name": "0043","x":2263,"y":4829,"w":479,"h":270,"rotated": false}},
-{"SPRITE" : {"name": "0044","x":2073,"y":2377,"w":102,"h":234,"rotated": true}},
-{"SPRITE" : {"name": "0045","x":8166,"y":911,"w":14,"h":9,"rotated": false}},
-{"SPRITE" : {"name": "0046","x":3399,"y":4588,"w":376,"h":528,"rotated": false}},
-{"SPRITE" : {"name": "0047","x":4908,"y":4657,"w":368,"h":528,"rotated": false}},
-{"SPRITE" : {"name": "0048","x":4437,"y":4519,"w":463,"h":531,"rotated": false}},
-{"SPRITE" : {"name": "0049","x":2840,"y":4439,"w":551,"h":523,"rotated": false}},
-{"SPRITE" : {"name": "0050","x":1122,"y":4402,"w":551,"h":526,"rotated": false}},
-{"SPRITE" : {"name": "0051","x":1704,"y":4371,"w":551,"h":527,"rotated": false}},
-{"SPRITE" : {"name": "0052","x":586,"y":2884,"w":551,"h":593,"rotated": false}},
-{"SPRITE" : {"name": "0053","x":4,"y":3514,"w":551,"h":587,"rotated": false}},
-{"SPRITE" : {"name": "0054","x":4493,"y":3926,"w":551,"h":585,"rotated": false}},
-{"SPRITE" : {"name": "0055","x":2281,"y":4238,"w":551,"h":583,"rotated": false}},
-{"SPRITE" : {"name": "0056","x":3589,"y":3995,"w":551,"h":585,"rotated": false}},
-{"SPRITE" : {"name": "0057","x":2471,"y":3643,"w":551,"h":587,"rotated": false}},
-{"SPRITE" : {"name": "0058","x":3934,"y":3399,"w":551,"h":588,"rotated": false}},
-{"SPRITE" : {"name": "0059","x":3375,"y":3246,"w":551,"h":590,"rotated": false}},
-{"SPRITE" : {"name": "0060","x":6114,"y":3739,"w":551,"h":587,"rotated": false}},
-{"SPRITE" : {"name": "0061","x":1722,"y":3776,"w":551,"h":587,"rotated": false}},
-{"SPRITE" : {"name": "0062","x":1145,"y":3807,"w":551,"h":587,"rotated": false}},
-{"SPRITE" : {"name": "0063","x":7560,"y":3851,"w":551,"h":586,"rotated": false}},
-{"SPRITE" : {"name": "0064","x":6673,"y":3852,"w":551,"h":586,"rotated": false}},
-{"SPRITE" : {"name": "0065","x":3030,"y":3844,"w":551,"h":587,"rotated": false}},
-{"SPRITE" : {"name": "0066","x":7560,"y":3254,"w":551,"h":589,"rotated": false}},
-{"SPRITE" : {"name": "0067","x":4996,"y":3329,"w":551,"h":589,"rotated": false}},
-{"SPRITE" : {"name": "0068","x":5052,"y":4064,"w":551,"h":585,"rotated": false}},
-{"SPRITE" : {"name": "0069","x":563,"y":4081,"w":551,"h":585,"rotated": false}},
-{"SPRITE" : {"name": "0070","x":4,"y":4109,"w":551,"h":585,"rotated": false}},
-{"SPRITE" : {"name": "0071","x":5555,"y":3468,"w":551,"h":588,"rotated": false}},
-{"SPRITE" : {"name": "0072","x":586,"y":3485,"w":551,"h":588,"rotated": false}},
-{"SPRITE" : {"name": "0073","x":7001,"y":3254,"w":551,"h":590,"rotated": false}},
-{"SPRITE" : {"name": "0074","x":7532,"y":4445,"w":476,"h":580,"rotated": false}},
-{"SPRITE" : {"name": "0075","x":6214,"y":4446,"w":473,"h":579,"rotated": false}},
-{"SPRITE" : {"name": "0076","x":6695,"y":4446,"w":443,"h":579,"rotated": false}},
-{"SPRITE" : {"name": "0077","x":6673,"y":3739,"w":86,"h":84,"rotated": false}},
-{"SPRITE" : {"name": "0078","x":5860,"y":2812,"w":652,"h":648,"rotated": false}},
-{"SPRITE" : {"name": "0079","x":1904,"y":4906,"w":349,"h":367,"rotated": true}},
-{"SPRITE" : {"name": "0080","x":2750,"y":4970,"w":346,"h":330,"rotated": false}},
-{"SPRITE" : {"name": "0081","x":4904,"y":5193,"w":197,"h":184,"rotated": false}},
-{"SPRITE" : {"name": "0082","x":4291,"y":2658,"w":43,"h":29,"rotated": false}},
-{"SPRITE" : {"name": "0083","x":5383,"y":1815,"w":44,"h":76,"rotated": true}},
-{"SPRITE" : {"name": "0084","x":1426,"y":2705,"w":28,"h":139,"rotated": true}},
-{"SPRITE" : {"name": "0085","x":5383,"y":1666,"w":51,"h":141,"rotated": true}},
-{"SPRITE" : {"name": "0086","x":5659,"y":3395,"w":114,"h":56,"rotated": true}},
-{"SPRITE" : {"name": "0087","x":5555,"y":3329,"w":96,"h":91,"rotated": false}},
-{"SPRITE" : {"name": "0088","x":2840,"y":4238,"w":173,"h":189,"rotated": true}},
-{"SPRITE" : {"name": "0089","x":4917,"y":3399,"w":67,"h":109,"rotated": false}},
-{"SPRITE" : {"name": "0090","x":1145,"y":3691,"w":96,"h":84,"rotated": false}},
-{"SPRITE" : {"name": "0091","x":2471,"y":3366,"w":324,"h":212,"rotated": false}},
-{"SPRITE" : {"name": "0092","x":586,"y":2722,"w":139,"h":122,"rotated": false}},
-{"SPRITE" : {"name": "0093","x":4139,"y":3246,"w":91,"h":99,"rotated": false}},
-{"SPRITE" : {"name": "0094","x":3589,"y":3844,"w":182,"h":139,"rotated": false}},
-{"SPRITE" : {"name": "0095","x":1338,"y":2410,"w":112,"h":139,"rotated": true}},
-{"SPRITE" : {"name": "0096","x":1338,"y":2557,"w":97,"h":140,"rotated": true}},
-{"SPRITE" : {"name": "0097","x":3934,"y":3246,"w":197,"h":139,"rotated": false}},
-{"SPRITE" : {"name": "0098","x":5181,"y":1861,"w":179,"h":34,"rotated": false}},
-{"SPRITE" : {"name": "0099","x":3028,"y":1028,"w":324,"h":51,"rotated": false}},
-{"SPRITE" : {"name": "0100","x":5383,"y":1045,"w":55,"h":300,"rotated": true}},
-{"SPRITE" : {"name": "0101","x":3521,"y":5124,"w":253,"h":213,"rotated": false}},
-{"SPRITE" : {"name": "0102","x":3030,"y":3643,"w":246,"h":193,"rotated": false}},
-{"SPRITE" : {"name": "0103","x":1339,"y":5176,"w":220,"h":175,"rotated": false}},
-{"SPRITE" : {"name": "0104","x":5894,"y":5124,"w":203,"h":244,"rotated": true}},
-{"SPRITE" : {"name": "0105","x":1071,"y":5176,"w":260,"h":165,"rotated": false}},
-{"SPRITE" : {"name": "0106","x":4291,"y":2419,"w":134,"h":231,"rotated": true}},
-{"SPRITE" : {"name": "0107","x":6434,"y":1021,"w":888,"h":881,"rotated": false}},
-{"SPRITE" : {"name": "0108","x":3393,"y":4,"w":1039,"h":1080,"rotated": false}},
-{"SPRITE" : {"name": "0109","x":7330,"y":1021,"w":858,"h":849,"rotated": false}},
-{"SPRITE" : {"name": "0110","x":5446,"y":971,"w":980,"h":929,"rotated": false}},
-{"SPRITE" : {"name": "0111","x":3578,"y":1999,"w":705,"h":706,"rotated": false}},
-{"SPRITE" : {"name": "0112","x":5446,"y":4,"w":1025,"h":959,"rotated": false}},
-{"SPRITE" : {"name": "0113","x":2271,"y":4,"w":1114,"h":1016,"rotated": false}},
-{"SPRITE" : {"name": "0114","x":4,"y":4,"w":1154,"h":1048,"rotated": false}},
-{"SPRITE" : {"name": "0115","x":1166,"y":4,"w":1097,"h":1054,"rotated": false}},
-{"SPRITE" : {"name": "0116","x":4440,"y":4,"w":998,"h":1033,"rotated": false}},
-{"SPRITE" : {"name": "0117","x":6479,"y":4,"w":947,"h":1009,"rotated": false}},
-{"SPRITE" : {"name": "0118","x":5608,"y":5124,"w":278,"h":281,"rotated": false}},
-{"SPRITE" : {"name": "0119","x":7409,"y":5033,"w":300,"h":333,"rotated": false}},
-{"SPRITE" : {"name": "0120","x":4291,"y":2710,"w":697,"h":681,"rotated": false}},
-{"SPRITE" : {"name": "0121","x":4,"y":1963,"w":725,"h":751,"rotated": true}},
-{"SPRITE" : {"name": "0122","x":4437,"y":1951,"w":732,"h":751,"rotated": true}},
-{"SPRITE" : {"name": "0123","x":2835,"y":1999,"w":735,"h":701,"rotated": false}},
-{"SPRITE" : {"name": "0124","x":5284,"y":5161,"w":146,"h":309,"rotated": false}},
-{"SPRITE" : {"name": "0125","x":1338,"y":2705,"w":80,"h":147,"rotated": true}},
-{"SPRITE" : {"name": "0126","x":2835,"y":1938,"w":104,"h":39,"rotated": false}},
-{"SPRITE" : {"name": "0127","x":2947,"y":1938,"w":63,"h":34,"rotated": false}},
-{"SPRITE" : {"name": "0128","x":4724,"y":5058,"w":172,"h":477,"rotated": true}},
-{"SPRITE" : {"name": "0129","x":7717,"y":5033,"w":192,"h":487,"rotated": true}},
-{"SPRITE" : {"name": "0130","x":4246,"y":5058,"w":470,"h":190,"rotated": false}},
-{"SPRITE" : {"name": "0131","x":3329,"y":5124,"w":184,"h":459,"rotated": true}},
-{"SPRITE" : {"name": "0132","x":7917,"y":5033,"w":189,"h":477,"rotated": true}},
-{"SPRITE" : {"name": "0133","x":1145,"y":2884,"w":185,"h":462,"rotated": true}},
-{"SPRITE" : {"name": "0134","x":2261,"y":5107,"w":468,"h":186,"rotated": false}},
-{"SPRITE" : {"name": "0135","x":546,"y":4980,"w":517,"h":209,"rotated": false}},
-{"SPRITE" : {"name": "0136","x":3104,"y":4970,"w":217,"h":522,"rotated": true}},
-{"SPRITE" : {"name": "0137","x":6141,"y":5033,"w":494,"h":215,"rotated": false}},
-{"SPRITE" : {"name": "0138","x":6643,"y":5033,"w":483,"h":209,"rotated": false}},
-{"SPRITE" : {"name": "0139","x":1071,"y":4936,"w":517,"h":232,"rotated": false}},
-{"SPRITE" : {"name": "0140","x":4016,"y":4937,"w":222,"h":520,"rotated": true}},
-{"SPRITE" : {"name": "0141","x":5611,"y":4064,"w":492,"h":232,"rotated": false}},
-{"SPRITE" : {"name": "0142","x":2073,"y":2619,"w":76,"h":177,"rotated": true}},
-{"SPRITE" : {"name": "0143","x":4,"y":4702,"w":534,"h":273,"rotated": false}},
-{"SPRITE" : {"name": "0144","x":8016,"y":4445,"w":172,"h":495,"rotated": true}},
-{"SPRITE" : {"name": "0145","x":4,"y":4983,"w":433,"h":246,"rotated": false}},
-{"SPRITE" : {"name": "0146","x":4,"y":1060,"w":731,"h":895,"rotated": false}},
-{"SPRITE" : {"name": "0147","x":743,"y":1066,"w":714,"h":905,"rotated": false}},
-{"SPRITE" : {"name": "0148","x":2189,"y":1938,"w":638,"h":899,"rotated": false}},
-{"SPRITE" : {"name": "0149","x":1465,"y":1969,"w":600,"h":898,"rotated": false}},
-{"SPRITE" : {"name": "0150","x":737,"y":1979,"w":593,"h":897,"rotated": false}},
-{"SPRITE" : {"name": "0151","x":1465,"y":1066,"w":716,"h":895,"rotated": false}},
-{"SPRITE" : {"name": "0152","x":7330,"y":1878,"w":680,"h":894,"rotated": false}},
-{"SPRITE" : {"name": "0153","x":5860,"y":1910,"w":669,"h":894,"rotated": false}},
-{"SPRITE" : {"name": "0154","x":5181,"y":1908,"w":671,"h":898,"rotated": false}},
-{"SPRITE" : {"name": "0155","x":3028,"y":1092,"w":707,"h":899,"rotated": false}},
-{"SPRITE" : {"name": "0156","x":2271,"y":1028,"w":749,"h":902,"rotated": false}},
-{"SPRITE" : {"name": "0157","x":7434,"y":4,"w":738,"h":899,"rotated": false}},
-{"SPRITE" : {"name": "0158","x":4440,"y":1045,"w":733,"h":898,"rotated": false}},
-{"SPRITE" : {"name": "0159","x":3743,"y":1092,"w":686,"h":897,"rotated": false}},
-{"SPRITE" : {"name": "0160","x":5383,"y":1513,"w":54,"h":145,"rotated": true}},
-{"SPRITE" : {"name": "0161","x":5659,"y":3329,"w":141,"h":58,"rotated": false}},
-{"SPRITE" : {"name": "0162","x":5383,"y":1353,"w":53,"h":152,"rotated": true}},
-{"SPRITE" : {"name": "0163","x":8119,"y":3254,"w":61,"h":142,"rotated": true}}
-]},
-"meta": {
-"app": "Adobe Animate",
-"version": "21.0.6.41649",
-"image": "spritemap1.png",
-"format": "RGBA8888",
-"size": {"w":8192,"h":5587},
-"resolution": "1"
-}
+﻿{
+  "ATLAS": {
+    "SPRITES": [
+      {
+        "SPRITE": {
+          "name": "0000",
+          "x": 6114,
+          "y": 3468,
+          "w": 328,
+          "h": 173,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0001",
+          "x": 2189,
+          "y": 1066,
+          "w": 71,
+          "h": 271,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0002",
+          "x": 8018,
+          "y": 1878,
+          "w": 170,
+          "h": 433,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0003",
+          "x": 7001,
+          "y": 2802,
+          "w": 167,
+          "h": 441,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0004",
+          "x": 1681,
+          "y": 4906,
+          "w": 215,
+          "h": 597,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0005",
+          "x": 1145,
+          "y": 3354,
+          "w": 175,
+          "h": 329,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0006",
+          "x": 7850,
+          "y": 911,
+          "w": 308,
+          "h": 98,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0007",
+          "x": 5284,
+          "y": 4657,
+          "w": 316,
+          "h": 496,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0008",
+          "x": 563,
+          "y": 4674,
+          "w": 500,
+          "h": 298,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0009",
+          "x": 2471,
+          "y": 2845,
+          "w": 306,
+          "h": 513,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0010",
+          "x": 7146,
+          "y": 4814,
+          "w": 255,
+          "h": 524,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0011",
+          "x": 5608,
+          "y": 4871,
+          "w": 525,
+          "h": 245,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0012",
+          "x": 8018,
+          "y": 2319,
+          "w": 146,
+          "h": 417,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0013",
+          "x": 4291,
+          "y": 1997,
+          "w": 136,
+          "h": 414,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0014",
+          "x": 2281,
+          "y": 3776,
+          "w": 134,
+          "h": 415,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0015",
+          "x": 5052,
+          "y": 3926,
+          "w": 421,
+          "h": 124,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0016",
+          "x": 4493,
+          "y": 3796,
+          "w": 424,
+          "h": 121,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0017",
+          "x": 7202,
+          "y": 1910,
+          "w": 115,
+          "h": 423,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0018",
+          "x": 1338,
+          "y": 1979,
+          "w": 110,
+          "h": 423,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0019",
+          "x": 7434,
+          "y": 911,
+          "w": 408,
+          "h": 101,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0020",
+          "x": 2073,
+          "y": 1969,
+          "w": 90,
+          "h": 400,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0021",
+          "x": 7202,
+          "y": 2341,
+          "w": 86,
+          "h": 368,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0022",
+          "x": 2189,
+          "y": 1345,
+          "w": 65,
+          "h": 289,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0023",
+          "x": 2189,
+          "y": 1642,
+          "w": 60,
+          "h": 282,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0024",
+          "x": 6537,
+          "y": 1910,
+          "w": 657,
+          "h": 884,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0025",
+          "x": 2835,
+          "y": 2708,
+          "w": 532,
+          "h": 927,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0026",
+          "x": 4148,
+          "y": 3995,
+          "w": 281,
+          "h": 934,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0027",
+          "x": 7232,
+          "y": 3852,
+          "w": 292,
+          "h": 954,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0028",
+          "x": 3783,
+          "y": 4588,
+          "w": 225,
+          "h": 866,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0029",
+          "x": 5181,
+          "y": 1045,
+          "w": 194,
+          "h": 808,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0030",
+          "x": 1596,
+          "y": 4936,
+          "w": 75,
+          "h": 463,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0031",
+          "x": 7296,
+          "y": 2341,
+          "w": 21,
+          "h": 102,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0032",
+          "x": 4493,
+          "y": 3399,
+          "w": 416,
+          "h": 389,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0033",
+          "x": 4996,
+          "y": 2710,
+          "w": 104,
+          "h": 88,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0034",
+          "x": 4,
+          "y": 2722,
+          "w": 574,
+          "h": 784,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0035",
+          "x": 5611,
+          "y": 4334,
+          "w": 595,
+          "h": 529,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0036",
+          "x": 4996,
+          "y": 2814,
+          "w": 794,
+          "h": 507,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0037",
+          "x": 3375,
+          "y": 2713,
+          "w": 879,
+          "h": 525,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0038",
+          "x": 7202,
+          "y": 2780,
+          "w": 918,
+          "h": 466,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0039",
+          "x": 6537,
+          "y": 2802,
+          "w": 456,
+          "h": 929,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0040",
+          "x": 1338,
+          "y": 2875,
+          "w": 376,
+          "h": 924,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0041",
+          "x": 2073,
+          "y": 2845,
+          "w": 390,
+          "h": 923,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0042",
+          "x": 1722,
+          "y": 2875,
+          "w": 298,
+          "h": 863,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0043",
+          "x": 2263,
+          "y": 4829,
+          "w": 479,
+          "h": 270,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0044",
+          "x": 2073,
+          "y": 2377,
+          "w": 102,
+          "h": 234,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0045",
+          "x": 8166,
+          "y": 911,
+          "w": 14,
+          "h": 9,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0046",
+          "x": 3399,
+          "y": 4588,
+          "w": 376,
+          "h": 528,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0047",
+          "x": 4908,
+          "y": 4657,
+          "w": 368,
+          "h": 528,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0048",
+          "x": 4437,
+          "y": 4519,
+          "w": 463,
+          "h": 531,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0049",
+          "x": 2840,
+          "y": 4439,
+          "w": 551,
+          "h": 523,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0050",
+          "x": 1122,
+          "y": 4402,
+          "w": 551,
+          "h": 526,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0051",
+          "x": 1704,
+          "y": 4371,
+          "w": 551,
+          "h": 527,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0052",
+          "x": 586,
+          "y": 2884,
+          "w": 551,
+          "h": 593,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0053",
+          "x": 4,
+          "y": 3514,
+          "w": 551,
+          "h": 587,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0054",
+          "x": 4493,
+          "y": 3926,
+          "w": 551,
+          "h": 585,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0055",
+          "x": 2281,
+          "y": 4238,
+          "w": 551,
+          "h": 583,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0056",
+          "x": 3589,
+          "y": 3995,
+          "w": 551,
+          "h": 585,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0057",
+          "x": 2471,
+          "y": 3643,
+          "w": 551,
+          "h": 587,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0058",
+          "x": 3934,
+          "y": 3399,
+          "w": 551,
+          "h": 588,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0059",
+          "x": 3375,
+          "y": 3246,
+          "w": 551,
+          "h": 590,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0060",
+          "x": 6114,
+          "y": 3739,
+          "w": 551,
+          "h": 587,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0061",
+          "x": 1722,
+          "y": 3776,
+          "w": 551,
+          "h": 587,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0062",
+          "x": 1145,
+          "y": 3807,
+          "w": 551,
+          "h": 587,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0063",
+          "x": 7560,
+          "y": 3851,
+          "w": 551,
+          "h": 586,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0064",
+          "x": 6673,
+          "y": 3852,
+          "w": 551,
+          "h": 586,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0065",
+          "x": 3030,
+          "y": 3844,
+          "w": 551,
+          "h": 587,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0066",
+          "x": 7560,
+          "y": 3254,
+          "w": 551,
+          "h": 589,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0067",
+          "x": 4996,
+          "y": 3329,
+          "w": 551,
+          "h": 589,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0068",
+          "x": 5052,
+          "y": 4064,
+          "w": 551,
+          "h": 585,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0069",
+          "x": 563,
+          "y": 4081,
+          "w": 551,
+          "h": 585,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0070",
+          "x": 4,
+          "y": 4109,
+          "w": 551,
+          "h": 585,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0071",
+          "x": 5555,
+          "y": 3468,
+          "w": 551,
+          "h": 588,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0072",
+          "x": 586,
+          "y": 3485,
+          "w": 551,
+          "h": 588,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0073",
+          "x": 7001,
+          "y": 3254,
+          "w": 551,
+          "h": 590,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0074",
+          "x": 7532,
+          "y": 4445,
+          "w": 476,
+          "h": 580,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0075",
+          "x": 6214,
+          "y": 4446,
+          "w": 473,
+          "h": 579,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0076",
+          "x": 6695,
+          "y": 4446,
+          "w": 443,
+          "h": 579,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0077",
+          "x": 6673,
+          "y": 3739,
+          "w": 86,
+          "h": 84,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0078",
+          "x": 5860,
+          "y": 2812,
+          "w": 652,
+          "h": 648,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0079",
+          "x": 1904,
+          "y": 4906,
+          "w": 349,
+          "h": 367,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0080",
+          "x": 2750,
+          "y": 4970,
+          "w": 346,
+          "h": 330,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0081",
+          "x": 4904,
+          "y": 5193,
+          "w": 197,
+          "h": 184,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0082",
+          "x": 4291,
+          "y": 2658,
+          "w": 43,
+          "h": 29,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0083",
+          "x": 5383,
+          "y": 1815,
+          "w": 44,
+          "h": 76,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0084",
+          "x": 1426,
+          "y": 2705,
+          "w": 28,
+          "h": 139,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0085",
+          "x": 5383,
+          "y": 1666,
+          "w": 51,
+          "h": 141,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0086",
+          "x": 5659,
+          "y": 3395,
+          "w": 114,
+          "h": 56,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0087",
+          "x": 5555,
+          "y": 3329,
+          "w": 96,
+          "h": 91,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0088",
+          "x": 2840,
+          "y": 4238,
+          "w": 173,
+          "h": 189,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0089",
+          "x": 4917,
+          "y": 3399,
+          "w": 67,
+          "h": 109,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0090",
+          "x": 1145,
+          "y": 3691,
+          "w": 96,
+          "h": 84,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0091",
+          "x": 2471,
+          "y": 3366,
+          "w": 324,
+          "h": 212,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0092",
+          "x": 586,
+          "y": 2722,
+          "w": 139,
+          "h": 122,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0093",
+          "x": 4139,
+          "y": 3246,
+          "w": 91,
+          "h": 99,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0094",
+          "x": 3589,
+          "y": 3844,
+          "w": 182,
+          "h": 139,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0095",
+          "x": 1338,
+          "y": 2410,
+          "w": 112,
+          "h": 139,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0096",
+          "x": 1338,
+          "y": 2557,
+          "w": 97,
+          "h": 140,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0097",
+          "x": 3934,
+          "y": 3246,
+          "w": 197,
+          "h": 139,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0098",
+          "x": 5181,
+          "y": 1861,
+          "w": 179,
+          "h": 34,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0099",
+          "x": 3028,
+          "y": 1028,
+          "w": 324,
+          "h": 51,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0100",
+          "x": 5383,
+          "y": 1045,
+          "w": 55,
+          "h": 300,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0101",
+          "x": 3521,
+          "y": 5124,
+          "w": 253,
+          "h": 213,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0102",
+          "x": 3030,
+          "y": 3643,
+          "w": 246,
+          "h": 193,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0103",
+          "x": 1339,
+          "y": 5176,
+          "w": 220,
+          "h": 175,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0104",
+          "x": 5894,
+          "y": 5124,
+          "w": 203,
+          "h": 244,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0105",
+          "x": 1071,
+          "y": 5176,
+          "w": 260,
+          "h": 165,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0106",
+          "x": 4291,
+          "y": 2419,
+          "w": 134,
+          "h": 231,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0107",
+          "x": 6434,
+          "y": 1021,
+          "w": 888,
+          "h": 881,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0108",
+          "x": 3393,
+          "y": 4,
+          "w": 1039,
+          "h": 1080,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0109",
+          "x": 7330,
+          "y": 1021,
+          "w": 858,
+          "h": 849,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0110",
+          "x": 5446,
+          "y": 971,
+          "w": 980,
+          "h": 929,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0111",
+          "x": 3578,
+          "y": 1999,
+          "w": 705,
+          "h": 706,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0112",
+          "x": 5446,
+          "y": 4,
+          "w": 1025,
+          "h": 959,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0113",
+          "x": 2271,
+          "y": 4,
+          "w": 1114,
+          "h": 1016,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0114",
+          "x": 4,
+          "y": 4,
+          "w": 1154,
+          "h": 1048,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0115",
+          "x": 1166,
+          "y": 4,
+          "w": 1097,
+          "h": 1054,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0116",
+          "x": 4440,
+          "y": 4,
+          "w": 998,
+          "h": 1033,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0117",
+          "x": 6479,
+          "y": 4,
+          "w": 947,
+          "h": 1009,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0118",
+          "x": 5608,
+          "y": 5124,
+          "w": 278,
+          "h": 281,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0119",
+          "x": 7409,
+          "y": 5033,
+          "w": 300,
+          "h": 333,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0120",
+          "x": 4291,
+          "y": 2710,
+          "w": 697,
+          "h": 681,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0121",
+          "x": 4,
+          "y": 1963,
+          "w": 725,
+          "h": 751,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0122",
+          "x": 4437,
+          "y": 1951,
+          "w": 732,
+          "h": 751,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0123",
+          "x": 2835,
+          "y": 1999,
+          "w": 735,
+          "h": 701,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0124",
+          "x": 5284,
+          "y": 5161,
+          "w": 146,
+          "h": 309,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0125",
+          "x": 1338,
+          "y": 2705,
+          "w": 80,
+          "h": 147,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0126",
+          "x": 2835,
+          "y": 1938,
+          "w": 104,
+          "h": 39,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0127",
+          "x": 2947,
+          "y": 1938,
+          "w": 63,
+          "h": 34,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0128",
+          "x": 4724,
+          "y": 5058,
+          "w": 172,
+          "h": 477,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0129",
+          "x": 7717,
+          "y": 5033,
+          "w": 192,
+          "h": 487,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0130",
+          "x": 4246,
+          "y": 5058,
+          "w": 470,
+          "h": 190,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0131",
+          "x": 3329,
+          "y": 5124,
+          "w": 184,
+          "h": 459,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0132",
+          "x": 7917,
+          "y": 5033,
+          "w": 189,
+          "h": 477,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0133",
+          "x": 1145,
+          "y": 2884,
+          "w": 185,
+          "h": 462,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0134",
+          "x": 2261,
+          "y": 5107,
+          "w": 468,
+          "h": 186,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0135",
+          "x": 546,
+          "y": 4980,
+          "w": 517,
+          "h": 209,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0136",
+          "x": 3104,
+          "y": 4970,
+          "w": 217,
+          "h": 522,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0137",
+          "x": 6141,
+          "y": 5033,
+          "w": 494,
+          "h": 215,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0138",
+          "x": 6643,
+          "y": 5033,
+          "w": 483,
+          "h": 209,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0139",
+          "x": 1071,
+          "y": 4936,
+          "w": 517,
+          "h": 232,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0140",
+          "x": 4016,
+          "y": 4937,
+          "w": 222,
+          "h": 520,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0141",
+          "x": 5611,
+          "y": 4064,
+          "w": 492,
+          "h": 232,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0142",
+          "x": 2073,
+          "y": 2619,
+          "w": 76,
+          "h": 177,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0143",
+          "x": 4,
+          "y": 4702,
+          "w": 534,
+          "h": 273,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0144",
+          "x": 8016,
+          "y": 4445,
+          "w": 172,
+          "h": 495,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0145",
+          "x": 4,
+          "y": 4983,
+          "w": 433,
+          "h": 246,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0146",
+          "x": 4,
+          "y": 1060,
+          "w": 731,
+          "h": 895,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0147",
+          "x": 743,
+          "y": 1066,
+          "w": 714,
+          "h": 905,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0148",
+          "x": 2189,
+          "y": 1938,
+          "w": 638,
+          "h": 899,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0149",
+          "x": 1465,
+          "y": 1969,
+          "w": 600,
+          "h": 898,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0150",
+          "x": 737,
+          "y": 1979,
+          "w": 593,
+          "h": 897,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0151",
+          "x": 1465,
+          "y": 1066,
+          "w": 716,
+          "h": 895,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0152",
+          "x": 7330,
+          "y": 1878,
+          "w": 680,
+          "h": 894,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0153",
+          "x": 5860,
+          "y": 1910,
+          "w": 669,
+          "h": 894,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0154",
+          "x": 5181,
+          "y": 1908,
+          "w": 671,
+          "h": 898,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0155",
+          "x": 3028,
+          "y": 1092,
+          "w": 707,
+          "h": 899,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0156",
+          "x": 2271,
+          "y": 1028,
+          "w": 749,
+          "h": 902,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0157",
+          "x": 7434,
+          "y": 4,
+          "w": 738,
+          "h": 899,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0158",
+          "x": 4440,
+          "y": 1045,
+          "w": 733,
+          "h": 898,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0159",
+          "x": 3743,
+          "y": 1092,
+          "w": 686,
+          "h": 897,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0160",
+          "x": 5383,
+          "y": 1513,
+          "w": 54,
+          "h": 145,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0161",
+          "x": 5659,
+          "y": 3329,
+          "w": 141,
+          "h": 58,
+          "rotated": false
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0162",
+          "x": 5383,
+          "y": 1353,
+          "w": 53,
+          "h": 152,
+          "rotated": true
+        }
+      },
+      {
+        "SPRITE": {
+          "name": "0163",
+          "x": 8119,
+          "y": 3254,
+          "w": 61,
+          "h": 142,
+          "rotated": true
+        }
+      }
+    ]
+  },
+  "meta": {
+    "app": "Adobe Animate",
+    "version": "21.0.6.41649",
+    "image": "spritemap1.png",
+    "format": "RGBA8888",
+    "size": { "w": 8192, "h": 5587 },
+    "resolution": "1"
+  }
 }

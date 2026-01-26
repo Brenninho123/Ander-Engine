@@ -11,54 +11,53 @@ import openfl.net.NetStream;
 
 class WebVideo extends FlxBasic
 {
-	public var video:Video;
-	var netStream:NetStream;
+  public var video:Video;
 
-	public var finishCallback:Void->Void;
+  var netStream:NetStream;
 
-	/**
-	 * Doesn't actually interact with Flixel shit, only just a pleasant to use class    
-	 */
-	public function new(vidSrc:String)
-	{
-		super();
+  public var finishCallback:Void->Void;
 
-		video = new Video();
-		video.x = 0;
-		video.y = 0;
+  /**
+   * Doesn't actually interact with Flixel shit, only just a pleasant to use class    
+   */
+  public function new(vidSrc:String)
+  {
+    super();
 
-		FlxG.addChildBelowMouse(video);
+    video = new Video();
+    video.x = 0;
+    video.y = 0;
 
-		var netConnection = new NetConnection();
-		netConnection.connect(null);
+    FlxG.addChildBelowMouse(video);
 
-		netStream = new NetStream(netConnection);
-		netStream.client = {onMetaData: client_onMetaData};
-		netConnection.addEventListener(NetStatusEvent.NET_STATUS, netConnection_onNetStatus);
-		netStream.play(vidSrc);
-	}
+    var netConnection = new NetConnection();
+    netConnection.connect(null);
 
-	public function finishVideo():Void
-	{
-		netStream.dispose();
-		FlxG.removeChild(video);
+    netStream = new NetStream(netConnection);
+    netStream.client = {onMetaData: client_onMetaData};
+    netConnection.addEventListener(NetStatusEvent.NET_STATUS, netConnection_onNetStatus);
+    netStream.play(vidSrc);
+  }
 
-		if (finishCallback != null)
-			finishCallback();
-	}
+  public function finishVideo():Void
+  {
+    netStream.dispose();
+    FlxG.removeChild(video);
 
-	public function client_onMetaData(metaData:Dynamic)
-	{
-		video.attachNetStream(netStream);
+    if (finishCallback != null) finishCallback();
+  }
 
-		video.width = FlxG.width;
-		video.height = FlxG.height;
-	}
+  public function client_onMetaData(metaData:Dynamic)
+  {
+    video.attachNetStream(netStream);
 
-	private function netConnection_onNetStatus(event:NetStatusEvent):Void
-	{
-		if (event.info.code == 'NetStream.Play.Complete')
-			finishVideo();
-	}
+    video.width = FlxG.width;
+    video.height = FlxG.height;
+  }
+
+  private function netConnection_onNetStatus(event:NetStatusEvent):Void
+  {
+    if (event.info.code == 'NetStream.Play.Complete') finishVideo();
+  }
 }
 #end

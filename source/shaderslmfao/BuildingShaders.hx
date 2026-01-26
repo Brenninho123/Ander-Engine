@@ -4,29 +4,29 @@ import flixel.system.FlxAssets.FlxShader;
 
 class BuildingShaders
 {
-	public var shader(default, null):BuildingShader;
-	public var daAlpha:Float = 1;
+  public var shader(default, null):BuildingShader;
+  public var daAlpha:Float = 1;
 
-	public function new():Void
-	{
-		shader = new BuildingShader();
-		shader.alphaShit.value = [0];
-	}
+  public function new():Void
+  {
+    shader = new BuildingShader();
+    shader.alphaShit.value = [0];
+  }
 
-	public function update(elapsed:Float):Void
-	{
-		shader.alphaShit.value[0] += elapsed;
-	}
+  public function update(elapsed:Float):Void
+  {
+    shader.alphaShit.value[0] += elapsed;
+  }
 
-	public function reset()
-	{
-		shader.alphaShit.value[0] = 0;
-	}
+  public function reset()
+  {
+    shader.alphaShit.value[0] = 0;
+  }
 }
 
 class BuildingShader extends FlxShader
 {
-	@:glFragmentSource('
+  @:glFragmentSource('
         #pragma header
 
         uniform float alphaShit;
@@ -42,8 +42,8 @@ class BuildingShader extends FlxShader
         }
 
     ')
-	public function new()
-	{
-		super();
-	}
+  public function new()
+  {
+    super();
+  }
 }
