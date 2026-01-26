@@ -456,9 +456,6 @@ class PlayState extends MusicBeatState
       case 'thorns':
         curStage = 'schoolEvil';
 
-        var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 3, 2);
-        var waveEffectFG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 5, 2);
-
         var posX = 400;
         var posY = 200;
 
@@ -1382,14 +1379,14 @@ class PlayState extends MusicBeatState
 
       if (player == 1) playerStrums.add(babyArrow);
       else
-        babyArrow.animation.finishCallback = (animName:String) -> {
+        babyArrow.animation.onFinish.add((animName:String) -> {
           if (animName == "confirm")
           {
             babyArrow.animation.play("static");
             babyArrow.centerOffsets();
             babyArrow.centerOrigin();
           }
-        };
+        });
 
       babyArrow.animation.play('static');
       babyArrow.x += 50;
@@ -1725,7 +1722,6 @@ class PlayState extends MusicBeatState
       var dunceNote:Note = unspawnNotes[0];
       notes.add(dunceNote);
 
-      var index:Int = unspawnNotes.indexOf(dunceNote);
       unspawnNotes.shift();
     }
 
@@ -2206,12 +2202,6 @@ class PlayState extends MusicBeatState
       controls.NOTE_DOWN_P,
       controls.NOTE_UP_P,
       controls.NOTE_RIGHT_P
-    ];
-    var releaseArray:Array<Bool> = [
-      controls.NOTE_LEFT_R,
-      controls.NOTE_DOWN_R,
-      controls.NOTE_UP_R,
-      controls.NOTE_RIGHT_R
     ];
 
     // HOLDS, check for sustain notes
