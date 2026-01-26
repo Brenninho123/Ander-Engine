@@ -119,7 +119,7 @@ class Character extends FlxSprite
 	{
 		if (!curCharacter.startsWith('bf'))
 		{
-			if (animation.curAnim.name.startsWith('sing'))
+			if (animation.name.startsWith('sing'))
 			{
 				holdTimer += elapsed;
 			}
@@ -138,14 +138,14 @@ class Character extends FlxSprite
 		if (curCharacter.endsWith('-car'))
 		{
 			// looping hair anims after idle finished
-			if (!animation.curAnim.name.startsWith('sing') && animation.curAnim.finished)
+			if (!animation.name.startsWith('sing') && animation.finished)
 				playAnim('idleHair');
 		}
 
 		switch (curCharacter)
 		{
 			case 'gf':
-				if (animation.curAnim.name == 'hairFall' && animation.curAnim.finished)
+				if (animation.name == 'hairFall' && animation.finished)
 					playAnim('danceRight');
 			case "pico-speaker":
 				// for pico??
@@ -167,9 +167,9 @@ class Character extends FlxSprite
 					}
 				}
 
-				if (animation.curAnim.finished)
+				if (animation.finished)
 				{
-					playAnim(animation.curAnim.name, false, false, animation.curAnim.numFrames - 3);
+					playAnim(animation.name, false, false, animation.numFrames - 3);
 				}
 		}
 
@@ -185,13 +185,13 @@ class Character extends FlxSprite
 	{
 		if (!debugMode)
 		{
-			if (curCharacter.startsWith('gf') && animation.curAnim.name.startsWith('hair'))
+			if (curCharacter.startsWith('gf') && animation.name.startsWith('hair'))
 				return;
 
 			switch (curCharacter)
 			{
 				case 'tankman':
-					if (!animation.curAnim.name.endsWith('DOWN-alt'))
+					if (!animation.name.endsWith('DOWN-alt'))
 						playAnim('idle');
 					return;
 			}
