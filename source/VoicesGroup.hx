@@ -6,7 +6,7 @@ import flixel.sound.FlxSound;
 // https://github.com/FunkinCrew/Funkin/blob/34dc1826ef08e70a205636075e534d6dee1ce680/source/VoicesGroup.hx
 class VoicesGroup extends FlxTypedGroup<FlxSound>
 {
-	public var time(default, set):Float = 0;
+	public var time(get, set):Float;
 
 	public var volume(default, set):Float = 1;
 
@@ -31,6 +31,8 @@ class VoicesGroup extends FlxTypedGroup<FlxSound>
 			FlxG.sound.list.add(snd); // adds it to sound group for proper volumes
 			add(snd); // adds it to main group for other shit
 		}
+
+		trace(members.length);
 	}
 
 	// prob a better / cleaner way to do all these forEach stuff?
@@ -58,6 +60,11 @@ class VoicesGroup extends FlxTypedGroup<FlxSound>
 		});
 	}
 
+	function get_time():Float
+	{
+		return members[0].time;
+	}
+	
 	function set_time(time:Float):Float
 	{
 		forEachAlive(function(snd)

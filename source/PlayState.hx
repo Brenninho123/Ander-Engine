@@ -1484,6 +1484,7 @@ class PlayState extends MusicBeatState
 		vocals.pause();
 		FlxG.sound.music.play();
 		Conductor.songPosition = FlxG.sound.music.time + Conductor.offset;
+		trace('resyn');
 
 		if (vocalsFinished)
 			return;
@@ -1517,6 +1518,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
+			vocals.time = FlxG.sound.music.time;
 			Conductor.songPosition = FlxG.sound.music.time + Conductor.offset; // 20 is THE MILLISECONDS??
 			// Conductor.songPosition += FlxG.elapsed * 1000;
 
@@ -2588,16 +2590,14 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
+	
+		/*
 		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > 20
 			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > 20))
 		{
 			resyncVocals();
 		}
-
-		if (dad.curCharacter == 'spooky' && curStep % 4 == 2)
-		{
-			// dad.dance();
-		}
+		*/
 	}
 
 	var lightningStrikeBeat:Int = 0;
