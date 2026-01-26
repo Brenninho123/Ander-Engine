@@ -1509,21 +1509,20 @@ class PlayState extends MusicBeatState
 	{
 		if (_exiting)
 			return;
-		trace('resinc');
 
+		playerVocals.pause();
+		opponentVocals.pause();
 		FlxG.sound.music.play();
 		Conductor.songPosition = FlxG.sound.music.time + Conductor.offset;
 
 		if (!playerVocalsFinished)
 		{
-			playerVocals.pause();
 			playerVocals.time = Conductor.songPosition;
 			playerVocals.play();
 		}
 
 		if (!opponentVocalsFinished)
 		{
-			opponentVocals.pause();
 			opponentVocals.time = Conductor.songPosition;
 			opponentVocals.play();
 		}
@@ -2635,12 +2634,12 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		var desyncmax:Float = 20;
-		var instDesynced = Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > desyncmax;
 		var playerVocDesynced = Math.abs(playerVocals.time - (Conductor.songPosition - Conductor.offset)) > desyncmax;
 		var opponentVocDesynced = Math.abs(opponentVocals.time - (Conductor.songPosition - Conductor.offset)) > desyncmax;
 
 		super.stepHit();
-		if (instDesynced || (SONG.needsVoices && (playerVocDesynced || opponentVocDesynced)))
+		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > desyncmax
+			|| (SONG.needsVoices && (playerVocDesynced || opponentVocDesynced)))
 		{
 			resyncVocals();
 		}
