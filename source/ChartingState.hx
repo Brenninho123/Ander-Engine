@@ -145,7 +145,9 @@ class ChartingState extends MusicBeatState
 		add(dummyArrow);
 
 		var tabs = [
+			#if MULTIPLE_VOICES
 			{name: "Vocals", label: 'Vocals'},
+			#end
 			{name: "Song", label: 'Song'},
 			{name: "Section", label: 'Section'},
 			{name: "Note", label: 'Note'}
@@ -159,7 +161,9 @@ class ChartingState extends MusicBeatState
 		UI_box.selected_tab = tabs.indexOf(tabs[1]);
 		add(UI_box);
 
+		#if MULTIPLE_VOICES
 		addVocalUI();
+		#end
 		addSongUI();
 		addSectionUI();
 		addNoteUI();
@@ -520,9 +524,7 @@ class ChartingState extends MusicBeatState
 		else
 			vocL = "None / Game with search for \n\"" + '<path>${Paths.voices(_song.song).split(':')[1]}<path>' + "\"";
 
-		vocalsList.applyMarkup(vocL, [
-			new FlxTextFormatMarkerPair(new FlxTextFormat(FlxColor.GREEN), '<path>'),
-		]);
+		vocalsList.applyMarkup(vocL, [new FlxTextFormatMarkerPair(new FlxTextFormat(FlxColor.GREEN), '<path>'),]);
 
 		Conductor.songPosition = FlxG.sound.music.time;
 

@@ -4,6 +4,7 @@ import flixel.sound.FlxSound;
 
 // yoinked from funkin hehehe
 // https://github.com/FunkinCrew/Funkin/blob/34dc1826ef08e70a205636075e534d6dee1ce680/source/VoicesGroup.hx
+#if MULTIPLE_VOICES
 class VoicesGroup extends FlxTypedGroup<FlxSound>
 {
 	public var time(get, set):Float;
@@ -64,7 +65,7 @@ class VoicesGroup extends FlxTypedGroup<FlxSound>
 	{
 		return members[0].time;
 	}
-	
+
 	function set_time(time:Float):Float
 	{
 		forEachAlive(function(snd)
@@ -87,3 +88,26 @@ class VoicesGroup extends FlxTypedGroup<FlxSound>
 		return volume;
 	}
 }
+#else
+class VoicesGroup extends FlxSound
+{
+	public var members:Array<FlxSound> = [];
+
+	public function new(song:String, ?files:Array<String>, ?needsVoices:Bool = true)
+	{
+		super();
+
+		if (!needsVoices)
+		{
+			members.push(this);
+			return;
+		}
+
+		if (files == null || files.length == 0)
+			files = [""]; // loads with no file name assumption, to load "Voices.ogg" or whatev normally
+
+		loadEmbedded(Paths.voices(song, files[0]));
+		members.push(this);
+	}
+}
+#end

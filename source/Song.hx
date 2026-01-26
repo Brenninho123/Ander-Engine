@@ -1,5 +1,7 @@
 package;
 
+import flixel.system.FlxVersion;
+import thx.semver.Version;
 import Section.SwagSection;
 import haxe.Json;
 import haxe.format.JsonParser;
@@ -21,7 +23,7 @@ typedef SwagSong =
 
 	var ?vocalsList:Array<String>;
 
-	var version:Null<Int>;
+	var version:Version;
 }
 
 class Song
@@ -57,7 +59,7 @@ class Song
 		var swagShit:SwagSong = cast Json.parse(rawJson).song;
 
 		swagShit.validScore = true;
-		swagShit.version ??= 0;
+		swagShit.version ??= new Version(0, 0, 0);
 
 		trace('swagshit(${swagShit.song}) version: ${swagShit.version}');
 
@@ -65,7 +67,9 @@ class Song
 		{
 			trace(' * porting to $SWAGSHITVER...');
 
+			#if MULTIPLE_VOICES
 			swagShit.vocalsList ??= [];
+			#end
 
 			swagShit.version = SWAGSHITVER;
 		}
@@ -73,7 +77,7 @@ class Song
 		return swagShit;
 	}
 
-	public static var SWAGSHITVER:Int = 1;
+	public static var SWAGSHITVER:Version = new Version(1, 0, 0);
 
 	public static var DUMBASS:SwagSong = {
 		song: 'Test',
