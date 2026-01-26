@@ -4,47 +4,47 @@ import characters.SimpleCharacterDatas;
 
 class PackerCharacter extends SparrowCharacter
 {
-	override function loadImage(data:AssetPath)
-	{
-		if (data.assetPath == null)
-			return;
+  override function loadImage(data:AssetPath)
+  {
+    if (data.assetPath == null) return;
 
-		var tex = Paths.getPackerAtlas('characters/${data.assetPath}', 'characters');
-		character.frames = tex;
-		trace(' * packer: ${Paths.image('characters/${data.assetPath}', 'characters')}');
-	}
+    var tex = Paths.getPackerAtlas('characters/${data.assetPath}', 'characters');
+    character.frames = tex;
+    trace(' * packer: ${Paths.image('characters/${data.assetPath}', 'characters')}');
+  }
 
-	override function loadCharacter()
-	{
-		var hasImplementation:Bool = true;
-		switch (curCharacter)
-		{
-			case 'spirit':
-				loadSinger({
-					assetPath: 'spirit',
-					idleName: 'idle spirit_',
-					upName: 'up_',
-					rightName: 'right_',
-					leftName: 'left_',
-					downName: 'spirit down',
-				});
+  override function loadCharacter()
+  {
+    var hasImplementation:Bool = true;
+    switch (curCharacter)
+    {
+      case 'spirit':
+        loadSinger(
+          {
+            assetPath: 'spirit',
+            idleName: 'idle spirit_',
+            upName: 'up_',
+            rightName: 'right_',
+            leftName: 'left_',
+            downName: 'spirit down',
+          });
 
-				character.setGraphicSize(Std.int(character.width * 6));
-				character.updateHitbox();
+        character.setGraphicSize(Std.int(character.width * 6));
+        character.updateHitbox();
 
-				character.playAnim('idle');
+        character.playAnim('idle');
 
-				character.antialiasing = false;
+        character.antialiasing = false;
 
-			default:
-				hasImplementation = false;
-		}
+      default:
+        hasImplementation = false;
+    }
 
-		info(hasImplementation);
-	}
+    info(hasImplementation);
+  }
 
-	override function exclusiveInfo()
-	{
-		trace(' * IMPLEMENTATION: PACKER');
-	}
+  override function exclusiveInfo()
+  {
+    trace(' * IMPLEMENTATION: PACKER');
+  }
 }
