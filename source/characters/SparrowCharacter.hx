@@ -26,7 +26,8 @@ class SparrowCharacter implements ICharacter
 
 	public function loadCustomAnimations(data:CustomAnimations)
 	{
-		if (data.custom == null) return;
+		if (data.custom == null)
+			return;
 
 		for (name => prefix in data.custom)
 			character.quickAnimAdd(name, prefix);
@@ -158,14 +159,15 @@ class SparrowCharacter implements ICharacter
 				loadDamsel({
 					assetPath: (curCharacter == 'gf-car') ? 'gfCar' : 'gfTankmen',
 
-					danceLeft: 'GF Dancing',
-					danceRight: 'GF Dancing',
+					danceLeft: (curCharacter == 'gf-car') ? 'GF Dancing Beat Hair blowing CAR' : 'GF Dancing at Gunpoint',
+					danceRight: (curCharacter == 'gf-car') ? 'GF Dancing Beat Hair blowing CAR' : 'GF Dancing at Gunpoint',
 
 					danceLeft_indices: [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 					danceRight_indices: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
 
 					offsetFile: (curCharacter == 'gf-tankmen') ? 'gf' : curCharacter
 				});
+
 				if (curCharacter == 'gf-tankmen')
 					character.indicwes('sad', 'GF Crying at Gunpoint', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], true);
 
