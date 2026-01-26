@@ -416,17 +416,17 @@ class SparrowCharacter implements ICharacter
 				loadSinger({
 					assetPath: 'tankmanCaptain',
 					idleName: 'Tankman Idle Dance instance',
-					upName: 'Tankman UP note ',
-					downName: 'Tankman DOWN note ',
-					leftName: (character.isPlayer) ? 'Tankman Note Left' : 'Tankman Right Note',
-					rightName: (character.isPlayer) ? 'Tankman Right Note' : 'Tankman Note Left',
+					upName: 'Tankman UP note instance',
+					downName: 'Tankman DOWN note instance',
+					leftName: (character.isPlayer) ? 'Tankman Note Left instance' : 'Tankman Right Note instance',
+					rightName: (character.isPlayer) ? 'Tankman Right Note instance' : 'Tankman Note Left instance',
 				});
 
 				// PRETTY GOOD tankman
 				// TANKMAN UGH instanc
 
-				character.quickAnimAdd('singDOWN-alt', 'PRETTY GOOD');
-				character.quickAnimAdd('singUP-alt', 'TANKMAN UGH');
+				character.quickAnimAdd('singDOWN-alt', 'PRETTY GOOD tankman instance 1');
+				character.quickAnimAdd('singUP-alt', 'TANKMAN UGH instance');
 
 				character.loadOffsetFile(curCharacter);
 
