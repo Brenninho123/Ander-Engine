@@ -55,10 +55,6 @@
 				"branch": "bdb191fe7cf745c02a980749906dbf22719e200b"
 			},
 			{
-				"name": "tentools",
-				"link": "https://github.com/TentaRJ/tentools.git"
-			},
-			{
 				"name": "systools",
 				"link": "https://github.com/haya3218/retools.git"
 			}
