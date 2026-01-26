@@ -428,8 +428,6 @@ class SparrowCharacter implements ICharacter
 				character.quickAnimAdd('singDOWN-alt', 'PRETTY GOOD tankman instance 1');
 				character.quickAnimAdd('singUP-alt', 'TANKMAN UGH instance');
 
-				character.loadOffsetFile(curCharacter);
-
 				character.flipX = true;
 
 			default:
