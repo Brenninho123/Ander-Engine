@@ -196,7 +196,7 @@ final class GameJoltInfo
   /**
    * The font used for the GameJolt API elements.
    */
-  public static final font:String = "VCR OSD Mono";
+  public static final font:String = Paths.font('vcr.ttf');
 }
 
 class GameJoltLogin extends MusicBeatState
@@ -329,12 +329,16 @@ class GameJoltLogin extends MusicBeatState
       username2.screenCenter(X);
       username2.x += baseX;
       add(username2);
+
+      if (GameJoltInfo.font != null)
+      {
+        username1.font = GameJoltInfo.font;
+        username2.font = GameJoltInfo.font;
+      }
     }
 
     if (GameJoltInfo.font != null)
     {
-      username1.font = GameJoltInfo.font;
-      username2.font = GameJoltInfo.font;
       loginBoxes.forEach(item -> item.font = GameJoltInfo.font);
       loginTexts.forEach(item -> item.font = GameJoltInfo.font);
     }
