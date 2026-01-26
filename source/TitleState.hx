@@ -1,5 +1,7 @@
 package;
 
+import flixel.util.typeLimit.OneOfTwo;
+import global.TitleStateGlobal;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
@@ -243,7 +245,7 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(Paths.txt('introText'));
+		var fullText:String = Assets.getText(TitleStateGlobal.introTextPath);
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
@@ -397,40 +399,42 @@ class TitleState extends MusicBeatState
 			{
 				for (i in lastBeat...curBeat)
 				{
-					switch (i + 1)
-					{
-						case 1:
-							createCoolText(['macohi', 'djotta flow']);
-						case 2:
-							addMoreText('funniboi');
-							addMoreText('flying.haxe');
-						case 3:
-							addMoreText('present');
-						case 4:
+					var scene:OneOfTwo<Array<String>, String> = TitleStateGlobal.introTextList[i];
+					var arr:Array<String> = [];
+
+					var parseSceneString = function(str:String) {
+						str = str.trim();
+						
+						var key = str.split('=')[0];
+						var keyVal = str.split('=')[1];
+
+						switch (key)
+						{
+							case 'ngSpr': ngSpr.visible = keyVal == "1"; return;
+							case 'wacky': addMoreText(curWacky[Std.parseInt(keyVal)]); return;
+							case '': return;
+						}
+
+						if (str == null)
+						{
 							deleteCoolText();
-						case 5:
-							createCoolText(['With no association', 'with']);
-						case 7:
-							addMoreText('newgrounds');
-							ngSpr.visible = true;
-						case 8:
-							deleteCoolText();
-							ngSpr.visible = false;
-						case 9:
-							createCoolText([curWacky[0]]);
-						case 11:
-							addMoreText(curWacky[1]);
-						case 12:
-							deleteCoolText();
-						case 13:
-							addMoreText('Friday');
-						case 14:
-							addMoreText('Night');
-						case 15:
-							addMoreText('Funkin');
-						case 16:
-							skipIntro();
+							return;
+						}
+
+						addMoreText(str);
 					}
+
+					if (Type.typeof(scene) == Type.typeof(arr))
+					{
+						for (i in scene)
+							parseSceneString(scene[i]);
+					}
+					else
+					{
+						parseSceneString(scene);
+					}
+
+					trace('beat scene: $scene');
 				}
 			}
 			lastBeat = curBeat;
