@@ -23,6 +23,7 @@ Also hashlink :D
 - Main menu options are split instead of being one big atlas
 - "Donate" is now "Support" and links you to my (Macohi's) kofi :D
 	- Higher amounts help more cause then I can split more evenly(?) with mi amigos / the dev team
+		- If theres anyway I even can pay them ;-;
 - Chart Editor's selected tab on start is the Songs tab now
 - Chart Editor now formats exported songs
 - Offset files are in "data/offsets" now
