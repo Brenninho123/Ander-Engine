@@ -91,10 +91,7 @@ class TitleState extends MusicBeatState
 				StoryMenuState.weekUnlocked[0] = true;
 		}
 
-		if (FlxG.save.data.seenVideo != null)
-		{
-			VideoState.seenVideo = FlxG.save.data.seenVideo;
-		}
+		VideoState.seenVideo = true;
 
 		#if FREEPLAY
 		FlxG.switchState(() -> new FreeplayState());
@@ -217,9 +214,6 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		else
 			initialized = true;
-
-		if (FlxG.sound.music != null)
-			FlxG.sound.music.onComplete = function() FlxG.switchState(() -> new VideoState());
 
 		startedIntro = true;
 	}

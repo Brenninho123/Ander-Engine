@@ -96,18 +96,9 @@ class MainMenuState extends MusicBeatState
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
 
-		if (VideoState.seenVideo)
-			menuItems.createItem('kickstarter', selectDonate, hasPopupBlocker);
-		else
-			menuItems.createItem('donate', selectDonate, hasPopupBlocker);
+			menuItems.createItem('support', selectDonate, hasPopupBlocker);
 		#end
 		menuItems.createItem('options', function() startExitState(new OptionsState()));
-		// #if newgrounds
-		// 	if (NGio.isLoggedIn)
-		// 		menuItems.createItem("logout", selectLogout);
-		// 	else
-		// 		menuItems.createItem("login", selectLogin);
-		// #end
 
 		// center vertically
 		var spacing = 160;
@@ -153,16 +144,15 @@ class MainMenuState extends MusicBeatState
 	#if CAN_OPEN_LINKS
 	function selectDonate()
 	{
+		var link = 'https://ko-fi.com/sphis/tip';
+
 		#if linux
 		// Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
-		Sys.command('/usr/bin/xdg-open', [
-			"https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/",
-			"&"
-		]);
+		Sys.command('/usr/bin/xdg-open', [link, "&"]);
 		#else
 		// FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
 
-		FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/');
+		FlxG.openURL(link);
 		#end
 	}
 	#end
@@ -223,17 +213,14 @@ class MainMenuState extends MusicBeatState
 
 private class MainMenuList extends MenuTypedList<MainMenuItem>
 {
-	public var atlas:FlxAtlasFrames;
-
 	public function new()
 	{
-		atlas = Paths.getSparrowAtlas('main_menu');
 		super(Vertical);
 	}
 
 	public function createItem(x = 0.0, y = 0.0, name:String, callback, fireInstantly = false)
 	{
-		var item = new MainMenuItem(x, y, name, atlas, callback);
+		var item = new MainMenuItem(x, y, name, Paths.getSparrowAtlas('main_menu/$name'), callback);
 		item.fireInstantly = fireInstantly;
 		item.ID = length;
 
@@ -243,7 +230,6 @@ private class MainMenuList extends MenuTypedList<MainMenuItem>
 	override function destroy()
 	{
 		super.destroy();
-		atlas = null;
 	}
 }
 

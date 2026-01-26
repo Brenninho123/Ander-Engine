@@ -1,8 +1,10 @@
-# Funkin Legacy
+# Funkin Legacy / Flegacy
 
 This is the repository for "Funkin Legacy",
 a port of Friday Night Funkin 0.3.0+ and onward into 0.2.8,
 cause why not? :)
+
+Play Flegacy via Gamejolt here: https://gamejolt.com/games/funkin-legacy/1046139
 
 Play FNF on Newgrounds here: https://www.newgrounds.com/portal/view/770371
 Play FNF on Itch.io here: https://ninja-muffin24.itch.io/funkin
@@ -14,6 +16,7 @@ IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN 
 ### Programmers
 - [Macohi](https://sphis-sinco.carrd.co)
 - [Funni Boi](https://github.com/yeeterongithub)
+- [Flying.Haxe](https://github.com/LeonGamerPS1)
 
 ### Artists / Animators
 - [Djotta Flow](https://www.youtube.com/@djotta11)
