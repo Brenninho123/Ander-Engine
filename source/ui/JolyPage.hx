@@ -5,12 +5,15 @@ import ui.OptionsState.Page;
 
 class JolyPage extends Page
 {
-  override public function new(exit:Bool = false)
+  override public function new()
   {
     super();
+  }
 
-    if (exit) onExit.dispatch();
-    else
-      LoadingState.loadAndSwitchState(new GameJoltLogin());
+  override function update(elapsed:Float)
+  {
+    super.update(elapsed);
+
+    LoadingState.loadAndSwitchState(new GameJoltLogin());
   }
 }
