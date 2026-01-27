@@ -12,17 +12,16 @@ import flixel.math.FlxRect;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.Assets;
-import shaderslmfao.ColorSwap;
+import shaders.ColorSwap;
 import ui.PreferencesMenu;
 import GameJolt.GameJoltAPI;
 
 using StringTools;
 
-#if discord_rpc
+#if linc_discord_rpc
 import Discord.DiscordClient;
 #end
 
-@:nullSafety
 class TitleState extends MusicBeatState
 {
   public static var initialized:Bool = false;
@@ -41,10 +40,6 @@ class TitleState extends MusicBeatState
 
   override public function create():Void
   {
-    #if polymod
-    polymod.Polymod.init({modRoot: "mods", dirs: ['introMod'], framework: OPENFL});
-    #end
-
     startedIntro = false;
 
     FlxG.game.focusLostFramerate = 60;
@@ -74,9 +69,9 @@ class TitleState extends MusicBeatState
 
     FlxTimer.wait(1, () -> startIntro());
 
-    #if discord_rpc
+    #if linc_discord_rpc
     DiscordClient.initialize();
-    Application.current.onExit.add(_ -> DiscordClient.shutdown());
+    FlxG.stage.window.onClose.add(() -> DiscordClient.shutdown());
     #end
 
     #if tentools

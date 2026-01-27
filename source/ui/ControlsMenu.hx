@@ -1,12 +1,10 @@
 package ui;
 
 import Controls;
-import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
-import flixel.input.actions.FlxActionInput;
 import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
 import ui.AtlasText;
@@ -31,7 +29,7 @@ class ControlsMenu extends ui.OptionsState.Page
 
   var controlGrid:MenuTypedList<InputItem>;
   var deviceList:TextMenuList;
-  var menuCamera:FlxCamera;
+  var menuCamera:FunkinCamera;
   var prompt:Prompt;
   var camFollow:FlxObject;
   var labels:FlxTypedGroup<AtlasText>;
@@ -43,7 +41,7 @@ class ControlsMenu extends ui.OptionsState.Page
   {
     super();
 
-    menuCamera = new FlxCamera();
+    menuCamera = new FunkinCamera();
     FlxG.cameras.add(menuCamera, false);
     menuCamera.bgColor = 0x0;
     camera = menuCamera;

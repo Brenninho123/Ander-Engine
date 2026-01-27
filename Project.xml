@@ -108,12 +108,14 @@
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" version="2.6.4" />
-	<haxelib name="polymod"/>
 	
-	<!-- <haxelib name="flixel-animate" /> -->
+	<haxelib name="flixel-animate" />
 
-	<haxelib name="discord_rpc" if="cpp"/>
+	<haxelib name="linc_discord-rpc" if="cpp"/>
 	<haxelib name="hxcpp-debug-server" if="desktop"/>
+
+	<haxelib name="thx.core" />
+	<haxelib name="thx.semver" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
@@ -153,8 +155,6 @@
 	<haxelib name="tentools" />
 	<haxelib name="systools" />
 	<ndll name="systools" haxelib="systools" />
-	
-	<haxeflag name="--dce full" if="release" />
 
 	<!-- desktop video shit -->
 

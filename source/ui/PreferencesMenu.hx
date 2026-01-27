@@ -1,12 +1,8 @@
 package ui;
 
-import ui.AtlasText.BoldText;
-import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.group.FlxGroup;
-import flixel.util.FlxColor;
 import ui.AtlasText.AtlasFont;
 import ui.TextMenuList.TextMenuItem;
 
@@ -17,14 +13,14 @@ class PreferencesMenu extends ui.OptionsState.Page
   var items:TextMenuList;
 
   var checkboxes:Array<CheckboxThingie> = [];
-  var menuCamera:FlxCamera;
+  var menuCamera:FunkinCamera;
   var camFollow:FlxObject;
 
   public function new()
   {
     super();
 
-    menuCamera = new SwagCamera();
+    menuCamera = new FunkinCamera();
     FlxG.cameras.add(menuCamera, false);
     menuCamera.bgColor = 0x0;
     camera = menuCamera;

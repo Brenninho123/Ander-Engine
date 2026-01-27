@@ -20,7 +20,6 @@ class SparrowCharacter implements ICharacter
 
     var tex = Paths.getSparrowAtlas('characters/${data.assetPath}', 'characters');
     character.frames = tex;
-    trace(' * sparrow: ${Paths.image('characters/${data.assetPath}', 'characters')}');
   }
 
   public function loadCustomAnimations(data:CustomAnimations)

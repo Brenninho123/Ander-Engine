@@ -1,6 +1,5 @@
 package;
 
-import flixel.system.FlxVersion;
 import thx.semver.Version;
 import Section.SwagSection;
 import haxe.Json;

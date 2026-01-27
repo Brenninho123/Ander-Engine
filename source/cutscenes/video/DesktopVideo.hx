@@ -3,7 +3,7 @@ package cutscenes.video;
 #if VIDEO_DESKTOP
 import flixel.util.FlxTimer;
 import flixel.FlxG;
-import hxcodec.flixel.FlxVideoSprite;
+import hxvlc.flixel.FlxVideoSprite;
 import flixel.FlxBasic;
 
 class DesktopVideo extends FlxBasic
@@ -18,17 +18,17 @@ class DesktopVideo extends FlxBasic
 
     video = new FlxVideoSprite(0, 0);
 
-    if (video != null)
+    if (video != null && video.load(vidSrc))
     {
       trace('ITS VIDEO TIME BITCH!');
-      video.autoPause = false;
-      video.play(vidSrc, false);
+      video.play();
+
       FlxG.state.add(video);
 
       video.bitmap.onEndReached.add(finishVideo);
 
       // Resize video bigger or smaller than the screen.
-      video.bitmap.onTextureSetup.add(() -> {
+      video.bitmap.onFormatSetup.add(() -> {
         video.setGraphicSize(FlxG.width, FlxG.height);
         video.updateHitbox();
         video.setPosition(0, 0);
@@ -36,10 +36,8 @@ class DesktopVideo extends FlxBasic
     }
     else
     {
-      trace('Null video shit');
-      FlxTimer.wait(.4, function() {
-        finishVideo();
-      });
+      trace('Null video...');
+      FlxTimer.wait(0.4, () -> finishVideo());
     }
   }
 

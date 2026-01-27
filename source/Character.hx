@@ -94,13 +94,11 @@ class Character extends FlxSprite
 
   public function quickAnimAdd(name:String, prefix:String)
   {
-    trace('   * quickanimadd($name, $prefix)');
     animation.addByPrefix(name, prefix, 24, false);
   }
 
   public function indicwes(name:String, prefix:String, indices:Array<Int>, looped:Bool = false, fps:Int = 24)
   {
-    trace('   * indicwes($name, $prefix, $indices, $looped, $fps)');
     animation.addByIndices(name, prefix, indices, '', fps, looped);
   }
 

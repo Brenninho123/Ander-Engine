@@ -1,7 +1,5 @@
 package global;
 
-import flixel.util.typeLimit.OneOfTwo;
-
 class TitleStateGlobal
 {
   public static var introTextPath:String = Paths.txt('introText');
@@ -25,7 +23,7 @@ class TitleStateGlobal
     ['funniboi', 'flying.haxe'],
     ['present'],
     ['%clear'],
-    ['in no way',],
+    ['in no way'],
     ['associated with'],
     ['newgrounds', '%ngSpr=1'],
     ['%clear', '%ngSpr=0'],

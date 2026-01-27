@@ -1,19 +1,10 @@
 package;
 
-import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.math.FlxMath;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
-import shaderslmfao.ColorSwap;
+import shaders.ColorSwap;
 import ui.PreferencesMenu;
 
 using StringTools;
-
-#if polymod
-import polymod.format.ParseRules.TargetSignatureElement;
-#end
 
 class Note extends FlxSprite
 {

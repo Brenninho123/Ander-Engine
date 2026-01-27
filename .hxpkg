@@ -43,12 +43,8 @@
       {
         "name": "hxcpp-debug-server",
         "link": "https://github.com/FunkinCrew/hxcpp-debugger.git",
-        "branch": "7459934666a473a4cc4d066ba4a93ef92f1ce94c"
-      },
-      {
-        "name": "polymod",
-        "link": "https://github.com/larsiusprime/polymod.git",
-        "branch": "9824bf4f00863c152d5afe3ac4bbcac173d80684"
+        "branch": "7459934666a473a4cc4d066ba4a93ef92f1ce94c",
+        "dir": "hxcpp-debug-server"
       },
       {
         "name": "thx.core",
@@ -71,7 +67,7 @@
         "branch": "2055163b700afeaf8f566c32442148cdbc429e44"
       },
       {
-        "name": "discord_rpc",
+        "name": "linc_discord-rpc",
         "link": "https://github.com/Aidan63/linc_discord-rpc.git",
         "branch": "2d83fa863ef0c1eace5f1cf67c3ac315d1a3a8a5"
       }

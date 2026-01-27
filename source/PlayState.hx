@@ -44,14 +44,14 @@ import openfl.display.BitmapData;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
-import shaderslmfao.BuildingShaders.BuildingShader;
-import shaderslmfao.BuildingShaders;
-import shaderslmfao.ColorSwap;
+import shaders.BuildingShaders.BuildingShader;
+import shaders.BuildingShaders;
+import shaders.ColorSwap;
 import ui.PreferencesMenu;
 
 using StringTools;
 
-#if discord_rpc
+#if linc_discord_rpc
 import Discord.DiscordClient;
 #end
 
@@ -106,8 +106,8 @@ class PlayState extends MusicBeatState
 
   private var iconP1:HealthIcon;
   private var iconP2:HealthIcon;
-  private var camHUD:FlxCamera;
-  private var camGame:FlxCamera;
+  private var camHUD:FunkinCamera;
+  private var camGame:FunkinCamera;
 
   var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 
@@ -151,7 +151,7 @@ class PlayState extends MusicBeatState
 
   var inCutscene:Bool = false;
 
-  #if discord_rpc
+  #if linc_discord_rpc
   // Discord RPC variables
   var storyDifficultyText:String = "";
   var iconRPC:String = "";
@@ -170,8 +170,8 @@ class PlayState extends MusicBeatState
     FlxG.sound.cache(Paths.inst(PlayState.SONG.song));
     FlxG.sound.cache(Paths.voices(PlayState.SONG.song));
 
-    camGame = new SwagCamera();
-    camHUD = new FlxCamera();
+    camGame = new FunkinCamera();
+    camHUD = new FunkinCamera();
     camHUD.bgColor.alpha = 0;
 
     FlxG.cameras.reset(camGame);
@@ -211,7 +211,7 @@ class PlayState extends MusicBeatState
       checkForTextDialoguePath(censoredDialoguePath_diff);
     }
 
-    #if discord_rpc
+    #if linc_discord_rpc
     initDiscord();
     #end
 
@@ -679,8 +679,6 @@ class PlayState extends MusicBeatState
 
     add(foregroundSprites);
 
-    trace('foregroundSprites');
-
     if (gf.curCharacter == 'pico-speaker')
     {
       gf.loadMappedAnims();
@@ -691,7 +689,6 @@ class PlayState extends MusicBeatState
         if (FlxG.random.bool(16))
         {
           var tankman:TankmenBG = new TankmenBG(0, 0, false);
-          // new TankmenBG(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
           tankman.strumTime = TankmenBG.animationNotes[i][0];
           tankman.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
           tankman.onded = (t) -> {
@@ -713,8 +710,6 @@ class PlayState extends MusicBeatState
     var basicdialogue:BasicDialogueBox = new BasicDialogueBox(false, dialogue);
     basicdialogue.scrollFactor.set();
     basicdialogue.finishThing = startCountdown;
-
-    trace('dialogue');
 
     Conductor.songPosition = -5000;
 
@@ -795,13 +790,6 @@ class PlayState extends MusicBeatState
     week6dialogue.cameras = [camHUD];
     basicdialogue.cameras = [camHUD];
 
-    trace('ui');
-
-    // if (SONG.song == 'South')
-    // FlxG.camera.alpha = 0.7;
-    // UI_camera.zoom = 1;
-
-    // cameras = [FlxG.cameras.list[1]];
     startingSong = true;
 
     if (isStoryMode && !seenCutscene)
@@ -936,8 +924,8 @@ class PlayState extends MusicBeatState
 
   function initDiscord():Void
   {
-    #if discord_rpc
-    storyDifficultyText = difficultyString();
+    #if linc_discord_rpc
+    storyDifficultyText = CoolUtil.difficultyString();
     iconRPC = SONG.player2;
 
     // To avoid having duplicate images in Discord assets
@@ -1108,8 +1096,6 @@ class PlayState extends MusicBeatState
     trace('COUNTDOWN TIME!');
 
     startTimer.start(Conductor.crochet / 1000, function(tmr:FlxTimer) {
-      trace(swagCounter);
-
       if (swagCounter > 0) readySetGo(introSprPaths[swagCounter - 1]);
       FlxG.sound.play(Paths.sound(introSndPaths[swagCounter]), 0.6);
       beatHit();
@@ -1120,8 +1106,6 @@ class PlayState extends MusicBeatState
 
   function readySetGo(path:String):Void
   {
-    trace(path);
-
     var spr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(path));
     spr.scrollFactor.set();
 
@@ -1152,7 +1136,7 @@ class PlayState extends MusicBeatState
     FlxG.sound.music.onComplete = endSong;
     vocals.play();
 
-    #if discord_rpc
+    #if linc_discord_rpc
     // Song duration in a float, useful for the time left feature
     songLength = FlxG.sound.music.length;
 
@@ -1406,7 +1390,7 @@ class PlayState extends MusicBeatState
       if (!startTimer.finished) startTimer.active = true;
       paused = false;
 
-      #if discord_rpc
+      #if linc_discord_rpc
       if (startTimer.finished) DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC, true,
         songLength - Conductor.songPosition);
       else
@@ -1417,7 +1401,7 @@ class PlayState extends MusicBeatState
     super.closeSubState();
   }
 
-  #if discord_rpc
+  #if linc_discord_rpc
   override public function onFocus():Void
   {
     if (health > 0 && !paused && FlxG.autoPause)
@@ -1544,7 +1528,7 @@ class PlayState extends MusicBeatState
         boyfriendPos.put();
       }
 
-      #if discord_rpc
+      #if linc_discord_rpc
       DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconRPC);
       #end
     }
@@ -1553,7 +1537,7 @@ class PlayState extends MusicBeatState
     {
       FlxG.switchState(() -> new ChartingState());
 
-      #if discord_rpc
+      #if linc_discord_rpc
       DiscordClient.changePresence("Chart Editor", null, null, true);
       #end
     }
@@ -1663,7 +1647,7 @@ class PlayState extends MusicBeatState
 
         openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
-        #if discord_rpc
+        #if linc_discord_rpc
         // Game Over doesn't get his own variable because it's only used here
         DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC);
         #end

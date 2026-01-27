@@ -23,7 +23,7 @@ import ui.Prompt;
 
 using StringTools;
 
-#if discord_rpc
+#if linc_discord_rpc
 import Discord.DiscordClient;
 #end
 
@@ -42,7 +42,7 @@ class MainMenuState extends MusicBeatState
 
   override function create()
   {
-    #if discord_rpc
+    #if linc_discord_rpc
     // Updating Discord Rich Presence
     DiscordClient.changePresence("In the Menus", null);
     #end
@@ -119,7 +119,7 @@ class MainMenuState extends MusicBeatState
 
     menuItems.selectItem(0);
 
-    FlxG.cameras.reset(new SwagCamera());
+    FlxG.cameras.reset();
     FlxG.camera.follow(camFollow, null, 0.06);
 
     var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version'), 12);
