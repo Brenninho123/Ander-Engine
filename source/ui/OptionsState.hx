@@ -1,6 +1,5 @@
 package ui;
 
-import GameJolt.GameJoltLogin;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -19,6 +18,14 @@ class OptionsState extends MusicBeatState
   inline function get_currentPage()
     return pages[currentName];
 
+  var gamejoly:Bool = false;
+
+  override public function new(gamejoly:Bool) {
+	super();
+
+	this.gamejoly = gamejoly;
+  }
+
   override function create()
   {
     var menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -29,7 +36,7 @@ class OptionsState extends MusicBeatState
     menuBG.scrollFactor.set(0, 0);
     add(menuBG);
 
-    var options = addPage(Options, new OptionsMenu(false));
+    var options = addPage(Options, new OptionsMenu(gamejoly));
     var preferences = addPage(Preferences, new PreferencesMenu());
     var controls = addPage(Controls, new ControlsMenu());
     var gamejoly = addPage(Gamejolt, new JolyPage());
@@ -45,7 +52,7 @@ class OptionsState extends MusicBeatState
       controls.onExit.add(switchPage.bind(Options));
       // colors.onExit.add(switchPage.bind(Options));
       preferences.onExit.add(switchPage.bind(Options));
-	  gamejoly.onExit.add(switchPage.bind(Options));
+      gamejoly.onExit.add(switchPage.bind(Options));
 
       #if (cpp && debug)
       mods.onExit.add(switchPage.bind(Options));
@@ -170,7 +177,7 @@ class OptionsMenu extends Page
 {
   var items:TextMenuList;
 
-  public function new(showDonate:Bool)
+  public function new(gamejoly:Bool)
   {
     super();
 
@@ -181,16 +188,11 @@ class OptionsMenu extends Page
     #if (cpp && debug)
     createItem('mods', function() switchPage(Mods));
     #end
-    createItem("gamejolt", function() switchPage(Gamejolt));
+    createItem((JolyPage.login) ? "gamejolt login required" : "gamejolt", function() switchPage(Gamejolt));
 
-    #if CAN_OPEN_LINKS
-    if (showDonate)
-    {
-      var hasPopupBlocker = #if web true #else false #end;
-      createItem('support', MainMenuState.selectDonate, hasPopupBlocker);
-    }
-    #end
     createItem("exit", exit);
+
+    if (gamejoly) switchPage(Gamejolt);
   }
 
   function createItem(name:String, callback:Void->Void, fireInstantly = false)

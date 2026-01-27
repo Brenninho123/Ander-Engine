@@ -99,7 +99,7 @@ class MainMenuState extends MusicBeatState
 
     menuItems.createItem('support', selectDonate, hasPopupBlocker);
     #end
-    menuItems.createItem('options', function() startExitState(new OptionsState()));
+    menuItems.createItem('options', function() startExitState(new OptionsState(false)));
 
     // center vertically
 
