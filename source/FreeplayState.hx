@@ -287,7 +287,7 @@ class FreeplayState extends MusicBeatState
 		// lerpScore = 0;
 
 		#if PRELOAD_ALL
-		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+		FlxG.sound.playMusic(openfl.Assets.getMusic(Paths.inst(songs[curSelected].songName)), 0);
 		#end
 
 		var bullShit:Int = 0;

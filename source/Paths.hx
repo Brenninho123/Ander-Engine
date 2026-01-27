@@ -1,5 +1,6 @@
 package;
 
+import openfl.Assets;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
@@ -97,7 +98,7 @@ class Paths
 
 	inline static public function music(key:String, ?library:String)
 	{
-		return getPath('music/$key.$SOUND_EXT', MUSIC, library);
+		return Assets.getMusic(getPath('music/$key.$SOUND_EXT', MUSIC, library));
 	}
 
 	inline static public function voices(song:String, ?suffix:String)

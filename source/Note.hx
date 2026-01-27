@@ -124,7 +124,6 @@ class Note extends FlxSprite
 		}
 
 		colorSwap = new ColorSwap();
-		shader = colorSwap.shader;
 		updateColors();
 
 		switch (noteData)
@@ -233,7 +232,7 @@ class Note extends FlxSprite
 			if (strumTime <= Conductor.songPosition
 				|| isSustainNote
 				&& prevNote.wasGoodHit
-				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5))
+				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset))
 				wasGoodHit = true;
 		}
 

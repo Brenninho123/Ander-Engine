@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 DEV https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="sonic.png" width="6214" height="1469" spritePadding="0" borderPadding="0">
+	<SubTexture name="sonic Idle0000" x="3936" y="1101" width="491" height="341" rotated="true" frameX="-278" frameY="-233" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Idle0001" x="1829" y="592" width="451" height="490" frameX="-235" frameY="-232" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Idle0002" x="3008" y="0" width="427" height="569" rotated="true" frameX="-176" frameY="-230" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Idle0003" x="2730" y="592" width="437" height="489" frameX="-185" frameY="-231" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Idle0004" x="1463" y="1101" width="491" height="358" rotated="true" frameX="-265" frameY="-233" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Idle0005" x="5704" y="0" width="476" height="493" frameX="-218" frameY="-231" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Idle0006" x="866" y="0" width="426" height="591" rotated="true" frameX="-174" frameY="-231" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Idle0007" x="3618" y="592" width="438" height="487" frameX="-181" frameY="-233" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Down0000" x="4427" y="1101" width="471" height="355" rotated="true" frameX="-282" frameY="-253" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Down0001" x="3167" y="592" width="451" height="473" frameX="-235" frameY="-249" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Down0002" x="4813" y="0" width="414" height="569" rotated="true" frameX="-176" frameY="-244" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Down0003" x="2280" y="592" width="450" height="480" frameX="-185" frameY="-240" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Down0004" x="492" y="1101" width="485" height="368" rotated="true" frameX="-265" frameY="-239" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Down0005" x="0" y="592" width="476" height="486" frameX="-218" frameY="-238" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Down0006" x="2156" y="0" width="420" height="591" rotated="true" frameX="-174" frameY="-237" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Down0007" x="4494" y="592" width="441" height="483" frameX="-181" frameY="-237" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Left0000" x="2939" y="1101" width="499" height="341" rotated="true" frameX="-253" frameY="-225" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Left0001" x="927" y="592" width="450" height="497" frameX="-233" frameY="-225" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Left0002" x="2576" y="0" width="432" height="569" rotated="true" frameX="-175" frameY="-226" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Left0003" x="2445" y="1101" width="494" height="351" rotated="true" frameX="-259" frameY="-226" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Left0004" x="3438" y="1101" width="498" height="340" rotated="true" frameX="-262" frameY="-226" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Left0005" x="4337" y="0" width="476" height="498" frameX="-218" frameY="-226" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Left0006" x="0" y="0" width="433" height="591" rotated="true" frameX="-174" frameY="-224" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Left0007" x="5789" y="592" width="425" height="496" frameX="-185" frameY="-224" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Right0000" x="1954" y="1101" width="491" height="356" rotated="true" frameX="-263" frameY="-233" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Right0001" x="1377" y="592" width="452" height="490" frameX="-235" frameY="-232" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Right0002" x="3435" y="0" width="426" height="570" rotated="true" frameX="-176" frameY="-232" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Right0003" x="977" y="1101" width="486" height="366" rotated="true" frameX="-265" frameY="-234" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Right0004" x="0" y="1101" width="492" height="363" rotated="true" frameX="-264" frameY="-232" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Right0005" x="5227" y="0" width="477" height="492" frameX="-218" frameY="-232" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Right0006" x="1292" y="0" width="424" height="592" rotated="true" frameX="-174" frameY="-233" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Right0007" x="4056" y="592" width="438" height="487" frameX="-181" frameY="-233" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Up0000" x="4898" y="1101" width="516" height="324" rotated="true" frameX="-240" frameY="-208" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Up0001" x="476" y="592" width="451" height="509" frameX="-235" frameY="-213" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Up0002" x="1716" y="0" width="440" height="569" rotated="true" frameX="-176" frameY="-218" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Up0003" x="4935" y="592" width="425" height="500" frameX="-185" frameY="-220" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Up0004" x="5414" y="1101" width="502" height="328" rotated="true" frameX="-247" frameY="-222" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Up0005" x="3861" y="0" width="476" height="501" frameX="-218" frameY="-223" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Up0006" x="433" y="0" width="433" height="591" rotated="true" frameX="-174" frameY="-224" frameWidth="804" frameHeight="804"/>
+	<SubTexture name="sonic Up0007" x="5360" y="592" width="429" height="494" frameX="-181" frameY="-226" frameWidth="804" frameHeight="804"/>
+</TextureAtlas>

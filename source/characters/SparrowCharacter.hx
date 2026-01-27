@@ -26,7 +26,8 @@ class SparrowCharacter implements ICharacter
 
 	public function loadCustomAnimations(data:CustomAnimations)
 	{
-		if (data.custom == null) return;
+		if (data.custom == null)
+			return;
 
 		for (name => prefix in data.custom)
 			character.quickAnimAdd(name, prefix);
@@ -426,7 +427,19 @@ class SparrowCharacter implements ICharacter
 					leftName: "exe Left",
 					rightName: "exe Right"
 				});
-				character.flipX = false;
+			case "sonic":
+				loadSinger({
+					assetPath: "sonic",
+					idleName: "sonic Idle",
+					upName: "sonic Up",
+					downName: "sonic Down",
+					leftName: "sonic Left",
+					rightName: "sonic Right"
+				});
+
+				character.scale.set(0.9, 0.9);
+				character.flipX = true;
+				character.updateHitbox();
 
 			default:
 				hasImplementation = false;
