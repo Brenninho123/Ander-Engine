@@ -1,11 +1,11 @@
 package ui;
 
-import ui.MenuList;
 import flixel.graphics.frames.FlxAtlasFrames;
+import ui.MenuList;
 
 typedef AtlasAsset = flixel.util.typeLimit.OneOfTwo<String, FlxAtlasFrames>;
 
-class AtlasMenuList extends MenuTypedList<AtlasMenuItem>
+class AtlasMenuList extends MenuList.MenuTypedList<AtlasMenuItem>
 {
   public var atlas:FlxAtlasFrames;
 
@@ -32,7 +32,7 @@ class AtlasMenuList extends MenuTypedList<AtlasMenuItem>
   }
 }
 
-class AtlasMenuItem extends MenuItem
+class AtlasMenuItem extends MenuList.MenuItem
 {
   var atlas:FlxAtlasFrames;
 

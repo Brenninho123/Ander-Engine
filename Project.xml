@@ -2,26 +2,17 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Funkin' Legacy" file="Flegacy" packageName="com.macohi.flegacy" package="com.macohi.flegacy" main="Main" version="0.2.9" company="Macohi" />
+	<app title="Funkin' Legacy" file="Flegacy" packageName="com.macohi.flegacy" package="com.macohi.flegacy" main="backend.Main" version="0.2.9" company="Macohi" />
 
-	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
-		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
-	<!-- <app preloader="Preloader" resizable="true" /> -->
 	<app preloader="flixel.system.FlxPreloader" />
-
-	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
-	<set name="SWF_VERSION" value="11.8" />
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="1280" height="720" fps="144" background="#000000" hardware="true" vsync="false" />
-
-	<!--HTML5-specific-->
-	<window if="html5" resizable="true" />
+	<window width="1280" height="720" fps="144" background="#000000" hardware="true" vsync="false" resizable="true"/>
 
 	<!--Desktop-specific-->
-	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
+	<window if="desktop" orientation="landscape" fullscreen="false" vsync="false"/>
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -29,14 +20,11 @@
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
 	<set name="BUILD_DIR" value="export/32bit" if="32bit" />
 
-	<classpath name="source" />
-
-	<!-- <assets path='assets/preload/music' include="*mp4" embed='false' /> -->
+	<source path="source" />
 
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3" unless="web"/>
 	
-	<!-- <define name="PRELOAD_ALL" /> -->
 	<define name="PRELOAD_ALL" unless="web" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 	
@@ -163,5 +151,5 @@
 
 	<haxelib name="hxvlc" version="2.2.5" if="VIDEO_DESKTOP" unless="VIDEO_WEB"/>
 
-	<define name="VOICES_GROUP" unless="DISABLE_VOICES_GROUP"/>
+	<define name="VOICES_GROUP" unless="NO_VOICES_GROUP"/>
 </project>

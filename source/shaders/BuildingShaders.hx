@@ -1,7 +1,5 @@
 package shaders;
 
-import flixel.system.FlxAssets.FlxShader;
-
 class BuildingShaders
 {
   public var shader(default, null):BuildingShader;

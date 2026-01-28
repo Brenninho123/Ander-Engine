@@ -8,7 +8,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
-class Prompt extends flixel.FlxSubState
+class Prompt extends MusicBeatSubstate
 {
   inline static var MARGIN = 100;
 
@@ -23,7 +23,8 @@ class Prompt extends flixel.FlxSubState
   public function new(text:String, style:ButtonStyle = Ok)
   {
     this.style = style;
-    super(0x80000000);
+    super();
+    bgColor = 0x80000000;
 
     buttons = new TextMenuList(Horizontal);
 
