@@ -96,7 +96,7 @@ class SparrowCharacter implements ICharacter
   public function loadDeathAnimations(data:DeathAnimations)
   {
     character.quickAnimAdd('firstDeath', data.firstDeathName);
-    character.animation.addByPrefix('deathLoop', data.deathLoopName, 24, true);
+    character.quickAnimAdd('deathLoop', data.deathLoopName, true);
     character.quickAnimAdd('deathConfirm', data.deathConfirmName);
   }
 
@@ -319,7 +319,7 @@ class SparrowCharacter implements ICharacter
               deathConfirmName: 'BF Dead confirm',
             });
 
-          character.animation.addByPrefix('scared', 'BF idle shaking', 24, true);
+          character.quickAnimAdd('scared', 'BF idle shaking', true);
         }
 
         if (curCharacter == 'bf-holding-gf') character.quickAnimAdd('catch', 'BF catches GF');

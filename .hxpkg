@@ -70,6 +70,11 @@
         "name": "linc_discord-rpc",
         "link": "https://github.com/Aidan63/linc_discord-rpc.git",
         "branch": "2d83fa863ef0c1eace5f1cf67c3ac315d1a3a8a5"
+      },
+      {
+        "name": "flixel-modding",
+        "link": "https://github.com/akaFinn/flixel-modding.git",
+        "branch": "develop"
       }
     ]
   }

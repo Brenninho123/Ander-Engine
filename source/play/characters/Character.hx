@@ -66,9 +66,7 @@ class Character extends FlxAnimate
     for (section in notes)
     {
       for (idk in section.sectionNotes)
-      {
         animationNotes.push(idk);
-      }
     }
 
     play.stage.objects.TankmenBG.animationNotes = animationNotes;
@@ -81,11 +79,11 @@ class Character extends FlxAnimate
     return FlxSort.byValues(FlxSort.ASCENDING, val1[0], val2[0]);
   }
 
-  public function quickAnimAdd(name:String, prefix:String)
+  public function quickAnimAdd(name:String, prefix:String, looped:Bool = false)
   {
-    if (isAnimate) anim.addByFrameLabel(name, prefix, 24, false);
+    if (isAnimate) anim.addByFrameLabel(name, prefix, 24, looped);
     else
-      anim.addByPrefix(name, prefix, 24, false);
+      anim.addByPrefix(name, prefix, 24, looped);
   }
 
   public function indicwes(name:String, prefix:String, indices:Array<Int>, looped:Bool = false, fps:Int = 24)

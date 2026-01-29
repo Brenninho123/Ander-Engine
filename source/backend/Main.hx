@@ -10,6 +10,9 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.media.Video;
 import openfl.net.NetStream;
+#if !web
+import flixel.system.FlxModding;
+#end
 
 class Main extends Sprite
 {
@@ -112,8 +115,8 @@ class Main extends Sprite
       gameHeight = Math.ceil(stageHeight / zoom);
     }
 
-    #if !debug
-    initialState = TitleState;
+    #if !web
+    FlxModding.init();
     #end
 
     addChild(new FlxGame(gameWidth, gameHeight, initialState, framerate, framerate, skipSplash, startFullscreen));

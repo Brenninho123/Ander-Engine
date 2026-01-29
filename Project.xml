@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project>
+<project xmlns="http://lime.openfl.org/project/1.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
+
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Funkin' Legacy" file="Flegacy" packageName="com.macohi.flegacy" package="com.macohi.flegacy" main="backend.Main" version="0.2.9" company="Macohi" />
@@ -80,11 +82,11 @@
 	<assets path="assets/week7"    library="week7"    exclude="*.fla|*.ogg" if="web"/>
 	<assets path="assets/week7"    library="week7"    exclude="*.fla|*.mp3" unless="web"/>
 
-	<template path="example_mods" rename="mods" />
+	<assets path="mods" unless="web" />
 
-	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	<assets path="CHANGELOG.md" rename='changelog.txt'/>
 	<assets path="assets/fonts" />
+
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
@@ -99,11 +101,13 @@
 	
 	<haxelib name="flixel-animate" />
 
-	<haxelib name="linc_discord-rpc" if="cpp"/>
-	<haxelib name="hxcpp-debug-server" if="desktop"/>
+	<haxelib name="linc_discord-rpc" if="cpp desktop"/>
+	<haxelib name="hxcpp-debug-server" if="cpp desktop"/>
 
 	<haxelib name="thx.core" />
 	<haxelib name="thx.semver" />
+
+	<haxelib name="flixel-modding" unless="web" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
@@ -112,12 +116,6 @@
 	<!-- <haxedef name="FLX_NO_KEYBOARD" if="mobile" /> -->
 	<haxedef name="FLX_NO_TOUCH" if="desktop" />
 	<!--<haxedef name="FLX_NO_GAMEPAD" />-->
-
-	<!--Disable the Flixel core sound tray-->
-	<!--<haxedef name="FLX_NO_SOUND_TRAY" />-->
-
-	<!--Disable the Flixel sound management code-->
-	<!--<haxedef name="FLX_NO_SOUND_SYSTEM" />-->
 
 	<!--Disable the Flixel core focus lost screen-->
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
