@@ -184,7 +184,7 @@ final class GameJoltInfo
   /**
    * The font used for the GameJolt API elements.
    */
-  public static final font:String = "VCR OSD Mono";
+  public static final font:String = Paths.font("vcr.ttf");
 }
 
 class GameJoltLogin extends MusicBeatState
