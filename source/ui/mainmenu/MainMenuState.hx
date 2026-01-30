@@ -69,7 +69,7 @@ class MainMenuState extends MusicBeatState
     menuItems.createItem('freeplay', () -> startExitState(new ui.freeplay.FreeplayState()));
     #if CAN_OPEN_LINKS
     var hasPopupBlocker = #if web true #else false #end;
-    menuItems.createItem('support', selectDonate, hasPopupBlocker);
+    menuItems.createItem('support', selectSupport, hasPopupBlocker);
     #end
     menuItems.createItem('options', () -> startExitState(new ui.options.OptionsState()));
 
@@ -115,16 +115,13 @@ class MainMenuState extends MusicBeatState
   }
 
   #if CAN_OPEN_LINKS
-  function selectDonate()
+  function selectSupport()
   {
-    var link = 'https://ko-fi.com/sphis/tip';
+    final link:String = 'https://ko-fi.com/sphis/tip';
 
     #if linux
-    // Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
     Sys.command('/usr/bin/xdg-open', [link, "&"]);
     #else
-    // FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
-
     FlxG.openURL(link);
     #end
   }

@@ -21,7 +21,7 @@ class OptionsState extends MusicBeatState
     menuBG.scrollFactor.set(0, 0);
     add(menuBG);
 
-    var options = addPage(Options, new OptionsMenu(false));
+    var options = addPage(Options, new OptionsMenu());
     var preferences = addPage(Preferences, new PreferencesMenu());
     var controls = addPage(Controls, new ControlsMenu());
     var colors = addPage(Colors, new ColorsMenu());
@@ -150,25 +150,14 @@ class OptionsMenu extends Page
 {
   var items:TextMenuList;
 
-  public function new(showDonate:Bool)
+  public function new()
   {
     super();
 
     add(items = new TextMenuList());
     createItem('preferences', function() switchPage(Preferences));
     createItem("controls", function() switchPage(Controls));
-    // createItem('colors', function() switchPage(Colors));
-    #if (cpp && debug)
-    createItem('mods', function() switchPage(Mods));
-    #end
-
-    #if CAN_OPEN_LINKS
-    if (showDonate)
-    {
-      var hasPopupBlocker = #if web true #else false #end;
-      createItem('donate', selectDonate, hasPopupBlocker);
-    }
-    #end
+    createItem('colors', function() switchPage(Colors));
     createItem("exit", exit);
   }
 
@@ -190,21 +179,8 @@ class OptionsMenu extends Page
    * True if this page has multiple options, excluding the exit option.
    * If false, there's no reason to ever show this page.
    */
-  public function hasMultipleOptions():Bool
-  {
+  public inline function hasMultipleOptions():Bool
     return items.length > 2;
-  }
-
-  #if CAN_OPEN_LINKS
-  function selectDonate()
-  {
-    #if linux
-    Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
-    #else
-    FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
-    #end
-  }
-  #end
 }
 
 enum PageName
@@ -212,6 +188,5 @@ enum PageName
   Options;
   Controls;
   Colors;
-  Mods;
   Preferences;
 }
