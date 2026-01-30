@@ -72,10 +72,8 @@ class MainMenuState extends MusicBeatState
     // center vertically
 
     spacing = 180;
-    for (i in 0...menuItems.length)
+    for (i => menuItem in menuItems)
     {
-      var menuItem = menuItems.members[i];
-
       menuItem.scale.set(.9, .9);
       if (menuItem.name == 'support') menuItem.scale.set(.8, .8);
       menuItem.updateHitbox();
