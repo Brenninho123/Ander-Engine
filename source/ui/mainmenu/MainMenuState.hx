@@ -34,8 +34,7 @@ class MainMenuState extends MusicBeatState
     persistentUpdate = persistentDraw = true;
 
     var bg:FlxSprite = new FlxSprite(Paths.image('menuBG'));
-    bg.scrollFactor.x = 0;
-    bg.scrollFactor.y = 0.17;
+    bg.scrollFactor.set(0, 0.17);
     bg.setGraphicSize(Std.int(bg.width * 1.2));
     bg.updateHitbox();
     bg.screenCenter();
@@ -45,26 +44,23 @@ class MainMenuState extends MusicBeatState
     camFollow = new FlxObject(0, 0, 1, 1);
     add(camFollow);
 
-    magenta = new FlxSprite(Paths.image('menuDesat'));
-    magenta.scrollFactor.x = bg.scrollFactor.x;
-    magenta.scrollFactor.y = bg.scrollFactor.y;
+    magenta = new FlxSprite(bg.x, bg.y, Paths.image('menuBGMagenta'));
+    magenta.scrollFactor.copyFrom(bg.scrollFactor);
     magenta.setGraphicSize(Std.int(bg.width));
     magenta.updateHitbox();
-    magenta.x = bg.x;
-    magenta.y = bg.y;
     magenta.visible = false;
     magenta.antialiasing = true;
-    magenta.color = 0xFFfd719b;
     if (PreferencesMenu.preferences.get('flashing-menu')) add(magenta);
 
     menuItems = new MainMenuList();
     add(menuItems);
+
     menuItems.onChange.add(onMenuItemChange);
     menuItems.onAcceptPress.add(function(_) {
       FlxFlicker.flicker(magenta, 1.1, 0.15, false, true);
     });
 
-    menuItems.enabled = false; // disable for intro
+    menuItems.enabled = false;
     menuItems.createItem('story mode', () -> startExitState(new ui.story.StoryMenuState()));
     menuItems.createItem('freeplay', () -> startExitState(new ui.freeplay.FreeplayState()));
     #if CAN_OPEN_LINKS
