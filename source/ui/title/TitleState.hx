@@ -49,8 +49,6 @@ class TitleState extends MusicBeatState
       if (!StoryMenuState.weekUnlocked[0]) StoryMenuState.weekUnlocked[0] = true;
     }
 
-    VideoState.seenVideo = true;
-
     FlxTimer.wait(1, () -> startIntro());
 
     #if linc_discord_rpc
