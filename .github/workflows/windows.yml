@@ -1,0 +1,41 @@
+name: Windows Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.2
+
+      - name: Install Haxelib dependencies
+        run: |
+          haxelib setup C:\haxelib
+          haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
+          haxelib install flixel-tools
+          haxelib install hxcpp
+          haxelib run lime setup
+        shell: powershell
+
+      - name: Build Windows (Release)
+        run: haxelib run lime build windows -release
+        shell: powershell
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ander-Engine-Windows
+          path: export/release/windows/bin/
