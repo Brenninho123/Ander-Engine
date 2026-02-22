@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Funkin' Legacy" file="Flegacy" packageName="com.macohi.flegacy" package="com.macohi.flegacy" main="Main" version="0.2.9" company="Macohi" />
+	<app title="FNF: Ander Engine" file="AnderEngine" packageName="me.ander.funkin" package="me.ander.funkin" main="Main" version="0.2.9" company="Ander" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
