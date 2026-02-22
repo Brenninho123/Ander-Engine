@@ -5,37 +5,67 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
-  build-windows:
+  build:
     runs-on: windows-latest
 
     steps:
+      # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Setup Haxe
       - name: Setup Haxe
         uses: krdlab/setup-haxe@v1
         with:
           haxe-version: 4.3.2
 
+      # Cache haxelib
+      - name: Cache Haxelib
+        uses: actions/cache@v4
+        with:
+          path: C:\haxelib
+          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/haxelib.json') }}
+          restore-keys: |
+            ${{ runner.os }}-haxelib-
+
+      # Install Dependencies
       - name: Install Haxelib dependencies
+        shell: powershell
         run: |
           haxelib setup C:\haxelib
+
           haxelib install lime
           haxelib install openfl
           haxelib install flixel
           haxelib install flixel-tools
+          haxelib install flixel-addons
+          haxelib install flixel-ui
           haxelib install hxcpp
+          haxelib install hscript
+          haxelib install polymod
+          haxelib install hxdiscord_rpc
+
           haxelib run lime setup
-        shell: powershell
+          haxelib run lime rebuild hxcpp windows
 
-      - name: Build Windows (Release)
+      # Build Release
+      - name: Build Windows Release
+        shell: powershell
         run: haxelib run lime build windows -release
-        shell: powershell
 
+      # Zip Build
+      - name: Zip Build
+        shell: powershell
+        run: |
+          Compress-Archive -Path export\release\windows\bin\* `
+            -DestinationPath Ander-Engine-Windows.zip
+
+      # Upload Artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Ander-Engine-Windows
-          path: export/release/windows/bin/
+          path: Ander-Engine-Windows.zip
