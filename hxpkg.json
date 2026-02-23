@@ -1,0 +1,20 @@
+{
+  "name": "Ander-Engine",
+  "version": "1.0.0",
+  "dependencies": {
+    "lime": "",
+    "openfl": "",
+    "flixel": "",
+    "flixel-addons": "",
+    "flixel-ui": "",
+    "hxcpp": "",
+    "hscript": "",
+    "hxCodec": "",
+    "polymod": ""
+  },
+  "scripts": {
+    "build": "hxpkg build windows -release",
+    "test": "hxpkg build windows",
+    "clean": "hxpkg clean"
+  }
+}
