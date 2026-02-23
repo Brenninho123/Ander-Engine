@@ -2,19 +2,21 @@
   "name": "Ander-Engine",
   "version": "1.0.0",
   "dependencies": {
-    "lime": "",
-    "openfl": "",
-    "flixel": "",
-    "flixel-addons": "",
-    "flixel-ui": "",
-    "hxcpp": "",
-    "hscript": "",
-    "hxCodec": "",
-    "polymod": ""
+    "flixel": "5.6.0",
+    "flixel-addons": "3.1.0",
+    "flixel-ui": "2.5.0",
+    "lime": "8.1.0",
+    "openfl": "9.3.0",
+    "hxcpp": "4.2.1",
+    "hscript": "2.5.0",
+    "hxCodec": "2.5.0",
+    "polymod": "1.7.0"
   },
-  "scripts": {
-    "build": "hxpkg build windows -release",
-    "test": "hxpkg build windows",
-    "clean": "hxpkg clean"
+  "platforms": ["windows"],
+  "build": {
+    "windows": {
+      "arch": "x86_64",
+      "cmd": "haxe build.hxml -windows -release"
+    }
   }
 }
