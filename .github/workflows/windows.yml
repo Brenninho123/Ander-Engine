@@ -16,7 +16,7 @@ jobs:
       HAXELIB_PATH: C:\haxelib
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Haxe
@@ -24,13 +24,13 @@ jobs:
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
 
-      - name: Setup Haxelib Path
+      - name: Setup Haxelib
         shell: powershell
         run: |
           mkdir $env:HAXELIB_PATH -ErrorAction SilentlyContinue
           haxelib setup $env:HAXELIB_PATH
 
-      - name: Cache Haxelib
+      - name: Restore Haxelib Cache
         uses: actions/cache@v4
         with:
           path: ${{ env.HAXELIB_PATH }}
@@ -38,29 +38,30 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-haxelib-
 
-      - name: Install HXP
+      # 👇 FORÇA instalar hxpkg sempre
+      - name: Install hxpkg
         shell: powershell
         run: |
           haxelib install hxpkg --quiet
 
-      - name: Install Dependencies (HXP)
+      - name: Install Dependencies
         shell: powershell
         run: |
           haxelib run hxpkg install --force
 
-      - name: Build Windows Release (HXP)
+      - name: Build Windows
         shell: powershell
         run: |
           haxelib run hxpkg build windows -release
 
-      - name: Create ZIP
+      - name: Zip Build
         shell: powershell
         run: |
           Compress-Archive `
             -Path export\release\windows\bin\* `
             -DestinationPath Ander-Engine-Windows.zip
 
-      - name: Upload Build Artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Ander-Engine-Windows
