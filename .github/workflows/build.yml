@@ -1,0 +1,47 @@
+name: Build com hxpkg
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.2
+      
+      - name: Instalar hxpkg globalmente
+        run: |
+          # Atualiza o haxelib primeiro
+          haxelib --global update haxelib
+          
+          # Instala o hxpkg globalmente
+          haxelib install hxpkg --global --always
+          
+          # Verifica instalação
+          haxelib list --global
+      
+      - name: Instalar dependências do projeto
+        run: |
+          # Usa o hxpkg para instalar dependências
+          haxelib run hxpkg install --force
+      
+      - name: Build do projeto
+        run: |
+          haxelib run hxpkg build windows -release
+      
+      - name: Upload do build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-Build
+          path: export/release/windows/bin/
