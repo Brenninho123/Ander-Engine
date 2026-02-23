@@ -24,7 +24,12 @@ jobs:
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
 
-      # Cache haxelib
+      - name: Setup Haxelib Path
+        shell: powershell
+        run: |
+          mkdir $env:HAXELIB_PATH -ErrorAction SilentlyContinue
+          haxelib setup $env:HAXELIB_PATH
+
       - name: Cache Haxelib
         uses: actions/cache@v4
         with:
@@ -32,21 +37,6 @@ jobs:
           key: ${{ runner.os }}-haxelib-${{ hashFiles('project.hxp') }}
           restore-keys: |
             ${{ runner.os }}-haxelib-
-
-      # Cache hxcpp
-      - name: Cache hxcpp
-        uses: actions/cache@v4
-        with:
-          path: |
-            C:\Users\runneradmin\AppData\Roaming\haxelib\hxcpp
-            C:\Users\runneradmin\.hxcpp_config.xml
-          key: ${{ runner.os }}-hxcpp
-
-      - name: Setup Haxelib Path
-        shell: powershell
-        run: |
-          mkdir $env:HAXELIB_PATH -ErrorAction SilentlyContinue
-          haxelib setup $env:HAXELIB_PATH
 
       - name: Install HXP
         shell: powershell
@@ -57,11 +47,6 @@ jobs:
         shell: powershell
         run: |
           haxelib run hxpkg install --force
-
-      - name: Rebuild hxcpp
-        shell: powershell
-        run: |
-          haxelib run hxcpp rebuild
 
       - name: Build Windows Release (HXP)
         shell: powershell
