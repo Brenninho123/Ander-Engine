@@ -1,87 +1,343 @@
-name: Windows Build
+name: Windows Build - Advanced
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Tipo de build'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - debug
+          - final
+      upload_artifact:
+        description: 'Upload do artifact?'
+        required: true
+        default: true
+        type: boolean
+
+env:
+  HAXE_VERSION: 4.3.2
+  NEKO_VERSION: 2.3.0
+  PROJECT_NAME: Ander-Engine
+  BUILD_CACHE_KEY: build-cache-${{ github.sha }}
+  CACHE_PATHS: |
+    ~/.haxelib
+    export/
+    .hxpkg/
 
 jobs:
-  build:
+  validate:
+    name: Validação e Preparação
     runs-on: windows-latest
-
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+      build_date: ${{ steps.get_date.outputs.date }}
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Get version from tag or commit
+        id: get_version
+        run: |
+          $VERSION = git describe --tags --abbrev=0 2>$null
+          if (!$VERSION) {
+            $VERSION = "0.0.0-$(git rev-parse --short HEAD)"
+          }
+          echo "version=$VERSION" >> $env:GITHUB_OUTPUT
+          echo "Version: $VERSION"
+        shell: pwsh
+      
+      - name: Get build date
+        id: get_date
+        run: |
+          $DATE = Get-Date -Format "yyyyMMdd-HHmm"
+          echo "date=$DATE" >> $env:GITHUB_OUTPUT
+        shell: pwsh
+      
+      - name: Validate project structure
+        run: |
+          $requiredFiles = @("hxpkg.json", "project.xml", "build.hxml")
+          $missing = @()
+          foreach ($file in $requiredFiles) {
+            if (!(Test-Path $file)) {
+              $missing += $file
+            }
+          }
+          if ($missing.Count -gt 0) {
+            Write-Host "⚠️ Arquivos obrigatórios faltando: $($missing -join ', ')"
+            # Não falha, apenas avisa
+          }
+        shell: pwsh
 
+  build:
+    name: Build Windows (${{ github.event.inputs.build_type || 'release' }})
+    runs-on: windows-latest
+    needs: validate
+    timeout-minutes: 30
+    
+    strategy:
+      matrix:
+        arch: [x86_64, x86]
+        config: [release, debug]
+        # Filtra apenas o config escolhido
+        exclude:
+          - config: ${{ github.event.inputs.build_type != 'debug' && 'debug' || 'none' }}
+          - config: ${{ github.event.inputs.build_type != 'release' && 'release' || 'none' }}
+          - config: ${{ github.event.inputs.build_type != 'final' && 'final' || 'none' }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
       - name: Setup Haxe
         uses: krdlab/setup-haxe@v1
         with:
-          haxe-version: 4.3.2
-
-      - name: Install hxpkg globally
+          haxe-version: ${{ env.HAXE_VERSION }}
+          
+      - name: Cache Haxelib
+        id: cache-haxelib
+        uses: actions/cache@v3
+        with:
+          path: ~/.haxelib
+          key: haxelib-${{ runner.os }}-${{ env.HAXE_VERSION }}-${{ hashFiles('hxpkg.json') }}
+          restore-keys: |
+            haxelib-${{ runner.os }}-${{ env.HAXE_VERSION }}-
+            haxelib-${{ runner.os }}-
+      
+      - name: Setup Haxelib and Tools
         shell: bash
         run: |
-          # Instala o hxpkg globalmente
-          haxelib install hxpkg --global --always
+          echo "=== Configurando Haxelib ==="
+          haxelib --global update haxelib
           
-          # Verifica a instalação
-          echo "=== Pacotes globais ==="
+          # Instala hxpkg globalmente
+          echo "=== Instalando hxpkg ==="
+          if ! haxelib list | grep -q "hxpkg"; then
+            haxelib install hxpkg --global --always
+          else
+            echo "hxpkg já está instalado"
+            haxelib upgrade hxpkg
+          fi
+          
+          # Ferramentas adicionais úteis
+          echo "=== Instalando ferramentas auxiliares ==="
+          haxelib list | grep -q "format" || haxelib install format --always
+          haxelib list | grep -q "actuate" || haxelib install actuate --always
+          
+          echo "=== Pacotes instalados ==="
           haxelib list --global
-          
-          # Mostra onde o hxpkg está instalado
-          echo "=== Caminho do hxpkg ==="
-          haxelib path hxpkg || true
-
+      
       - name: Install Project Dependencies
         shell: bash
         run: |
-          # Usa o caminho direto do hxpkg
-          HXPKG_PATH=$(haxelib path hxpkg | head -1)
-          echo "HXPKG_PATH=$HXPKG_PATH" >> $GITHUB_ENV
+          echo "=== Instalando dependências do projeto ==="
           
-          # Executa o install pelo caminho absoluto
-          haxelib run hxpkg install --force || {
-            # Fallback: tenta executar diretamente
-            if [ -f "$HXPKG_PATH/hxpkg.hxml" ]; then
-              haxe $HXPKG_PATH/hxpkg.hxml --run hxpkg.Hxpkg install --force
-            else
-              exit 1
+          # Verifica se hxpkg está acessível
+          if haxelib path hxpkg &>/dev/null; then
+            haxelib run hxpkg install --force
+          else
+            echo "⚠️ hxpkg não encontrado, instalando dependências manualmente"
+            # Fallback: instala dependências manualmente do hxpkg.json
+            if [ -f "hxpkg.json" ]; then
+              DEPS=$(grep -oP '(?<=dependencies": {)[^}]*(?=})' hxpkg.json | grep -oP '"\K[^"]+(?=":)')
+              for dep in $DEPS; do
+                echo "Instalando $dep..."
+                haxelib install $dep --always
+              done
             fi
+          fi
+      
+      - name: Verify Dependencies
+        run: |
+          haxelib list
+          
+          # Verifica dependências críticas
+          $critical = @("flixel", "lime", "openfl", "hxcpp")
+          $missing = @()
+          $list = haxelib list
+          foreach ($lib in $critical) {
+            if ($list -notmatch $lib) {
+              $missing += $lib
+            }
           }
-
-      - name: Build Windows
+          
+          if ($missing.Count -gt 0) {
+            Write-Host "::warning::Dependências críticas faltando: $($missing -join ', ')"
+          }
+        shell: pwsh
+      
+      - name: Build Project
+        id: build
         shell: bash
         run: |
-          # Tenta diferentes formas de executar o build
-          if command -v hxpkg &> /dev/null; then
-            hxpkg build windows -release
-          elif haxelib run hxpkg build windows -release; then
-            echo "Build via haxelib ok"
+          BUILD_TYPE="${{ github.event.inputs.build_type || 'release' }}"
+          ARCH="${{ matrix.arch }}"
+          
+          echo "=== Iniciando build $BUILD_TYPE para $ARCH ==="
+          
+          # Tenta diferentes métodos de build
+          if haxelib path hxpkg &>/dev/null; then
+            echo "Usando hxpkg para build"
+            haxelib run hxpkg build windows -$BUILD_TYPE -$ARCH 2>&1 | tee build.log
+          elif [ -f "build.hxml" ]; then
+            echo "Usando haxe diretamente"
+            haxe build.hxml -windows -$BUILD_TYPE -D $ARCH 2>&1 | tee build.log
+          elif [ -f "project.xml" ]; then
+            echo "Usando lime"
+            haxelib run lime build windows -$BUILD_TYPE -$ARCH 2>&1 | tee build.log
           else
-            # Último recurso: execução direta
-            HXPKG_PATH=$(haxelib path hxpkg | head -1)
-            haxe $HXPKG_PATH/hxpkg.hxml --run hxpkg.Hxpkg build windows -release
-          fi
-
-      - name: Zip Build
-        shell: pwsh
-        run: |
-          if (Test-Path "export/release/windows/bin") {
-            Compress-Archive -Path export/release/windows/bin/* -DestinationPath build.zip -Force
-          } elseif (Test-Path "export/windows/bin") {
-            Compress-Archive -Path export/windows/bin/* -DestinationPath build.zip -Force
-          } elseif (Test-Path "build/windows/bin") {
-            Compress-Archive -Path build/windows/bin/* -DestinationPath build.zip -Force
-          } else {
-            Write-Host "Pastas disponíveis:"
-            Get-ChildItem -Recurse -Directory | Select-Object FullName
+            echo "::error::Nenhum método de build encontrado!"
             exit 1
+          fi
+          
+          # Salva o caminho do build para o próximo passo
+          if [ -d "export/release/windows/bin" ]; then
+            echo "BUILD_PATH=export/release/windows/bin" >> $GITHUB_ENV
+          elif [ -d "export/windows/bin" ]; then
+            echo "BUILD_PATH=export/windows/bin" >> $GITHUB_ENV
+          elif [ -d "build/windows/bin" ]; then
+            echo "BUILD_PATH=build/windows/bin" >> $GITHUB_ENV
+          else
+            echo "BUILD_PATH=." >> $GITHUB_ENV
+          fi
+          
+          echo "BUILD_TYPE=$BUILD_TYPE" >> $GITHUB_ENV
+          echo "ARCH=$ARCH" >> $GITHUB_ENV
+      
+      - name: Run Tests (if available)
+        continue-on-error: true
+        run: |
+          if (Test-Path "tests") {
+            Write-Host "Executando testes..."
+            # Aqui você pode adicionar testes específicos
+            # haxelib run munit test
           }
-
-      - name: Upload Artifact
+        shell: pwsh
+      
+      - name: Create Build Info
+        run: |
+          $info = @"
+          {
+            "project": "${{ env.PROJECT_NAME }}",
+            "version": "${{ needs.validate.outputs.version }}",
+            "build_date": "${{ needs.validate.outputs.build_date }}",
+            "build_type": "${{ env.BUILD_TYPE }}",
+            "architecture": "${{ env.ARCH }}",
+            "haxe_version": "${{ env.HAXE_VERSION }}",
+            "commit": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}"
+          }
+          "@
+          $info | Out-File -FilePath "${{ env.BUILD_PATH }}/build_info.json" -Encoding UTF8
+        shell: pwsh
+      
+      - name: Create Installer (optional)
+        if: github.event.inputs.build_type == 'final'
+        continue-on-error: true
+        run: |
+          if (Get-Command "iscc" -ErrorAction SilentlyContinue) {
+            if (Test-Path "installer.iss") {
+              iscc installer.iss
+              Move-Item -Path "*.exe" -Destination "${{ env.BUILD_PATH }}/" -Force
+            }
+          }
+        shell: pwsh
+      
+      - name: Zip Build
+        run: |
+          $zipName = "${{ env.PROJECT_NAME }}-${{ needs.validate.outputs.version }}-windows-${{ env.ARCH }}-${{ env.BUILD_TYPE }}.zip"
+          Compress-Archive -Path "${{ env.BUILD_PATH }}/*" -DestinationPath $zipName -Force
+          echo "ZIP_NAME=$zipName" >> $env:GITHUB_ENV
+          echo "Arquivo criado: $zipName"
+        shell: pwsh
+      
+      - name: Upload Build Artifact
+        if: github.event.inputs.upload_artifact != 'false'
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-Build
-          path: build.zip
+          name: ${{ env.PROJECT_NAME }}-${{ needs.validate.outputs.version }}-windows-${{ matrix.arch }}-${{ env.BUILD_TYPE }}
+          path: ${{ env.ZIP_NAME }}
+          retention-days: 30
+          if-no-files-found: error
+      
+      - name: Upload Build Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-${{ matrix.arch }}-${{ env.BUILD_TYPE }}
+          path: |
+            build.log
+            *.log
+          retention-days: 7
+
+  release:
+    name: Create Release
+    if: github.event.inputs.build_type == 'final' && github.ref == 'refs/heads/main'
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.validate.outputs.version }}
+          name: Release v${{ needs.validate.outputs.version }}
+          body: |
+            ## Build Automático v${{ needs.validate.outputs.version }}
+            
+            - **Data:** ${{ needs.validate.outputs.build_date }}
+            - **Commit:** ${{ github.sha }}
+            
+            ### Arquivos:
+          files: artifacts/**/*.zip
+          draft: false
+          prerelease: ${{ contains(github.ref, 'develop') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  notify:
+    name: Notify Status
+    if: always()
+    needs: [build, release]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check build status
+        run: |
+          if [ "${{ needs.build.result }}" == "success" ]; then
+            echo "✅ Build concluído com sucesso!"
+          else
+            echo "❌ Build falhou!"
+            exit 1
+          fi
+      
+      - name: Send Discord notification (optional)
+        if: github.event.inputs.build_type == 'final' && secrets.DISCORD_WEBHOOK
+        uses: Ilshidur/action-discord@master
+        with:
+          args: |
+            **${{ env.PROJECT_NAME }}** - Build ${{ needs.build.result }}
+            Versão: v${{ needs.validate.outputs.version }}
+            Branch: ${{ github.ref_name }}
+            Por: ${{ github.actor }}
