@@ -1,4 +1,3 @@
-# .github/workflows/windows.yml
 name: Windows Build
 
 on:
@@ -13,7 +12,7 @@ jobs:
     runs-on: windows-latest
     
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
       
       - name: Setup Haxe
@@ -21,23 +20,96 @@ jobs:
         with:
           haxe-version: 4.3.2
       
+      - name: Show Haxelib Path
+        run: haxelib config
+      
       - name: Install hxpkg
-        shell: bash
+        run: haxelib install hxpkg --always
+      
+      - name: Verify hxpkg installation
         run: |
-          haxelib install hxpkg --always
+          echo "=== Verificando instalação ==="
+          haxelib list
+          echo "=== Caminho do hxpkg ==="
+          haxelib path hxpkg
       
       - name: Install dependencies
-        shell: bash
         run: |
-          haxelib run hxpkg install --force
+          # Método 1: Via haxelib diretamente (SEM hxpkg)
+          echo "Instalando dependências manualmente..."
+          haxelib install lime --always
+          haxelib install openfl --always
+          haxelib install flixel --always
+          haxelib install flixel-addons --always
+          haxelib install flixel-ui --always
+          haxelib install hxcpp --always
+          haxelib install hscript --always
+          haxelib install hxCodec --always
+          haxelib install polymod --always
+          haxelib install actuate --always
+          haxelib install format --always
       
-      - name: Build project
-        shell: bash
+      - name: Build project (múltiplos métodos)
         run: |
-          haxelib run hxpkg build windows -release
+          echo "=== Tentando build ==="
+          
+          # Método 1: Usando lime diretamente
+          if haxelib path lime &>/dev/null; then
+            echo "Tentando build com lime..."
+            haxelib run lime build windows -release && exit 0
+          fi
+          
+          # Método 2: Usando openfl
+          if haxelib path openfl &>/dev/null; then
+            echo "Tentando build com openfl..."
+            haxelib run openfl build windows -release && exit 0
+          fi
+          
+          # Método 3: Compilação direta com haxe
+          if [ -f "build.hxml" ]; then
+            echo "Tentando build com haxe..."
+            haxe build.hxml -windows -release && exit 0
+          fi
+          
+          # Método 4: Usando flixel
+          if haxelib path flixel &>/dev/null; then
+            echo "Tentando build com flixel..."
+            haxelib run flixel build windows -release && exit 0
+          fi
+          
+          echo "::error::Nenhum método de build funcionou!"
+          exit 1
+        shell: bash
+      
+      - name: Find build output
+        id: find_build
+        run: |
+          # Procura pelo executável gerado
+          $paths = @(
+            "export/release/windows/bin",
+            "export/windows/bin",
+            "build/windows/bin",
+            "bin",
+            "export/release/windows",
+            "export/windows"
+          )
+          
+          foreach ($path in $paths) {
+            if (Test-Path $path) {
+              echo "build_path=$path" >> $env:GITHUB_OUTPUT
+              echo "Build encontrado em: $path"
+              dir $path
+              exit 0
+            }
+          }
+          
+          echo "::warning::Build não encontrado em pastas comuns"
+          echo "build_path=." >> $env:GITHUB_OUTPUT
+        shell: pwsh
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows-Build
-          path: export/release/windows/bin/
+          path: ${{ steps.find_build.outputs.build_path }}
+          if-no-files-found: warn
