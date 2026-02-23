@@ -41,7 +41,7 @@ jobs:
       - name: Install HXP
         shell: powershell
         run: |
-          haxelib --global install hxpkg
+          haxelib install hxpkg --quiet
 
       - name: Install Dependencies (HXP)
         shell: powershell
