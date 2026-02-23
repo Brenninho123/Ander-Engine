@@ -1,59 +1,66 @@
 [
-	{
-		"profile": "default",
-		"pkgs": [
-			{
-				"name": "flixel"
-			},
-			{
-				"name": "openfl"
-			},
-			{
-				"name": "lime"
-			},
-			{
-				"name": "flixel-addons"
-			},
-			{
-				"name": "flixel-ui"
-			},
-			{
-				"name": "hscript",
-				"link": "https://github.com/FunkinCrew/hscript",
-				"branch": "dcc6f822e0866ca4fda300ed23e99559260f7bf5"
-			},
-			{
-				"name": "hxCodec",
-				"link": "https://github.com/FunkinCrew/hxCodec",
-				"branch": "c0c7f2680cc190c932a549c2e2fdd9b0ba2bd10e"
-			},
-			{
-				"name": "hxcpp"
-			},
-			{
-				"name": "hxcpp-debug-server"
-			},
-			{
-				"name": "jsonpatch"
-			},
-			{
-				"name": "jsonpath"
-			},
-			{
-				"name": "polymod",
-				"link": "https://github.com/larsiusprime/polymod",
-				"branch": "9824bf4f00863c152d5afe3ac4bbcac173d80684"
-			},
-			{
-				"name": "thx.core",
-				"link": "https://github.com/fponticelli/thx.core",
-				"branch": "2bf2b992e06159510f595554e6b952e47922f128"
-			},
-			{
-				"name": "thx.semver",
-				"link": "https://github.com/fponticelli/thx.semver",
-				"branch": "bdb191fe7cf745c02a980749906dbf22719e200b"
-			}
-		]
-	}
+  {
+    "profile": "default",
+    "pkgs": [
+      {
+        "name": "lime",
+        "version": "8.1.2"
+      },
+      {
+        "name": "openfl",
+        "version": "9.3.2"
+      },
+      {
+        "name": "flixel",
+        "version": "5.5.0"
+      },
+      {
+        "name": "flixel-addons",
+        "version": "3.1.0"
+      },
+      {
+        "name": "flixel-ui",
+        "version": "2.6.1"
+      },
+      {
+        "name": "hxcpp",
+        "version": "4.3.2"
+      },
+      {
+        "name": "hxcpp-debug-server"
+      },
+      {
+        "name": "jsonpatch"
+      },
+      {
+        "name": "jsonpath"
+      },
+
+      {
+        "name": "hscript",
+        "link": "https://github.com/FunkinCrew/hscript",
+        "commit": "dcc6f822e0866ca4fda300ed23e99559260f7bf5"
+      },
+      {
+        "name": "hxCodec",
+        "link": "https://github.com/FunkinCrew/hxCodec",
+        "commit": "c0c7f2680cc190c932a549c2e2fdd9b0ba2bd10e"
+      },
+      {
+        "name": "polymod",
+        "link": "https://github.com/larsiusprime/polymod",
+        "commit": "9824bf4f00863c152d5afe3ac4bbcac173d80684"
+      },
+      {
+        "name": "thx.core",
+        "link": "https://github.com/fponticelli/thx.core",
+        "commit": "2bf2b992e06159510f595554e6b952e47922f128"
+      },
+      {
+        "name": "thx.semver",
+        "link": "https://github.com/fponticelli/thx.semver",
+        "commit": "bdb191fe7cf745c02a980749906dbf22719e200b"
+      }
+    ]
+  }
 ]
