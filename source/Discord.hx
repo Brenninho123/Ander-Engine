@@ -19,10 +19,9 @@ class Discord
 
     private static final CLIENT_ID:String = "814588678700924999";
 
-    // ==============================
+    // =========================================
     // INITIALIZE
-    // ==============================
-
+    // =========================================
     public static function initialize():Void
     {
         if (_initialized) return;
@@ -34,10 +33,9 @@ class Discord
         trace("Discord RPC initialized.");
     }
 
-    // ==============================
-    // MAIN RPC LOOP (SAFE)
-    // ==============================
-
+    // =========================================
+    // MAIN LOOP
+    // =========================================
     private static function rpcLoop():Void
     {
         try
@@ -69,10 +67,9 @@ class Discord
         trace("Discord RPC stopped.");
     }
 
-    // ==============================
+    // =========================================
     // SHUTDOWN
-    // ==============================
-
+    // =========================================
     public static function shutdown():Void
     {
         if (!_initialized) return;
@@ -84,21 +81,14 @@ class Discord
         trace("Discord RPC shutdown complete.");
     }
 
-    // ==============================
-    // READY CALLBACK
-    // ==============================
-
+    // =========================================
+    // CALLBACKS
+    // =========================================
     private static function onReady():Void
     {
         trace("Discord RPC ready.");
 
-        changePresence(
-            "In the Menus",
-            null,
-            null,
-            false,
-            0
-        );
+        changePresence("In the Menus", null);
     }
 
     private static function onError(code:Int, message:String):Void
@@ -111,10 +101,9 @@ class Discord
         trace('Discord RPC Disconnected $code : $message');
     }
 
-    // ==============================
+    // =========================================
     // CHANGE PRESENCE
-    // ==============================
-
+    // =========================================
     public static function changePresence(
         details:String,
         state:Null<String>,
