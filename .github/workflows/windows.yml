@@ -24,49 +24,48 @@ jobs:
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
 
-      # Cache haxelib
       - name: Cache Haxelib
         uses: actions/cache@v4
         with:
           path: ${{ env.HAXELIB_PATH }}
-          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/project.xml') }}
+          key: ${{ runner.os }}-haxelib-${{ hashFiles('project.hxp') }}
           restore-keys: |
             ${{ runner.os }}-haxelib-
 
-      # Cache hxcpp build
       - name: Cache hxcpp
         uses: actions/cache@v4
         with:
           path: |
-            C:\Users\runneradmin\.hxcpp_config
             C:\Users\runneradmin\AppData\Roaming\haxelib\hxcpp
+            C:\Users\runneradmin\.hxcpp_config.xml
           key: ${{ runner.os }}-hxcpp
 
-      - name: Setup Haxelib
+      - name: Setup Haxelib Path
         shell: powershell
         run: |
+          mkdir $env:HAXELIB_PATH -ErrorAction SilentlyContinue
           haxelib setup $env:HAXELIB_PATH
 
-      - name: Install Dependencies
+      - name: Install HXP
         shell: powershell
         run: |
-          haxelib install lime --quiet
-          haxelib install openfl --quiet
-          haxelib install flixel --quiet
-          haxelib install flixel-tools --quiet
-          haxelib install flixel-addons --quiet
-          haxelib install flixel-ui --quiet
-          haxelib install hxcpp --quiet
-          haxelib install hscript --quiet
-          haxelib install polymod --quiet
-          haxelib install hxCodec --quiet
+          haxelib --global install hxpkg
+          haxelib --global run hxpkg setup
 
-          haxelib run lime setup
-          haxelib run lime rebuild hxcpp windows
-
-      - name: Build Windows Release
+      - name: Install Dependencies (via hxp)
         shell: powershell
-        run: haxelib run lime build windows -release
+        run: |
+          hxp install --force
+
+      - name: Rebuild hxcpp
+        shell: powershell
+        run: |
+          haxelib run hxcpp rebuild
+
+      - name: Build Windows Release (HXP)
+        shell: powershell
+        run: |
+          hxp build windows -release
 
       - name: Create ZIP
         shell: powershell
