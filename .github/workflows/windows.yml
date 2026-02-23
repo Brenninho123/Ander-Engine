@@ -12,26 +12,76 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
-      
-      - uses: krdlab/setup-haxe@v1
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
         with:
           haxe-version: 4.3.2
-      
-      - name: Install hxpkg
+
+      - name: Install hxpkg globally
         shell: bash
         run: |
-          # Instala silenciosamente sem pipe
-          haxelib install hxpkg --always
-      
-      - name: Build
+          # Instala o hxpkg globalmente
+          haxelib install hxpkg --global --always
+          
+          # Verifica a instalação
+          echo "=== Pacotes globais ==="
+          haxelib list --global
+          
+          # Mostra onde o hxpkg está instalado
+          echo "=== Caminho do hxpkg ==="
+          haxelib path hxpkg || true
+
+      - name: Install Project Dependencies
         shell: bash
         run: |
-          haxelib run hxpkg install --force
-          haxelib run hxpkg build windows -release
-      
-      - name: Upload
+          # Usa o caminho direto do hxpkg
+          HXPKG_PATH=$(haxelib path hxpkg | head -1)
+          echo "HXPKG_PATH=$HXPKG_PATH" >> $GITHUB_ENV
+          
+          # Executa o install pelo caminho absoluto
+          haxelib run hxpkg install --force || {
+            # Fallback: tenta executar diretamente
+            if [ -f "$HXPKG_PATH/hxpkg.hxml" ]; then
+              haxe $HXPKG_PATH/hxpkg.hxml --run hxpkg.Hxpkg install --force
+            else
+              exit 1
+            fi
+          }
+
+      - name: Build Windows
+        shell: bash
+        run: |
+          # Tenta diferentes formas de executar o build
+          if command -v hxpkg &> /dev/null; then
+            hxpkg build windows -release
+          elif haxelib run hxpkg build windows -release; then
+            echo "Build via haxelib ok"
+          else
+            # Último recurso: execução direta
+            HXPKG_PATH=$(haxelib path hxpkg | head -1)
+            haxe $HXPKG_PATH/hxpkg.hxml --run hxpkg.Hxpkg build windows -release
+          fi
+
+      - name: Zip Build
+        shell: pwsh
+        run: |
+          if (Test-Path "export/release/windows/bin") {
+            Compress-Archive -Path export/release/windows/bin/* -DestinationPath build.zip -Force
+          } elseif (Test-Path "export/windows/bin") {
+            Compress-Archive -Path export/windows/bin/* -DestinationPath build.zip -Force
+          } elseif (Test-Path "build/windows/bin") {
+            Compress-Archive -Path build/windows/bin/* -DestinationPath build.zip -Force
+          } else {
+            Write-Host "Pastas disponíveis:"
+            Get-ChildItem -Recurse -Directory | Select-Object FullName
+            exit 1
+          }
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows-Build
-          path: export/release/windows/bin/
+          path: build.zip
