@@ -1,0 +1,104 @@
+import hxp.*;
+import sys.io.File;
+
+class Project extends Hxp
+{
+    function new()
+    {
+        super();
+
+        app = {
+            title: "FNF: Ander Engine",
+            file: "AnderEngine",
+            main: "Main",
+            packageName: "me.ander.funkin",
+            version: "0.1.0",
+            company: "Ander"
+        };
+
+        window = {
+            width: 1280,
+            height: 720,
+            fps: 144,
+            background: 0x000000,
+            vsync: false,
+            fullscreen: false,
+            resizable: true
+        };
+
+        // Build directories
+        if (debug)
+            set("BUILD_DIR", "export/debug");
+        else
+            set("BUILD_DIR", "export/release");
+
+        classPath = ["source"];
+
+        // Libraries
+        haxelib("flixel");
+        haxelib("flixel-addons");
+        haxelib("flixel-ui");
+        haxelib("hscript");
+        haxelib("polymod");
+        haxelib("hxCodec");
+
+        // Defines
+        if (!debug)
+            define("FLX_NO_DEBUG");
+
+        if (!debug)
+            define("NAPE_RELEASE_BUILD");
+
+        define("message.reporting", "pretty");
+
+        if (target == "html5")
+            define("VIDEO_WEB");
+        else
+            define("VIDEO_DESKTOP");
+
+        // Assets
+        assets("assets/preload", { rename: "assets" });
+
+        library("characters", true);
+        assets("assets/characters", { library: "characters" });
+
+        library("songs", true);
+        assets("assets/songs", { library: "songs" });
+
+        library("shared", true);
+        assets("assets/shared", { library: "shared" });
+
+        library("tutorial", true);
+        assets("assets/tutorial", { library: "tutorial" });
+
+        library("week1", true);
+        assets("assets/week1", { library: "week1" });
+
+        library("week2", true);
+        assets("assets/week2", { library: "week2" });
+
+        library("week3", true);
+        assets("assets/week3", { library: "week3" });
+
+        library("week4", true);
+        assets("assets/week4", { library: "week4" });
+
+        library("week5", true);
+        assets("assets/week5", { library: "week5" });
+
+        library("week6", true);
+        assets("assets/week6", { library: "week6" });
+
+        library("week7", true);
+        assets("assets/week7", { library: "week7" });
+
+        // Fonts
+        assets("assets/fonts", { embed: true });
+
+        // Icons
+        icon("art/icon16.png", 16);
+        icon("art/icon32.png", 32);
+        icon("art/icon64.png", 64);
+        icon("art/iconOG.png");
+    }
+}
