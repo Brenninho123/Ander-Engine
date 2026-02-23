@@ -8,7 +8,7 @@ import sys.thread.Mutex;
 import discord_rpc.DiscordRpc;
 #end
 
-class DiscordClient
+class Discord
 {
     #if discord_rpc
 
