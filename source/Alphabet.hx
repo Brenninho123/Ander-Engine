@@ -6,304 +6,429 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.util.FlxTimer;
+import flixel.system.FlxSound;
 
 using StringTools;
 
 /**
- * Loosley based on FlxTypeText lolol
+ * Classe Alphabet melhorada - Sistema de texto estilizado para menus e diálogos
+ * Baseado no FlxTypeText, mas com sprites individuais para cada caractere
  */
 class Alphabet extends FlxSpriteGroup
 {
-	public var delay:Float = 0.05;
-	public var paused:Bool = false;
-
-	// for menu shit
-	public var targetY:Float = 0;
-	public var isMenuItem:Bool = false;
-
-	public var text:String = "";
-
-	var _finalText:String = "";
-	var _curText:String = "";
-
-	public var widthOfWords:Float = FlxG.width;
-
-	var yMulti:Float = 1;
-
-	// custom shit
-	// amp, backslash, question mark, apostrophy, comma, angry faic, period
-	var lastSprite:AlphaCharacter;
-	var xPosResetted:Bool = false;
-	var lastWasSpace:Bool = false;
-
-	var splitWords:Array<String> = [];
-
-	var isBold:Bool = false;
-
-	public function new(x:Float = 0.0, y:Float = 0.0, text:String = "", ?bold:Bool = false, typed:Bool = false)
-	{
-		super(x, y);
-
-		_finalText = text;
-		this.text = text;
-		isBold = bold;
-
-		if (text != "")
-		{
-			if (typed)
-			{
-				startTypedText();
-			}
-			else
-			{
-				addText();
-			}
-		}
-	}
-
-	public function addText()
-	{
-		doSplitWords();
-
-		var xPos:Float = 0;
-		for (character in splitWords)
-		{
-			// if (character.fastCodeAt() == " ")
-			// {
-			// }
-
-			if (character == " " || character == "-")
-			{
-				lastWasSpace = true;
-			}
-
-			if (AlphaCharacter.alphabet.indexOf(character.toLowerCase()) != -1)
-				// if (AlphaCharacter.alphabet.contains(character.toLowerCase()))
-			{
-				if (lastSprite != null)
-				{
-					xPos = lastSprite.x + lastSprite.width;
-				}
-
-				if (lastWasSpace)
-				{
-					xPos += 40;
-					lastWasSpace = false;
-				}
-
-				// var letter:AlphaCharacter = new AlphaCharacter(30 * loopNum, 0);
-				var letter:AlphaCharacter = new AlphaCharacter(xPos, 0);
-
-				if (isBold)
-					letter.createBold(character);
-				else
-				{
-					letter.createLetter(character);
-				}
-
-				add(letter);
-
-				lastSprite = letter;
-			}
-
-			// loopNum += 1;
-		}
-	}
-
-	function doSplitWords():Void
-	{
-		splitWords = _finalText.split("");
-	}
-
-	public var personTalking:String = 'gf';
-
-	public function startTypedText():Void
-	{
-		_finalText = text;
-		doSplitWords();
-
-		// trace(arrayShit);
-
-		var loopNum:Int = 0;
-
-		var xPos:Float = 0;
-		var curRow:Int = 0;
-
-		new FlxTimer().start(0.05, function(tmr:FlxTimer)
-		{
-			// trace(_finalText.fastCodeAt(loopNum) + " " + _finalText.charAt(loopNum));
-			if (_finalText.fastCodeAt(loopNum) == "\n".code)
-			{
-				yMulti += 1;
-				xPosResetted = true;
-				xPos = 0;
-				curRow += 1;
-			}
-
-			if (splitWords[loopNum] == " ")
-			{
-				lastWasSpace = true;
-			}
-
-			#if (haxe >= "4.0.0")
-			var isNumber:Bool = AlphaCharacter.numbers.contains(splitWords[loopNum]);
-			var isSymbol:Bool = AlphaCharacter.symbols.contains(splitWords[loopNum]);
-			#else
-			var isNumber:Bool = AlphaCharacter.numbers.indexOf(splitWords[loopNum]) != -1;
-			var isSymbol:Bool = AlphaCharacter.symbols.indexOf(splitWords[loopNum]) != -1;
-			#end
-
-			if (AlphaCharacter.alphabet.indexOf(splitWords[loopNum].toLowerCase()) != -1 || isNumber || isSymbol)
-				// if (AlphaCharacter.alphabet.contains(splitWords[loopNum].toLowerCase()) || isNumber || isSymbol)
-
-			{
-				if (lastSprite != null && !xPosResetted)
-				{
-					lastSprite.updateHitbox();
-					xPos += lastSprite.width + 3;
-					// if (isBold)
-					// xPos -= 80;
-				}
-				else
-				{
-					xPosResetted = false;
-				}
-
-				if (lastWasSpace)
-				{
-					xPos += 20;
-					lastWasSpace = false;
-				}
-				// trace(_finalText.fastCodeAt(loopNum) + " " + _finalText.charAt(loopNum));
-
-				// var letter:AlphaCharacter = new AlphaCharacter(30 * loopNum, 0);
-				var letter:AlphaCharacter = new AlphaCharacter(xPos, 55 * yMulti);
-				letter.row = curRow;
-				if (isBold)
-				{
-					letter.createBold(splitWords[loopNum]);
-				}
-				else
-				{
-					if (isNumber)
-					{
-						letter.createNumber(splitWords[loopNum]);
-					}
-					else if (isSymbol)
-					{
-						letter.createSymbol(splitWords[loopNum]);
-					}
-					else
-					{
-						letter.createLetter(splitWords[loopNum]);
-					}
-
-					letter.x += 90;
-				}
-
-				if (FlxG.random.bool(40))
-				{
-					var daSound:String = "GF_";
-					FlxG.sound.play(Paths.soundRandom(daSound, 1, 4));
-				}
-
-				add(letter);
-
-				lastSprite = letter;
-			}
-
-			loopNum += 1;
-
-			tmr.time = FlxG.random.float(0.04, 0.09);
-		}, splitWords.length);
-	}
-
-	override function update(elapsed:Float)
-	{
-		if (isMenuItem)
-		{
-			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
-
-			y = CoolUtil.coolLerp(y, (scaledY * 120) + (FlxG.height * 0.48), 0.16);
-			x = CoolUtil.coolLerp(x, (targetY * 20) + 90, 0.16);
-		}
-
-		super.update(elapsed);
-	}
+    // Propriedades principais
+    public var delay:Float = 0.05;
+    public var paused:Bool = false;
+    public var text:String = "";
+    public var targetY:Float = 0;
+    public var isMenuItem:Bool = false;
+    public var bold:Bool = false;
+    public var typed:Bool = false;
+    public var personTalking:String = 'gf';
+    
+    // Controle de espaçamento
+    public var letterSpacing:Float = 3;
+    public var spaceWidth:Float = 40;
+    public var typedSpaceWidth:Float = 20;
+    public var rowHeight:Float = 110;
+    public var boldOffset:Float = 0;
+    
+    // Controle visual
+    public var autoSize:Bool = true;
+    public var maxWidth:Float = FlxG.width;
+    public var centerText:Bool = false;
+    
+    // Controle de som
+    public var soundChance:Float = 0.4; // 40% de chance
+    public var soundVolume:Float = 0.6;
+    
+    // Privado
+    var _finalText:String = "";
+    var _curText:String = "";
+    var _splitWords:Array<String> = [];
+    var _lastSprite:AlphaCharacter;
+    var _xPos:Float = 0;
+    var _row:Int = 0;
+    var _yMulti:Float = 1;
+    var _xPosResetted:Bool = false;
+    var _lastWasSpace:Bool = false;
+    var _typingTimer:FlxTimer;
+    var _currentChar:Int = 0;
+    
+    // Cache de caracteres válidos para performance
+    static final _validChars:String = AlphaCharacter.alphabet + AlphaCharacter.numbers + AlphaCharacter.symbols;
+    
+    public function new(x:Float = 0, y:Float = 0, text:String = "", ?bold:Bool = false, typed:Bool = false)
+    {
+        super(x, y);
+        
+        this.text = text;
+        _finalText = text;
+        this.bold = bold;
+        this.typed = typed;
+        
+        if (text != "")
+        {
+            if (typed)
+                startTypedText();
+            else
+                instantAddText();
+        }
+    }
+    
+    /**
+     * Adiciona texto instantaneamente
+     */
+    function instantAddText():Void
+    {
+        _splitWords = _finalText.split("");
+        _xPos = 0;
+        _row = 0;
+        
+        for (char in _splitWords)
+        {
+            processCharacter(char, false);
+        }
+        
+        if (centerText && autoSize)
+            center();
+    }
+    
+    /**
+     * Processa um caractere individual
+     */
+    function processCharacter(char:String, typedMode:Bool = false):Void
+    {
+        if (char == "\n")
+        {
+            _yMulti++;
+            _xPosResetted = true;
+            _xPos = 0;
+            _row++;
+            return;
+        }
+        
+        if (char == " " || char == "-")
+        {
+            _lastWasSpace = true;
+            if (!typedMode)
+                _xPos += spaceWidth;
+            return;
+        }
+        
+        if (isValidCharacter(char))
+        {
+            updatePosition(typedMode);
+            
+            var letter = createLetterSprite(char, typedMode);
+            add(letter);
+            
+            _lastSprite = letter;
+            
+            if (typedMode && FlxG.random.float() < soundChance)
+                playTalkSound();
+        }
+    }
+    
+    /**
+     * Atualiza a posição para o próximo caractere
+     */
+    inline function updatePosition(typedMode:Bool):Void
+    {
+        if (_lastSprite != null && !_xPosResetted)
+        {
+            _lastSprite.updateHitbox();
+            _xPos += _lastSprite.width + (bold ? boldOffset : letterSpacing);
+        }
+        else
+        {
+            _xPosResetted = false;
+        }
+        
+        if (_lastWasSpace)
+        {
+            _xPos += typedMode ? typedSpaceWidth : spaceWidth;
+            _lastWasSpace = false;
+        }
+    }
+    
+    /**
+     * Cria um sprite de letra
+     */
+    function createLetterSprite(char:String, typedMode:Bool):AlphaCharacter
+    {
+        var yPos = typedMode ? 55 * _yMulti : 0;
+        var letter = new AlphaCharacter(_xPos, yPos);
+        letter.row = _row;
+        
+        var charLower = char.toLowerCase();
+        var isNumber = AlphaCharacter.numbers.contains(char);
+        var isSymbol = AlphaCharacter.symbols.contains(char);
+        
+        if (bold)
+        {
+            letter.createBold(char);
+        }
+        else if (isNumber)
+        {
+            letter.createNumber(char);
+        }
+        else if (isSymbol)
+        {
+            letter.createSymbol(char);
+        }
+        else
+        {
+            letter.createLetter(char);
+        }
+        
+        // Ajuste para texto datilografado
+        if (typedMode && !bold && !isNumber && !isSymbol)
+            letter.x += 90;
+        
+        return letter;
+    }
+    
+    /**
+     * Inicia texto datilografado
+     */
+    public function startTypedText():Void
+    {
+        if (_typingTimer != null)
+        {
+            _typingTimer.cancel();
+            _typingTimer = null;
+        }
+        
+        _splitWords = _finalText.split("");
+        _currentChar = 0;
+        _xPos = 0;
+        _row = 0;
+        _yMulti = 1;
+        
+        clear();
+        
+        _typingTimer = new FlxTimer().start(delay, typedCharHandler, 0);
+    }
+    
+    /**
+     * Handler para cada caractere digitado
+     */
+    function typedCharHandler(tmr:FlxTimer):Void
+    {
+        if (paused || _currentChar >= _splitWords.length)
+        {
+            if (_currentChar >= _splitWords.length && centerText && autoSize)
+                center();
+            return;
+        }
+        
+        processCharacter(_splitWords[_currentChar], true);
+        
+        _currentChar++;
+        tmr.time = FlxG.random.float(delay * 0.8, delay * 1.2);
+    }
+    
+    /**
+     * Verifica se caractere é válido
+     */
+    inline function isValidCharacter(char:String):Bool
+    {
+        return _validChars.indexOf(char.toLowerCase()) != -1;
+    }
+    
+    /**
+     * Toca som de fala
+     */
+    function playTalkSound():Void
+    {
+        var soundPath = '${personTalking}_${FlxG.random.int(1, 4)}';
+        FlxG.sound.play(Paths.soundRandom(personTalking, 1, 4), soundVolume);
+    }
+    
+    /**
+     * Reinicia a digitação
+     */
+    public function resetTyping():Void
+    {
+        if (!typed) return;
+        
+        if (_typingTimer != null)
+        {
+            _typingTimer.cancel();
+            _typingTimer = null;
+        }
+        
+        clear();
+        startTypedText();
+    }
+    
+    /**
+     * Centraliza o texto
+     */
+    public function center():Void
+    {
+        if (members.length == 0) return;
+        
+        var minX = members[0].x;
+        var maxX = members[0].x + members[0].width;
+        
+        for (member in members)
+        {
+            if (member.x < minX) minX = member.x;
+            if (member.x + member.width > maxX) maxX = member.x + member.width;
+        }
+        
+        var textWidth = maxX - minX;
+        var offsetX = (maxWidth - textWidth) / 2 - minX;
+        
+        for (member in members)
+        {
+            member.x += offsetX;
+        }
+    }
+    
+    /**
+     * Pula a animação de digitação
+     */
+    public function skipTyping():Void
+    {
+        if (!typed || _typingTimer == null) return;
+        
+        _typingTimer.cancel();
+        _typingTimer = null;
+        
+        while (_currentChar < _splitWords.length)
+        {
+            processCharacter(_splitWords[_currentChar], true);
+            _currentChar++;
+        }
+        
+        if (centerText && autoSize)
+            center();
+    }
+    
+    override function update(elapsed:Float)
+    {
+        if (isMenuItem)
+        {
+            // Animação suave para itens de menu
+            var lerpVal = CoolUtil.coolLerp(0.16);
+            var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
+            
+            y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.48), lerpVal);
+            x = FlxMath.lerp(x, (targetY * 20) + 90, lerpVal);
+        }
+        
+        super.update(elapsed);
+    }
+    
+    override function destroy()
+    {
+        if (_typingTimer != null)
+        {
+            _typingTimer.cancel();
+            _typingTimer = null;
+        }
+        super.destroy();
+    }
 }
 
+/**
+ * Sprite individual para cada caractere
+ */
 class AlphaCharacter extends FlxSprite
 {
-	public static var alphabet:String = "abcdefghijklmnopqrstuvwxyz";
+    public static final alphabet:String = "abcdefghijklmnopqrstuvwxyz";
+    public static final numbers:String = "1234567890";
+    public static final symbols:String = "|~#$%()*+-:;<=>@[]^_.,'!?";
+    
+    public var row:Int = 0;
+    public var charType:CharType = LETTER;
+    
+    // Cache de animações para evitar recriação
+    static var _animCache:Map<String, Bool> = new Map();
+    
+    public function new(x:Float, y:Float)
+    {
+        super(x, y);
+        
+        var tex = Paths.getSparrowAtlas('alphabet');
+        frames = tex;
+        antialiasing = true;
+    }
+    
+    public function createBold(letter:String):Void
+    {
+        charType = BOLD;
+        var animName = letter.toUpperCase() + " bold";
+        playCachedAnim(animName);
+        y = 0;
+    }
+    
+    public function createLetter(letter:String):Void
+    {
+        charType = LETTER;
+        var letterCase = (letter.toLowerCase() == letter) ? "lowercase" : "capital";
+        var animName = letter + " " + letterCase;
+        playCachedAnim(animName);
+        
+        y = (110 - height);
+        y += row * 60;
+    }
+    
+    public function createNumber(letter:String):Void
+    {
+        charType = NUMBER;
+        playCachedAnim(letter);
+        y = (110 - height) + row * 60;
+    }
+    
+    public function createSymbol(letter:String):Void
+    {
+        charType = SYMBOL;
+        
+        switch (letter)
+        {
+            case '.':
+                playCachedAnim('period');
+                y += 50;
+            case "'":
+                playCachedAnim('apostraphie');
+            case "?":
+                playCachedAnim('question mark');
+            case "!":
+                playCachedAnim('exclamation point');
+            default:
+                playCachedAnim(letter);
+        }
+        
+        y += row * 60;
+    }
+    
+    /**
+     * Toca animação com cache
+     */
+    inline function playCachedAnim(animName:String):Void
+    {
+        if (!_animCache.exists(animName))
+        {
+            animation.addByPrefix(animName, animName, 24, false);
+            _animCache.set(animName, true);
+        }
+        
+        animation.play(animName);
+        updateHitbox();
+    }
+}
 
-	public static var numbers:String = "1234567890";
-
-	public static var symbols:String = "|~#$%()*+-:;<=>@[]^_.,'!?";
-
-	public var row:Int = 0;
-
-	public function new(x:Float, y:Float)
-	{
-		super(x, y);
-		var tex = Paths.getSparrowAtlas('alphabet');
-		frames = tex;
-
-		antialiasing = true;
-	}
-
-	public function createBold(letter:String)
-	{
-		animation.addByPrefix(letter, letter.toUpperCase() + " bold", 24);
-		animation.play(letter);
-		updateHitbox();
-	}
-
-	public function createLetter(letter:String):Void
-	{
-		var letterCase:String = "lowercase";
-		if (letter.toLowerCase() != letter)
-		{
-			letterCase = 'capital';
-		}
-
-		animation.addByPrefix(letter, letter + " " + letterCase, 24);
-		animation.play(letter);
-		updateHitbox();
-
-		trace('the row' + row);
-
-		y = (110 - height);
-		y += row * 60;
-	}
-
-	public function createNumber(letter:String):Void
-	{
-		animation.addByPrefix(letter, letter, 24);
-		animation.play(letter);
-
-		updateHitbox();
-	}
-
-	public function createSymbol(letter:String)
-	{
-		switch (letter)
-		{
-			case '.':
-				animation.addByPrefix(letter, 'period', 24);
-				animation.play(letter);
-				y += 50;
-			case "'":
-				animation.addByPrefix(letter, 'apostraphie', 24);
-				animation.play(letter);
-				y -= 0;
-			case "?":
-				animation.addByPrefix(letter, 'question mark', 24);
-				animation.play(letter);
-			case "!":
-				animation.addByPrefix(letter, 'exclamation point', 24);
-				animation.play(letter);
-		}
-
-		updateHitbox();
-	}
+/**
+ * Tipos de caractere para referência
+ */
+enum CharType
+{
+    LETTER;
+    NUMBER;
+    SYMBOL;
+    BOLD;
 }
