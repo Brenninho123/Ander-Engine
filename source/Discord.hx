@@ -1,8 +1,8 @@
 package;
 
 import Sys.sleep;
-
-using StringTools;
+import sys.thread.Thread;
+import sys.thread.Mutex;
 
 #if discord_rpc
 import discord_rpc.DiscordRpc;
@@ -10,83 +10,145 @@ import discord_rpc.DiscordRpc;
 
 class DiscordClient
 {
-	#if discord_rpc
-	public function new()
-	{
-		trace("Discord Client starting...");
-		DiscordRpc.start({
-			clientID: "814588678700924999",
-			onReady: onReady,
-			onError: onError,
-			onDisconnected: onDisconnected
-		});
-		trace("Discord Client started.");
+    #if discord_rpc
 
-		while (true)
-		{
-			DiscordRpc.process();
-			sleep(2);
-			// trace("Discord Client Update");
-		}
+    private static var _initialized:Bool = false;
+    private static var _running:Bool = false;
+    private static var _thread:Thread;
+    private static var _mutex:Mutex = new Mutex();
 
-		DiscordRpc.shutdown();
-	}
+    private static final CLIENT_ID:String = "814588678700924999";
 
-	public static function shutdown()
-	{
-		DiscordRpc.shutdown();
-	}
-	
-	static function onReady()
-	{
-		DiscordRpc.presence({
-			details: "In the Menus",
-			state: null,
-			largeImageKey: 'icon',
-			largeImageText: "Friday Night Funkin'"
-		});
-	}
+    // ==============================
+    // INITIALIZE
+    // ==============================
 
-	static function onError(_code:Int, _message:String)
-	{
-		trace('Error! $_code : $_message');
-	}
+    public static function initialize():Void
+    {
+        if (_initialized) return;
 
-	static function onDisconnected(_code:Int, _message:String)
-	{
-		trace('Disconnected! $_code : $_message');
-	}
+        _running = true;
+        _thread = Thread.create(rpcLoop);
+        _initialized = true;
 
-	public static function initialize()
-	{
-		var DiscordDaemon = sys.thread.Thread.create(() ->
-		{
-			new DiscordClient();
-		});
-		trace("Discord Client initialized");
-	}
+        trace("Discord RPC initialized.");
+    }
 
-	public static function changePresence(details:String, state:Null<String>, ?smallImageKey:String, ?hasStartTimestamp:Bool, ?endTimestamp:Float)
-	{
-		var startTimestamp:Float = if (hasStartTimestamp) Date.now().getTime() else 0;
+    // ==============================
+    // MAIN RPC LOOP (SAFE)
+    // ==============================
 
-		if (endTimestamp > 0)
-		{
-			endTimestamp = startTimestamp + endTimestamp;
-		}
+    private static function rpcLoop():Void
+    {
+        try
+        {
+            DiscordRpc.start({
+                clientID: CLIENT_ID,
+                onReady: onReady,
+                onError: onError,
+                onDisconnected: onDisconnected
+            });
 
-		DiscordRpc.presence({
-			details: details,
-			state: state,
-			largeImageKey: 'icon',
-			largeImageText: "Friday Night Funkin'",
-			smallImageKey: smallImageKey,
-			// Obtained times are in milliseconds so they are divided so Discord can use it
-			startTimestamp: Std.int(startTimestamp / 1000),
-			endTimestamp: Std.int(endTimestamp / 1000)
-		});
+            trace("Discord RPC started.");
 
-		// trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp');
-	}
-	#end
+            while (_running)
+            {
+                _mutex.acquire();
+                DiscordRpc.process();
+                _mutex.release();
+
+                sleep(1);
+            }
+        }
+        catch (e:Dynamic)
+        {
+            trace("Discord RPC Fatal Error: " + e);
+        }
+
+        DiscordRpc.shutdown();
+        trace("Discord RPC stopped.");
+    }
+
+    // ==============================
+    // SHUTDOWN
+    // ==============================
+
+    public static function shutdown():Void
+    {
+        if (!_initialized) return;
+
+        _running = false;
+        sleep(0.5);
+
+        _initialized = false;
+        trace("Discord RPC shutdown complete.");
+    }
+
+    // ==============================
+    // READY CALLBACK
+    // ==============================
+
+    private static function onReady():Void
+    {
+        trace("Discord RPC ready.");
+
+        changePresence(
+            "In the Menus",
+            null,
+            null,
+            false,
+            0
+        );
+    }
+
+    private static function onError(code:Int, message:String):Void
+    {
+        trace('Discord RPC Error $code : $message');
+    }
+
+    private static function onDisconnected(code:Int, message:String):Void
+    {
+        trace('Discord RPC Disconnected $code : $message');
+    }
+
+    // ==============================
+    // CHANGE PRESENCE
+    // ==============================
+
+    public static function changePresence(
+        details:String,
+        state:Null<String>,
+        ?smallImageKey:String,
+        ?useTimer:Bool = false,
+        ?durationSeconds:Float = 0
+    ):Void
+    {
+        if (!_initialized) return;
+
+        var startTimestamp:Float = 0;
+        var endTimestamp:Float = 0;
+
+        if (useTimer)
+        {
+            startTimestamp = Date.now().getTime();
+            if (durationSeconds > 0)
+                endTimestamp = startTimestamp + (durationSeconds * 1000);
+        }
+
+        _mutex.acquire();
+
+        DiscordRpc.presence({
+            details: details,
+            state: state,
+            largeImageKey: "icon",
+            largeImageText: "Friday Night Funkin'",
+            smallImageKey: smallImageKey,
+            startTimestamp: Std.int(startTimestamp / 1000),
+            endTimestamp: Std.int(endTimestamp / 1000)
+        });
+
+        _mutex.release();
+    }
+
+    #end
 }
