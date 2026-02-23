@@ -1,10 +1,46 @@
+name: Multi OS Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
 jobs:
   build:
-    runs-on: [ubuntu-latest, macos-latest]
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        haxe: [4.3.2]
+
     steps:
-      - uses: krdlab/setup-haxe@v1
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
         with:
-          haxe-version: 4.0.5
-      - run: |
-          haxe -version
-          haxelib install hxnodejs
+          haxe-version: ${{ matrix.haxe }}
+
+      - name: Setup Haxelib Path
+        run: |
+          mkdir -p ~/haxelib
+          haxelib setup ~/haxelib
+
+      - name: Cache Haxelib
+        uses: actions/cache@v4
+        with:
+          path: ~/haxelib
+          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/project.hxp') }}
+          restore-keys: |
+            ${{ runner.os }}-haxelib-
+
+      - name: Show Haxe Version
+        run: haxe -version
+
+      - name: Install hxnodejs
+        run: haxelib install hxnodejs --quiet
