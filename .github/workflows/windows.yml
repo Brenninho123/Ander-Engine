@@ -11,60 +11,71 @@ jobs:
   build:
     runs-on: windows-latest
 
+    env:
+      HAXE_VERSION: 4.3.2
+      HAXELIB_PATH: C:\haxelib
+
     steps:
-      # Checkout
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Setup Haxe
       - name: Setup Haxe
         uses: krdlab/setup-haxe@v1
         with:
-          haxe-version: 4.3.2
+          haxe-version: ${{ env.HAXE_VERSION }}
 
       # Cache haxelib
       - name: Cache Haxelib
         uses: actions/cache@v4
         with:
-          path: C:\haxelib
-          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/haxelib.json') }}
+          path: ${{ env.HAXELIB_PATH }}
+          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/project.xml') }}
           restore-keys: |
             ${{ runner.os }}-haxelib-
 
-      # Install Dependencies
-      - name: Install Haxelib dependencies
+      # Cache hxcpp build
+      - name: Cache hxcpp
+        uses: actions/cache@v4
+        with:
+          path: |
+            C:\Users\runneradmin\.hxcpp_config
+            C:\Users\runneradmin\AppData\Roaming\haxelib\hxcpp
+          key: ${{ runner.os }}-hxcpp
+
+      - name: Setup Haxelib
         shell: powershell
         run: |
-          haxelib setup C:\haxelib
+          haxelib setup $env:HAXELIB_PATH
 
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib install flixel-tools
-          haxelib install flixel-addons
-          haxelib install flixel-ui
-          haxelib install hxcpp
-          haxelib install hscript
-          haxelib install polymod
-          haxelib install hxdiscord_rpc
+      - name: Install Dependencies
+        shell: powershell
+        run: |
+          haxelib install lime --quiet
+          haxelib install openfl --quiet
+          haxelib install flixel --quiet
+          haxelib install flixel-tools --quiet
+          haxelib install flixel-addons --quiet
+          haxelib install flixel-ui --quiet
+          haxelib install hxcpp --quiet
+          haxelib install hscript --quiet
+          haxelib install polymod --quiet
+          haxelib install hxCodec --quiet
 
           haxelib run lime setup
           haxelib run lime rebuild hxcpp windows
 
-      # Build Release
       - name: Build Windows Release
         shell: powershell
         run: haxelib run lime build windows -release
 
-      # Zip Build
-      - name: Zip Build
+      - name: Create ZIP
         shell: powershell
         run: |
-          Compress-Archive -Path export\release\windows\bin\* `
+          Compress-Archive `
+            -Path export\release\windows\bin\* `
             -DestinationPath Ander-Engine-Windows.zip
 
-      # Upload Artifact
-      - name: Upload Artifact
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Ander-Engine-Windows
