@@ -11,10 +11,6 @@ jobs:
   build:
     runs-on: windows-latest
 
-    env:
-      HAXE_VERSION: 4.3.2
-      HAXELIB_PATH: C:\haxelib
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,47 +18,25 @@ jobs:
       - name: Setup Haxe
         uses: krdlab/setup-haxe@v1
         with:
-          haxe-version: ${{ env.HAXE_VERSION }}
+          haxe-version: 4.3.2
 
-      - name: Setup Haxelib
-        shell: powershell
-        run: |
-          mkdir $env:HAXELIB_PATH -ErrorAction SilentlyContinue
-          haxelib setup $env:HAXELIB_PATH
-
-      - name: Restore Haxelib Cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.HAXELIB_PATH }}
-          key: ${{ runner.os }}-haxelib-${{ hashFiles('project.hxp') }}
-          restore-keys: |
-            ${{ runner.os }}-haxelib-
-
-      # 👇 FORÇA instalar hxpkg sempre
       - name: Install hxpkg
-        shell: powershell
-        run: |
-          haxelib install hxpkg --quiet
+        run: haxelib install hxpkg
 
-      - name: Install Dependencies
-        shell: powershell
-        run: |
-          haxelib run hxpkg install --force
+      - name: Install Project Dependencies
+        run: haxelib run hxpkg install --force
 
       - name: Build Windows
-        shell: powershell
-        run: |
-          haxelib run hxpkg build windows -release
+        run: haxelib run hxpkg build windows -release
 
       - name: Zip Build
-        shell: powershell
         run: |
           Compress-Archive `
             -Path export\release\windows\bin\* `
-            -DestinationPath Ander-Engine-Windows.zip
+            -DestinationPath build.zip
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Ander-Engine-Windows
-          path: Ander-Engine-Windows.zip
+          name: Windows-Build
+          path: build.zip
