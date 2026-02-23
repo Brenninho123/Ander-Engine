@@ -12,43 +12,26 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@v1
+      - uses: actions/checkout@v4
+      
+      - uses: krdlab/setup-haxe@v1
         with:
           haxe-version: 4.3.2
-
-      - name: Show Haxelib Path
-        run: haxelib config
-
+      
       - name: Install hxpkg
         shell: bash
         run: |
-          yes | haxelib install hxpkg
-
-      - name: Verify hxpkg
-        run: haxelib list
-
-      - name: Install Project Dependencies
+          # Instala silenciosamente sem pipe
+          haxelib install hxpkg --always
+      
+      - name: Build
         shell: bash
         run: |
           haxelib run hxpkg install --force
-
-      - name: Build Windows
-        shell: bash
-        run: |
           haxelib run hxpkg build windows -release
-
-      - name: Zip Build
-        run: |
-          powershell Compress-Archive `
-            -Path export/release/windows/bin/* `
-            -DestinationPath build.zip
-
-      - name: Upload Artifact
+      
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: Windows-Build
-          path: build.zip
+          path: export/release/windows/bin/
