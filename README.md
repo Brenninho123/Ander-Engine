@@ -1,47 +1,120 @@
-# Funkin Legacy / Flegacy
+# Friday Night Funkin' Ander Engine
 
-This is the repository for "Funkin Legacy",
-a port of Friday Night Funkin 0.3.0+ and onward into 0.2.8,
-cause why not? :)
+This is the official repository for **Friday Night Funkin' Ander Engine**,  
+a custom enhanced engine built on top of Friday Night Funkin', featuring new systems, optimizations, modding improvements, and engine-level upgrades.
 
-Play Flegacy via Gamejolt here: https://gamejolt.com/games/funkin-legacy/1046139
+Ander Engine aims to provide:
 
-Play FNF on Newgrounds here: https://www.newgrounds.com/portal/view/770371
-Play FNF on Itch.io here: https://ninja-muffin24.itch.io/funkin
+- Improved performance
+- Extended modding support
+- Custom gameplay systems
+- Enhanced scripting capabilities
+- Cross-platform builds
 
-IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN SOURCE YOUR MOD AS WELL
+---
+
+## Play the Original Game
+
+Play Friday Night Funkin' on Newgrounds:  
+https://www.newgrounds.com/portal/view/770371  
+
+Play Friday Night Funkin' on Itch.io:  
+https://ninja-muffin24.itch.io/funkin  
+
+---
+
+## License Notice
+
+IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION OF ANDER ENGINE,  
+YOU MUST OPEN SOURCE YOUR MOD AS WELL.
+
+Respect the original creators and contributors.
+
+---
 
 ## Credits
 
-### Programmers
-- [Macohi](https://sphis-sinco.carrd.co)
-- [Funni Boi](https://github.com/yeeterongithub)
-- [Flying.Haxe](https://github.com/LeonGamerPS1)
+### Engine Developer
+- Ander
 
-### Artists / Animators
-- [Djotta Flow](https://www.youtube.com/@djotta11)
+### Original Friday Night Funkin’ Team
+- ninjamuffin99
+- PhantomArcade
+- evilsk8r
+- Kawai Sprite
 
+---
 
 ## Build Instructions
 
-A fleshed out doc will have to come later but here is the run down, 
-I am going to assume you've already downloaded the repo .zip for this
+A full documentation page may be added in the future.  
+For now, follow these instructions carefully.
 
-- Install haxe
-- Install haxeflixel
-- Run `haxelib --global install hxpkg` and then `haxelib --global run hxpkg setup` to install hxpkg
-- Make sure you have a command prompt open for the source code folder (not `source/`)
-- Run `hxpkg install` or `hxpkg install --force`
-- Perform additional platform setup
-	- For Windows, download the [Visual Studio Build Tools](https://aka.ms/vs/17/release/vs_BuildTools.exe)
-    	- When prompted, select "Individual Components" and make sure to download the following:
-    		- MSVC v143 VS 2022 C++ x64/x86 build tools
-    		- Windows 10/11 SDK
-	- Mac: [`lime setup mac` Documentation](https://lime.openfl.org/docs/advanced-setup/macos/)
-	- Linux: [`lime setup linux` Documentation](https://lime.openfl.org/docs/advanced-setup/linux/)
-		- In order to build a application with `hxCodec` on Linux,
-		you have to install libvlc and libvlccore
-		from your distro's package manager.
-		- Debian based distributions: `sudo apt-get install libvlc-dev libvlccore-dev`
-		- Arch based distributions: `sudo pacman -S vlc`
-    - HTML5: Compiles without any extra setup
+---
+
+### Requirements
+
+- Install Haxe (4.3.2 recommended)
+- Install HaxeFlixel
+- Install Git
+- Install Visual Studio Build Tools (Windows users)
+
+---
+
+### Initial Setup
+
+1. Download or clone the repository.
+2. Open a command prompt inside the project folder (NOT inside `source/`).
+3. Install dependencies:
+
+---
+
+## Platform Setup
+
+### Windows
+
+Download Visual Studio Build Tools:  
+https://aka.ms/vs/17/release/vs_BuildTools.exe  
+
+During installation, go to **Individual Components** and select:
+
+- MSVC v143 VS 2022 C++ x64/x86 build tools
+- Windows 10/11 SDK
+
+---
+
+### Mac
+
+Run:
+Follow Lime’s official macOS documentation.
+
+---
+
+### Linux
+
+Run:
+If using hxCodec, install VLC libraries:
+
+Debian-based:
+Arch-based:
+
+---
+
+### HTML5
+
+Compiles without additional setup:
+---
+
+## Building the Game
+
+For Windows (Release build):
+
+For Debug build:
+
+---
+
+## Notes
+
+- Do NOT remove required engine files.
+- Make sure all libraries are installed before building.
+- GitHub Actions builds may require full dependency installation.
