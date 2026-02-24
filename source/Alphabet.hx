@@ -10,13 +10,8 @@ import flixel.system.FlxSound;
 
 using StringTools;
 
-/**
- * Classe Alphabet melhorada - Sistema de texto estilizado para menus e diálogos
- * Baseado no FlxTypeText, mas com sprites individuais para cada caractere
- */
 class Alphabet extends FlxSpriteGroup
 {
-    // Propriedades principais
     public var delay:Float = 0.05;
     public var paused:Bool = false;
     public var text:String = "";
