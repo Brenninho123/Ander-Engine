@@ -1,0 +1,18 @@
+{
+  "name": "YourProjectName",
+  "url": "https://github.com/seuusuario/seurepo",
+  "license": "MIT",
+  "tags": ["game", "haxe", "hxcpp", "discord"],
+  "description": "Haxe project using hxcpp and Discord RPC",
+  "version": "1.0.0",
+  "classPath": "source/",
+  "releasenote": "Initial release.",
+  "contributors": ["Ander"],
+
+  "dependencies": {
+    "hxcpp": "",
+    "discord_rpc": "",
+    "lime": "",
+    "openfl": ""
+  }
+}
